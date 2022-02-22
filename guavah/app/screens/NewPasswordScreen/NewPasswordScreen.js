@@ -110,12 +110,14 @@ const styles = StyleSheet.create({
         color: '#FDB075',
     },
     inputContainer: {
-        top: 150,
+        // top: 150,
+        marginTop: '55%',
         width: '100%',
     },
     footerContainer: {
         width: '100%',
-        top: 300
+        marginTop: '45%',
+        // top: 300
     }
 })
 

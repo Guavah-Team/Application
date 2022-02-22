@@ -150,10 +150,10 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: '100%',
-        top: 100,
+        marginTop: '30%',
     },
     footer: {
-        top: 100,
+        marginTop: '30%',
     }
 })
 

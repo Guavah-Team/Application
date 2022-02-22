@@ -78,6 +78,8 @@ function LoginScreen(props) {
                         }}
                     />
 
+                    {/* <Text>Cory a hoe</Text> */}
+
                     <CustomButton 
                         text = {"Forgot Password"}
                         onPress = {onForgotPasswordPressed}
@@ -108,14 +110,17 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 33,
         alignItems: 'center',
+
     },
     inputContainer: {
-        top: 190,
+        flex: 1,
+        marginTop: '60%',
         width: '100%',
     },
     footerContainer: {
         width: '100%',
-        top: 300
+        marginTop: '45%',
+
     }
 })
 

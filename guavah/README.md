@@ -86,6 +86,10 @@ git checkout  "page-NAME"
 git branch "feature-NAME"
 git checkout  "feature-NAME" 
 ```
+3.1 If you want to save incomplete changes you will need to push your changes to your branch. If you are working on a new branch (that has yet to be published) type the following command.
+```
+git push --set-upstream origin your-BRANCH
+```
 4. Once you are done with your feature/ page you need to begin the process of merging it to main. DO NOT DIRECTLY MERGE TO MAIN (I will find you and punish you specifically if you do this). First checkout the parent branch that you want your changes to be merged to (I.E. If you were working on a Search Bar for the search page you would select page-SEARCH). 
 ```
 git checkout "parantBranch"

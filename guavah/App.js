@@ -8,10 +8,15 @@ import ForgotPasswordScreen from './app/screens/ForgotPasswordScreen';
 import NewPasswordScreen from './app/screens/NewPasswordScreen';
 import Navigation from './app/navigation';
 import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/HorizontalRestaurantPage';
+import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/VerticalRestaurantBox';
+import NavigationBar from './app/components/NavigationBar/NavigationBar';
 
 
 
 function App(props) {
+
+
+
   return (
     <SafeAreaView style = {styles.root}>
       {/* <LoginScreen/> */}
@@ -20,7 +25,13 @@ function App(props) {
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
       {/* <Navigation/> */}
-      <HorizontalRestaurantPage/>
+
+      {/* <HorizontalRestaurantPage/> */}
+      {/* <VerticalRestaurantBox/> */}
+      <NavigationBar/>
+
+      
+      
     </SafeAreaView>
   );
 }

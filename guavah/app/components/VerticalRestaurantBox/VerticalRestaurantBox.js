@@ -1,15 +1,16 @@
 import React from 'react';
-import {View, Text, Pressable, StyleSheet, ImageBackground} from 'react-native';
+import {StyleSheet, Pressable, ImageBackground, Text, View} from 'react-native';
 import colors from '../../config/colors/colors';
 
-function HorizontalRestaurantPage({onPress, name, rating, distance, backgroundImage}) {
-
+function VerticalRestaurantBox({onPress, name, rating, distance, backgroundImage}) {
     return (
         <Pressable onPress = {onPress} style = {[styles.container, styles.shadowProp]}>
             <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} source = {backgroundImage}>
                 <View style = {styles.mask}/>
-                <View style = {styles.textBox}>
+                <View style = {styles.topTextBox}>
                     <Text style = {styles.restaurantNameText}> {name} </Text>
+                </View>
+                <View style = {styles.bottomTextBox}>
                     <Text style = {styles.distanceText}> {distance} </Text>
                 </View>
             </ImageBackground>
@@ -18,14 +19,9 @@ function HorizontalRestaurantPage({onPress, name, rating, distance, backgroundIm
 }
 
 const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        padding: 10,
-        alignItems: 'center',
-    },
     container: {
-        width: '100%',
-        height: 100,
+        width: 150,
+        height: 200,
     },
     restaurantNameText: {
         color: colors.white,
@@ -48,9 +44,13 @@ const styles = StyleSheet.create({
         fontSize: 12,
         textTransform: 'capitalize',
     },
-    textBox: {
-        marginLeft: 25,
-        marginTop: 9,
+    topTextBox: {
+        marginLeft: 14,
+        marginTop: 14,
+    },
+    bottomTextBox: {
+        marginTop: 126,
+        alignItems: 'center',
     },
     shadowProp: {
         shadowColor: '#171717',
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default HorizontalRestaurantPage;
+export default VerticalRestaurantBox;

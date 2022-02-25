@@ -5,5 +5,4 @@ export default {
     dark: '#696164',
     light: '#DBD3CE',
     white: 'white',
-    hoe: 'jake is a hoe',
 }

@@ -26,9 +26,9 @@ function App(props) {
       {/* <NewPasswordScreen/> */}
       {/* <Navigation/> */}
 
-      {/* <HorizontalRestaurantPage/> */}
+      <HorizontalRestaurantPage/>
       {/* <VerticalRestaurantBox/> */}
-      <NavigationBar/>
+      {/* <NavigationBar/> */}
 
       
       

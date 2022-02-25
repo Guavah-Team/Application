@@ -127,11 +127,13 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         width: '100%',
-        top: 190,
+        marginTop: '60%',
+        // top: 190,
     },
     footer: {
-        top: 300,
+        // top: 300,
         width: '100%',
+        marginTop: '50%',
     }
 
 

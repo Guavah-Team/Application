@@ -27,6 +27,7 @@ function CustomButton({onPress, text, type = "PRIMARY", bgColor, fgColor}) {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
+        flex: 1,
 
         padding: 15,
         marginVertical: 5,

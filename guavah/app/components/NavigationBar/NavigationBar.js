@@ -1,25 +1,24 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Pressable, Alert} from 'react-native';
+import Icon from 'react-native-ico-material-design';
 
-var iconHeight = 50;
-var iconWidth = 50;
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 
 function NavigationBar(props) {
     return (
-        <View style = {styles.navContainer}>
-
-        </View>
+      <View>
+        
+      </View>
     );
 }
 
 const styles = StyleSheet.create({
-    navContainer: {
 
-        height: 60,
-        width: '100%',
 
-        backgroundColor: 'red',
-    }
 })
 
 export default NavigationBar;
+
+

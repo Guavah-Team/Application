@@ -4,10 +4,13 @@ import colors from '../../config/colors/colors';
 import { Auth } from 'aws-amplify';
 
 function HorizontalUserData({text}) {
+    const userPicture = async (data) => {
+        const {name} = name;
+    }
     return (
         <View>
-
-            <Text>User Name</Text>
+            
+            name
         </View>
         
     );

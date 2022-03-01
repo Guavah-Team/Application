@@ -7,6 +7,7 @@ import ConfirmEmailScreen from './app/screens/ConfirmEmailScreen';
 import ForgotPasswordScreen from './app/screens/ForgotPasswordScreen';
 import NewPasswordScreen from './app/screens/NewPasswordScreen';
 import Navigation from './app/navigation';
+import SearchPage from './app/screens/SearchPage';
 
 
 
@@ -18,7 +19,8 @@ function App(props) {
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
-      <Navigation/>
+      {/* <Navigation/> */}
+      <SearchPage/>
     </SafeAreaView>
   );
 }

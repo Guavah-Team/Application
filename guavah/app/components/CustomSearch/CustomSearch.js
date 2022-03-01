@@ -10,6 +10,10 @@ export default function CustomSearch({value, updateSearch, style}) {
 
     return (
         <View style={[styles.container, style]} >
+            <View style={styles.textContainer}>
+                <Text style={styles.text}>search</Text>
+            </View>
+            
             <View style={styles.searchContainer}>
                 <View style={styles.vwSearch}>
                     {/* Add image from Figma */}
@@ -25,7 +29,7 @@ export default function CustomSearch({value, updateSearch, style}) {
                         placeholder="Search"
                         style={styles.textInput}
                         onChangeText={(text) => {
-                            var letters = /^$|^[a-zA-z._\b ]+$/; //Add regex for numbers
+                            var letters = /^$|^[a-zA-z0-9._\b ]+$/; //Add regex for numbers
                             if (text.match(letters)) {
                                 setQuery(text)
                                 updateSearch(text)
@@ -36,17 +40,25 @@ export default function CustomSearch({value, updateSearch, style}) {
                         } } 
                     />
             </View>
+            
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    textContainer: {
+        
+    },
+    text: {
+        
+    },
+    
     container: {
         height: 80,
         alignItems: 'center',
         ...Platform.select({
             android: {
-                marginTop: '11%',
+                marginTop: '25%',
             },
         })
     },

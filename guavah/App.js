@@ -19,8 +19,9 @@ function App(props) {
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
-      {/* <Navigation/> */}
-      <SearchPage/>
+      {/* <SearchPage/> */}
+      <Navigation/>
+      
     </SafeAreaView>
   );
 }

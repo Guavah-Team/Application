@@ -22,11 +22,11 @@ function App(props) {
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
-      {/* <Navigation/> */}
+      <Navigation/>
 
       {/* <HorizontalRestaurantPage/> */}
       {/* <VerticalRestaurantBox/> */}
-      <NavigationBar/>
+      {/* <NavigationBar/> */}
 
       
       

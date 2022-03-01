@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { Alert, SafeAreaView, StyleSheet } from 'react-native';
 import colors from './app/config/colors/colors';
 import LoginScreen from './app/screens/LoginScreen';
 import SignUpScreen from './app/screens/SignUpScreen/SignUpScreen';
@@ -8,10 +8,15 @@ import ForgotPasswordScreen from './app/screens/ForgotPasswordScreen';
 import NewPasswordScreen from './app/screens/NewPasswordScreen';
 import Navigation from './app/navigation';
 import SearchPage from './app/screens/SearchPage';
+import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/HorizontalRestaurantPage';
+import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/VerticalRestaurantBox';
+import NavigationBar from './app/components/NavigationBar/NavigationBar';
+
 
 
 
 function App(props) {
+
   return (
     <SafeAreaView style = {styles.root}>
       {/* <LoginScreen/> */}
@@ -19,8 +24,14 @@ function App(props) {
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
-      {/* <SearchPage/> */}
-      <Navigation/>
+      <SearchPage/>
+      {/* <Navigation/> */}
+
+      {/* <HorizontalRestaurantPage/> */}
+      {/* <VerticalRestaurantBox/> */}
+      {/* <NavigationBar/> */}
+
+      
       
     </SafeAreaView>
   );
@@ -28,7 +39,7 @@ function App(props) {
 
 const styles = StyleSheet.create({
   root: {
-    backgroundColor: colors.background,
+    // backgroundColor: 'blue',
     flex: 1,
   },
 });

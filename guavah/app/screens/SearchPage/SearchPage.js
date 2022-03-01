@@ -11,6 +11,7 @@ import {useForm, Controller} from 'react-hook-form';
 
 import config from '../../../src/aws-exports';
 import CustomSearch from "../../components/CustomSearch";
+import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/HorizontalRestaurantPage";
 Amplify.configure(config)
 
 function SearchPage(props) {
@@ -22,18 +23,65 @@ function SearchPage(props) {
     }
 
     return (
-        <ScrollView>
-            <CustomSearch
-                value={value}
-                updateSearch={updateSearch}
-            ></CustomSearch>
-        </ScrollView>
+        //FIXME
+        //Scroll View causes background to not be one color
+
+        // <ScrollView>
+            <View style={styles.container}> 
+                <View style={styles.searchContainer}>
+                    <Text style={styles.text}>search</Text>
+                        <CustomSearch
+                            value={value}
+                            updateSearch={updateSearch}
+                        ></CustomSearch>
+                </View>
+                <View style={styles.resultsContainer}>
+
+                    {/* FIXME */}
+                    {/* Using invisible text to space these is AWFUL*/}
+                    <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                    <Text style={styles.invisText}>test</Text>
+                    <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                    <Text style={styles.invisText}>test</Text>
+                    <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                </View>
+            </View>
+        // </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.background,
+    },
+    searchContainer: {
+        // backgroundColor: colors.accent,
+    },
+    text: {
+        color: colors.accent,
+        // color: colors.background,
+        textAlign: 'center',
+        fontSize: 30,
+
+        ...Platform.select({
+            android: {
+                marginTop: '10%',
+            },
+        })
+    },
+
+    resultsContainer: {
+        margin: '2%',
+    },
+    resultItem: {
+        margin: '20%',
+        justifyContent: 'space-between',
+        padding: '10',
+    },
+
+    invisText: {
+        color: colors.background,
     },
 })
 

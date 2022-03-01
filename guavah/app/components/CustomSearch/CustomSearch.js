@@ -10,9 +10,6 @@ export default function CustomSearch({value, updateSearch, style}) {
 
     return (
         <View style={[styles.container, style]} >
-            <View style={styles.textContainer}>
-                <Text style={styles.text}>search</Text>
-            </View>
             
             <View style={styles.searchContainer}>
                 <View style={styles.vwSearch}>
@@ -53,24 +50,31 @@ const styles = StyleSheet.create({
         
     },
     
+    //Move margin and position stuff out of custom search
+    // to make it easier to use custom search again?
     container: {
         height: 80,
+        
         alignItems: 'center',
-        ...Platform.select({
-            android: {
-                marginTop: '25%',
-            },
-        })
+        marginTop: '8%',
     },
     searchContainer: {
         backgroundColor: 'white',
         width: '90%',
         height: 40,
-        flexDirection: 'row'
+        flexDirection: 'row',
+
+        borderWidth: 1,
+        borderRadius: 4,
+        borderColor: colors.light,
     },
     vwSearch: {
         flex: 0.2,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+
+    textInput: {
+        color: colors.text,
     },
 })

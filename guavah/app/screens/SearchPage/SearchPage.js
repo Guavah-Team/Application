@@ -38,11 +38,11 @@ function SearchPage(props) {
                 <View style={styles.resultsContainer}>
 
                     {/* FIXME */}
-                    {/* Using invisible text to space these is AWFUL*/}
+                    {/* Using text to space these is AWFUL*/}
                     <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-                    <Text style={styles.invisText}>test</Text>
+                    <Text></Text>
                     <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-                    <Text style={styles.invisText}>test</Text>
+                    <Text></Text>
                     <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
                 </View>
             </View>

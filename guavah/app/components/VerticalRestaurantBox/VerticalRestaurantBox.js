@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     container: {
         width: 150,
         height: 200,
+        marginRight: 10,
     },
     restaurantNameText: {
         color: colors.white,
@@ -45,8 +46,9 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
     },
     topTextBox: {
-        marginLeft: 14,
         marginTop: 14,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     bottomTextBox: {
         marginTop: 126,

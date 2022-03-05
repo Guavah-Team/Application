@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 33,
         alignItems: 'center',
+        marginTop: '15%',
 
     },
     inputContainer: {

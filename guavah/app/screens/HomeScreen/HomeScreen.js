@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import HorizontalRestaurantPage from '../../components/HorizontalRestaurantBox/HorizontalRestaurantPage';
 import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
+import Amplify, {Auth} from 'aws-amplify';
 
 const DATA = [
     {
@@ -44,7 +45,7 @@ const DATA2 = [
     },
     {
         id: '4',
-        title: 'guadaljara',
+        title: 'guadaAJAJAJAljara',
         distance: '2.3 Miles',
     }
 ];
@@ -56,13 +57,16 @@ const Item = ({ title }) => (
 );
 
 function HomeScreen(props) {
+    const signOut = () => {
+        Auth.signOut();
+    }
 
     const renderItem = ({ item }) => (
-        <VerticalRestaurantBox name = {item.title} distance = {item.distance}/>
+        <VerticalRestaurantBox name = {item.title} distance = {item.distance} onPress = {signOut}/>
     );
 
     const renderItem2 = ({item}) => (
-        <HorizontalRestaurantPage name = {item.title}/>
+        <HorizontalRestaurantPage name = {item.title} distance = {item.distance}/>
     );
 
     return (
@@ -85,16 +89,11 @@ function HomeScreen(props) {
 
             <View style = {styles.horizontal}>
                 <Text style = {styles.localText}>Recommended</Text>
-
-                <ScrollView>
                     <FlatList
                         data={DATA2}
                         renderItem={renderItem2}
                         keyExtractor={item => item.id}
-                        // numColumns = {10}
-                        
                     />
-                </ScrollView>
             </View>
 
 
@@ -106,13 +105,12 @@ function HomeScreen(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // justifyContent: 'center',
         marginTop: 40
 
     },
     topImage: {
         height: 200,
-        width: 375,
+        width: '100%',
     },
     mask: {
         flex: 1,

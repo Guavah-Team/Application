@@ -9,7 +9,6 @@ import NewPasswordScreen from './app/screens/NewPasswordScreen';
 import Navigation from './app/navigation';
 import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/HorizontalRestaurantPage';
 import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/VerticalRestaurantBox';
-import NavigationBar from './app/components/NavigationBar/NavigationBar';
 import HomeScreen from './app/screens/HomeScreen';
 
 

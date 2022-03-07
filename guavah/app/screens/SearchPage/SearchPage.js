@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         padding: '10',
     },
     scroller: {
-        maxHeight: '65%',
+        
     },
 
     invisText: {

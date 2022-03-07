@@ -10,7 +10,6 @@ import Navigation from './app/navigation';
 import SearchPage from './app/screens/SearchPage';
 import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/HorizontalRestaurantPage';
 import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/VerticalRestaurantBox';
-// import NavigationBar from './app/components/NavigationBar/NavigationBar';
 import HomeScreen from './app/screens/HomeScreen';
 
 
@@ -27,6 +26,9 @@ function App(props) {
       {/* <NewPasswordScreen/> */}
       {/* <SearchPage/> */}
       <Navigation/>
+
+      {/* <SearchPage/> */}
+      {/* <Navigation/> */}
 
       {/* <HorizontalRestaurantPage/> */}
       {/* <VerticalRestaurantBox/> */}

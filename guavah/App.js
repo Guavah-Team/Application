@@ -6,6 +6,7 @@ import SignUpScreen from './app/screens/SignUpScreen/SignUpScreen';
 import ConfirmEmailScreen from './app/screens/ConfirmEmailScreen';
 import ForgotPasswordScreen from './app/screens/ForgotPasswordScreen';
 import NewPasswordScreen from './app/screens/NewPasswordScreen';
+import RestaurantScreen from './app/screens/RestaurantScreen/RestaurantScreen';
 import Navigation from './app/navigation';
 
 
@@ -13,12 +14,8 @@ import Navigation from './app/navigation';
 function App(props) {
   return (
     <SafeAreaView style = {styles.root}>
-      {/* <LoginScreen/> */}
-      {/* <SignUpScreen/> */}
-      {/* <ConfirmEmailScreen/> */}
-      {/* <ForgotPasswordScreen/> */}
-      {/* <NewPasswordScreen/> */}
-      <Navigation/>
+      <RestaurantScreen/>
+      
     </SafeAreaView>
   );
 }

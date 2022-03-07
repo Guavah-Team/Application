@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import colors from '../../config/colors/colors';
-import { Auth } from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 
 function HorizontalUserData({text}) {
     const userPicture = async (data) => {
@@ -9,8 +9,9 @@ function HorizontalUserData({text}) {
     }
     return (
         <View>
-            
-            name
+            <Text style = {styles.text_Primary}>UserName</Text>
+            <Text style = {styles.text_SECONDARY}>Level 10</Text>
+            <Text style = {styles.text_TERTIARY}>Pull the like or dislike from dynamo</Text>
         </View>
         
     );
@@ -18,39 +19,22 @@ function HorizontalUserData({text}) {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
+        width: '80%',
         flex: 1,
 
         padding: 15,
         marginVertical: 5,
-
-        alignItems: 'center',
-        borderRadius: 5,
     },
 
-    container_PRIMARY: {
-        backgroundColor: colors.accent,
-        borderRadius: 100,
-    },
-    container_SECONDARY: {
-        borderColor: colors.accent,
-        borderWidth: 2,
-        borderRadius: 100,
-    },
-    container_TERTIARY: {
-        marginVertical: 2,
-    },
-
-    text: {
-        color: colors.dark,        
-
+    text_Primary: {
+        color: colors.dark,  
     },
     text_SECONDARY: {
         color: colors.accent,
+
     },
     text_TERTIARY: {
-        color: 'gray',
-        // alignSelf: 'stretch',
+        textAlign: 'right'
     }
 })
 

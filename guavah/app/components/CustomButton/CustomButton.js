@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
     container_TERTIARY: {
         marginVertical: 2,
     },
+    container_SPECIAL:{
+        backgroundColor: colors.accent,
+        borderRadius: 15,
+        width: '40%'
+    },
 
     text: {
         color: colors.white,        

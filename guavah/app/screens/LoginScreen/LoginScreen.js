@@ -48,7 +48,7 @@ function LoginScreen(props) {
     }
 
     return (
-        <ScrollView>
+        <ScrollView style = {styles.scroll}>
             <View style = {styles.root}>
                 <Wordmark/>
                 <View style = {styles.inputContainer}>

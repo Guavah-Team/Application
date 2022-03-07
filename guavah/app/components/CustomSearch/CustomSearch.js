@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import colors from '../../config/colors/colors';
-import { Text, View, TextInput, StyleSheet, Platform  } from 'react-native';
+import { Text, View, TextInput, StyleSheet, Platform, Image  } from 'react-native';
 import { Controller } from 'react-hook-form';
 
 export default function CustomSearch({value, updateSearch, style}) {
@@ -14,11 +14,11 @@ export default function CustomSearch({value, updateSearch, style}) {
             <View style={styles.searchContainer}>
                 <View style={styles.vwSearch}>
                     {/* Add image from Figma */}
-                    {/* <Image 
+                    <Image 
                         style={styles.icSearch}
                         source=
-                        {require('../../assets/images/ic_search.png')}
-                    /> */}
+                        {require('../../assets/FOOTER-ICONS/search.png')}
+                    />
                 </View>
             
                 <TextInput 
@@ -72,6 +72,10 @@ const styles = StyleSheet.create({
         flex: 0.2,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+
+    icSearch: {
+        
     },
 
     textInput: {

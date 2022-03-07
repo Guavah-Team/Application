@@ -35,16 +35,34 @@ function SearchPage(props) {
                             updateSearch={updateSearch}
                         ></CustomSearch>
                 </View>
-                <View style={styles.resultsContainer}>
-
-                    {/* FIXME */}
-                    {/* Using text to space these is AWFUL*/}
-                    <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-                    <Text></Text>
-                    <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-                    <Text></Text>
-                    <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-                </View>
+                <ScrollView style={styles.scroller}>
+                    <View style={styles.resultsContainer}>
+                        {/* FIXME */}
+                        {/* Using text to space these is AWFUL*/}
+                        {/* How do we show the amount of restaurant page items based on search results? */}
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <Text></Text>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                    </View>
+                </ScrollView>
             </View>
         // </ScrollView>
     );
@@ -75,9 +93,11 @@ const styles = StyleSheet.create({
         margin: '2%',
     },
     resultItem: {
-        margin: '20%',
         justifyContent: 'space-between',
         padding: '10',
+    },
+    scroller: {
+        maxHeight: '65%',
     },
 
     invisText: {

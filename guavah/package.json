@@ -19,6 +19,7 @@
     "@react-navigation/native-stack": "^6.5.0",
     "aws-amplify": "^4.3.14",
     "aws-amplify-react-native": "^6.0.2",
+    "axios": "^0.26.0",
     "expo": "^44.0.6",
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",

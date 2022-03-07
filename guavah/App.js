@@ -7,9 +7,12 @@ import ConfirmEmailScreen from './app/screens/ConfirmEmailScreen';
 import ForgotPasswordScreen from './app/screens/ForgotPasswordScreen';
 import NewPasswordScreen from './app/screens/NewPasswordScreen';
 import Navigation from './app/navigation';
+import SearchPage from './app/screens/SearchPage';
 import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/HorizontalRestaurantPage';
 import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/VerticalRestaurantBox';
+// import NavigationBar from './app/components/NavigationBar/NavigationBar';
 import HomeScreen from './app/screens/HomeScreen';
+
 
 
 
@@ -22,7 +25,8 @@ function App(props) {
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
-      <Navigation/>
+      <SearchPage/>
+      {/* <Navigation/> */}
 
       {/* <HorizontalRestaurantPage/> */}
       {/* <VerticalRestaurantBox/> */}

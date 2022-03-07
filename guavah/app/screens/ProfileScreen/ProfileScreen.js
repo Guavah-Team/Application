@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
     },
     topBox: {
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
         width: '100%',
         height: 315,
         position: 'absolute',

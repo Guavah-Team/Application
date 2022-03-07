@@ -25,8 +25,8 @@ function App(props) {
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
-      <SearchPage/>
-      {/* <Navigation/> */}
+      {/* <SearchPage/> */}
+      <Navigation/>
 
       {/* <HorizontalRestaurantPage/> */}
       {/* <VerticalRestaurantBox/> */}

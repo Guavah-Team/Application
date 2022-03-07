@@ -50,12 +50,6 @@ const DATA2 = [
     }
 ];
 
-const Item = ({ title }) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-);
-
 function HomeScreen(props) {
     const signOut = () => {
         Auth.signOut();

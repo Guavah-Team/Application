@@ -1,10 +1,15 @@
 import React from 'react';
-import {StyleSheet, Pressable, ImageBackground, Text, View} from 'react-native';
+import {StyleSheet, Pressable, ImageBackground, Text, View, Alert} from 'react-native';
 import colors from '../../config/colors/colors';
+import {useNavigation} from '@react-navigation/native';
 
-function VerticalRestaurantBox({onPress, name, rating, distance, backgroundImage}) {
+function VerticalRestaurantBox({restaurant}) {
+    const {onPress, name, rating, distance, backgroundImage} = restaurant;
+    const navigation = useNavigation();
     return (
-        <Pressable onPress = {onPress} style = {[styles.container, styles.shadowProp]}>
+        <Pressable 
+        onPress={() => navigation.navigate("SearchScreen")}
+        style = {[styles.container, styles.shadowProp]}>
             <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} source = {backgroundImage}>
                 <View style = {styles.mask}/>
                 <View style = {styles.topTextBox}>

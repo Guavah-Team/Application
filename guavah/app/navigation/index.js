@@ -11,6 +11,7 @@ import NewPasswordScreen from '../screens/NewPasswordScreen';
 import HomeScreen from '../screens/HomeScreen';
 import {Auth, Hub} from 'aws-amplify';
 import TabNavigator from './TabNavigator';
+import SearchScreen from '../screens/SearchPage';
 
 
 const Stack = createNativeStackNavigator();
@@ -58,7 +59,11 @@ const Navigation = () => {
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false}}>
                 {user ? (
-                    <Stack.Screen name = 'HomeScreen' component={TabNavigator}/>
+                    <>
+                        <Stack.Screen name = 'HomeScreen' component={TabNavigator}/>
+                        <Stack.Screen name = 'SearchScreen' component={SearchScreen}/>
+                    </>
+
                     
                 ): (
                     <>

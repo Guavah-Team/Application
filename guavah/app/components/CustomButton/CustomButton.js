@@ -53,6 +53,12 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         width: '40%'
     },
+    container_FIXED:{
+        backgroundColor: colors.accent,
+        borderRadius: 100,
+        width: '50%',
+        position: 'absolute',
+    },
 
     text: {
         color: colors.white,        

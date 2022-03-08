@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Image, ImageBackground} from 'react-native';
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
@@ -9,16 +9,23 @@ import { Auth } from 'aws-amplify';
 import RestaurantReview from '../../components/RestaurantReview';
 
 function RestaurantScreen(){
-
-
+const [restaurantData, setData] = useState({
+    "id": "4321",
+    "name": "Olive Garden",
+    "distance": "49"
+})
+const name = "Olive Garden";
+const location = "420 PushinP Ave Suite 69";
+const image = { uri: "https://reactjs.org/logo-og.png" };
     
     return(
         <View style = {styles.root}>
-       <ScrollView style = {styles.container}>
+        <ScrollView style = {styles.container}>
             
                 <View>
-                    <Text style = {styles.text_Primary}>Olive Garden</Text>
-                    <Text style = {styles.text_Secondary}>420 PushinP Ave Suite 69</Text>
+                {/*<ImageBackground source = {image}/>*/}
+                    <Text style = {styles.text_Primary}>{name}</Text>
+                    <Text style = {styles.text_Secondary}>{location}</Text>
                     <CustomButton text ={'Get Directions'} type = {'SPECIAL'}/>
                 </View>
                 <View>
@@ -28,7 +35,8 @@ function RestaurantScreen(){
                 
             
         </ScrollView>
-        <CustomButton style ={styles.add_review} text = {'Add Review'}/>
+        <View style = {styles.add_review}><CustomButton text = {'Add Review'} type = {'FIXED'}/></View>
+        
         </View>
     )
 }
@@ -37,6 +45,9 @@ const styles = StyleSheet.create({
     root:{
         flex: 1,
         justifyContent: 'flex-end',
+        alignContent: 'center',
+        paddingHorizontal: 10,
+        
     },
     container:{
         padding: '5%',
@@ -53,13 +64,15 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     text_Tertiary:{
+        paddingTop: '5%',
         paddingBottom: '5%',
         color: colors.dark,
         fontWeight: 'bold',
         fontSize: 17.5
     },
     add_review:{
-        padding: '30%'
+        left: '25%',
+        bottom: '8%'
     }
     
 })

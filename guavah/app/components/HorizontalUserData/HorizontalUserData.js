@@ -1,21 +1,26 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Image} from 'react-native';
 import colors from '../../config/colors/colors';
 import Amplify, { Auth } from 'aws-amplify';
 
-function HorizontalUserData({text}) {
-    const userPicture = async (data) => {
-        const {name} = name;
-    }
+
+
+function HorizontalUserData({name, level, iconName}) {
+    
+    
     return (
         <View>
-            <Text style = {styles.text_Primary}>UserName</Text>
-            <Text style = {styles.text_SECONDARY}>Level 10</Text>
-            <Text style = {styles.text_TERTIARY}>Pull the like or dislike from dynamo</Text>
+            <Text style = {styles.text_Primary}>{name}</Text>
+            <Text style = {styles.text_SECONDARY}>{'Level ' + level}</Text>
+            <View style = {styles.image}>
+            <Image source = {require('../../assets/LikeDislike/Like.png')}/>
+            </View>
+            
         </View>
         
     );
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -28,6 +33,7 @@ const styles = StyleSheet.create({
 
     text_Primary: {
         color: colors.dark,  
+        fontWeight: 'bold'
     },
     text_SECONDARY: {
         color: colors.accent,
@@ -35,6 +41,16 @@ const styles = StyleSheet.create({
     },
     text_TERTIARY: {
         textAlign: 'right'
+    },
+    image:{
+        flex: 1,
+        width: 10,
+        height: 10,
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: 20,
+        top: -3
+
     }
 })
 

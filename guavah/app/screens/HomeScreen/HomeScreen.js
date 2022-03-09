@@ -6,28 +6,27 @@ import Amplify, {Auth} from 'aws-amplify';
 import axios from 'axios';
 import { urlSafeDecode } from '@aws-amplify/core';
 
-let DATA = [
+const DATA = [
     {
-    
-      },
-      {
-      
-      },
-      {
-        
-      },
-      {
-        
-      },
-      {
-
-      },
-      {
-
-      },
-      {
-          
-      }
+      id: '1',
+      title: 'Olive Garden',
+      distance: '5.3 Miles',
+    },
+    {
+      id: '2',
+      title: 'Taco Bell',
+      distance: '8.3 Miles',
+    },
+    {
+      id: '3',
+      title: 'El Habenaro',
+      distance: '7.3 Miles',
+    },
+    {
+        id: '4',
+        title: 'guadaljara',
+        distance: '2.3 Miles',
+    }
 ];
 
 let DATA2 = [
@@ -54,34 +53,6 @@ let DATA2 = [
 ];
 
 const HomeScreen = () => {
-    const [restaurantData, setData] = useState({
-        "id": "4321",
-        "name": "Olive Garden",
-        "distance": "50"
-    });
-
-        useEffect(async () => {
-        let url = 'https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/home?latlong=33.9806,-117.3755&radius=2000';
-        axios.get(url).then(function (response) {
-            response.data["body"].forEach(p => {
-                DATA.push(p);
-            });
-            console.log("TEST");
-        })
-        .catch(function (error) {
-            if (error.response) // error from server
-            console.log(error.response.data.message)
-            else
-            console.log("Error Occured. Please try Again.!") // error from app side
-        });
-        setData({
-            "id": "4321",
-            "name": "Jake A HOE",
-            "distance": "49"
-        });
-
-    })
-
     const renderItem = ({ item }) => (
         <VerticalRestaurantBox name = {restaurantData["name"]} distance = {restaurantData["distance"]}/>
     );

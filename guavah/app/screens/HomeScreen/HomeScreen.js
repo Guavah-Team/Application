@@ -23,8 +23,6 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
 
-  let DATA = [];
-
   const fetchData = async () => {
     setLoading(true);
     // url = "https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/home?latlong=33.9806,-117.3755&radius=2000";

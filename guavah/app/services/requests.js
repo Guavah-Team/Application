@@ -20,7 +20,8 @@ export const getDetailedRestaurantData = async () => {
 
       try{
           const response = await axios.get(url);
-          return response.data["body"];
+        //   console.log(response);
+          return response.data["sectionA"];
       }catch (e) {
         console.log(e);
       }

@@ -4,19 +4,19 @@ import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 
 function VerticalRestaurantBox({restaurant}) {
-    const {onPress, name, rating, distance, backgroundImage} = restaurant;
+    const {name, rating, distance, photo} = restaurant;
     const navigation = useNavigation();
     return (
         <Pressable 
         onPress={() => navigation.navigate("SearchScreen")}
         style = {[styles.container, styles.shadowProp]}>
-            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} source = {backgroundImage}>
+            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} source = {{uri: photo}}>
                 <View style = {styles.mask}/>
                 <View style = {styles.topTextBox}>
                     <Text style = {styles.restaurantNameText}> {name} </Text>
                 </View>
                 <View style = {styles.bottomTextBox}>
-                    <Text style = {styles.distanceText}> {distance} </Text>
+                    <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text>
                 </View>
             </ImageBackground>
         </Pressable>
@@ -28,12 +28,14 @@ const styles = StyleSheet.create({
         width: 150,
         height: 200,
         marginRight: 10,
+
     },
     restaurantNameText: {
         color: colors.white,
         fontSize: 18,
         fontWeight: 'bold',
         textTransform: 'capitalize',
+        textAlign: 'center',
     },
     backgroundImage: {
         flex: 1,
@@ -53,11 +55,14 @@ const styles = StyleSheet.create({
     topTextBox: {
         marginTop: 14,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     bottomTextBox: {
-        marginTop: 126,
         alignItems: 'center',
+        position: 'absolute',
+        bottom: 21,
+        left: 45,
+        right: 45
     },
     shadowProp: {
         shadowColor: '#171717',

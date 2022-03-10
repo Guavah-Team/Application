@@ -40,7 +40,7 @@ function SearchPage(props) {
                         {/* FIXME */}
                         {/* Using text to space these is AWFUL*/}
                         {/* How do we show the amount of restaurant page items based on search results? */}
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        {/* <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
                         <Text></Text>
                         <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
                         <Text></Text>
@@ -60,7 +60,7 @@ function SearchPage(props) {
                         <Text></Text>
                         <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
                         <Text></Text>
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
+                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage> */}
                     </View>
                 </ScrollView>
             </View>

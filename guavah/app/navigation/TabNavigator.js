@@ -54,8 +54,8 @@ export default function TabNavigator() {
 
         <Tab.Screen name={homeName} component={HomeScreen}/>
         <Tab.Screen name={searchName} component={SearchScreen}/>
-        <Tab.Screen name={versusName} component={HomeScreen}/>
-        <Tab.Screen name={profileName} component={HomeScreen}/>
+        <Tab.Screen name={versusName} component={SearchScreen}/>
+        <Tab.Screen name={profileName} component={SearchScreen}/>
 
       </Tab.Navigator>
 

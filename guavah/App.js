@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, View, SafeAreaView, StyleSheet } from 'react-native';
+import { Alert, View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import colors from './app/config/colors/colors';
 import LoginScreen from './app/screens/LoginScreen';
 import SignUpScreen from './app/screens/SignUpScreen/SignUpScreen';
@@ -16,6 +16,7 @@ import HomeScreen from './app/screens/HomeScreen';
 
 
 function App(props) {
+  const temp = 2374;
 
   return (
     <View style = {styles.root}>
@@ -26,15 +27,14 @@ function App(props) {
       {/* <NewPasswordScreen/> */}
 
       <Navigation/>
+
       {/* <SearchPage/> */}
       {/* <Navigation/> */}
 
-      {/* <HorizontalRestaurantPage/> */}
-      {/* <VerticalRestaurantBox/> */}
+      {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/>
+      <VerticalRestaurantBox name = "Toast" distance = "13"/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
-
-      
       
     </View>
   );

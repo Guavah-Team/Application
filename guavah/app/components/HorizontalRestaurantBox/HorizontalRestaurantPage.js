@@ -1,16 +1,21 @@
 import React from 'react';
 import {View, Text, Pressable, StyleSheet, ImageBackground} from 'react-native';
 import colors from '../../config/colors/colors';
+import {useNavigation} from '@react-navigation/native';
 
-function HorizontalRestaurantPage({onPress, name, rating, distance, backgroundImage}) {
-
+function HorizontalRestaurantPage({restaurant}) {
+    const {name, rating, distance, photo} = restaurant;
+    const navigation = useNavigation();
     return (
-        <Pressable onPress = {onPress} style = {[styles.container, styles.shadowProp]}>
-            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} source = {backgroundImage}>
+        <Pressable 
+        onPress={() => navigation.navigate("SearchScreen")}
+        style = {[styles.container, styles.shadowProp]}
+        >
+            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} source= {{uri: photo}}>
                 <View style = {styles.mask}/>
                 <View style = {styles.textBox}>
                     <Text style = {styles.restaurantNameText}> {name} </Text>
-                    <Text style = {styles.distanceText}> {distance} </Text>
+                    <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text>
                 </View>
             </ImageBackground>
         </Pressable>
@@ -33,6 +38,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         textTransform: 'capitalize',
+        textAlign: 'left',
     },
     backgroundImage: {
         flex: 1,
@@ -51,6 +57,7 @@ const styles = StyleSheet.create({
     },
     textBox: {
         marginLeft: 25,
+        marginRight: 25,
         marginTop: 9,
     },
     shadowProp: {

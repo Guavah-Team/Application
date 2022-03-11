@@ -11,7 +11,7 @@ function HorizontalRestaurantPage({restaurant}) {
         onPress={() => navigation.navigate("SearchScreen")}
         style = {[styles.container, styles.shadowProp]}
         >
-            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} source= {{uri: photo}}>
+            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} defaultSource={require('../../assets/defaults/HorizontalDefault.png')} source= {{uri: photo}}>
                 <View style = {styles.mask}/>
                 <View style = {styles.textBox}>
                     <Text style = {styles.restaurantNameText}> {name} </Text>

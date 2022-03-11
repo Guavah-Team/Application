@@ -31,8 +31,8 @@ function App(props) {
       {/* <SearchPage/> */}
       {/* <Navigation/> */}
 
-      {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/>
-      <VerticalRestaurantBox name = "Toast" distance = "13"/> */}
+      {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
+      {/* <VerticalRestaurantBox name = "Toast" distance = "10000"/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
       
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
   root: {
     backgroundColor: colors.background,
     flex: 1,
+    justifyContent: 'center',
   },
 });
 

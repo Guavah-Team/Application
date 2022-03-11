@@ -1,20 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  ScrollView,
-  ImageBackground,
-  ActivityIndicator,
-  Alert,
-} from "react-native";
+import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityIndicator, Alert, RefreshControl} from "react-native";
 import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/HorizontalRestaurantPage";
 import VerticalRestaurantBox from "../../components/VerticalRestaurantBox";
 import Amplify, { Auth } from "aws-amplify";
-import axios from "axios";
-
+import {useNavigation} from '@react-navigation/native';
 import { getDetailedRestaurantData } from "../../services/requests";
+import colors from "../../config/colors/colors";
+import CustomButton from "../../components/CustomButton";
 
 const HomeScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -22,6 +14,22 @@ const HomeScreen = () => {
   const [messageA, setMessageA] = useState(null);
   const [dataB, setDataB] = useState(null);
   const [messageB, setMessageB] = useState(null);
+
+  const navigation = useNavigation();
+
+  const randomImage = [
+    require('../../assets/topPhotos/photo1.png'),
+    require('../../assets/topPhotos/photo2.jpg'),
+    require('../../assets/topPhotos/photo3.png'),
+    require('../../assets/topPhotos/photo4.png'),
+    require('../../assets/topPhotos/photo5.png'),
+    require('../../assets/topPhotos/photo6.png'),
+    require('../../assets/topPhotos/photo7.png'),
+  ];
+
+  const searchPressed = () => {
+    navigation.navigate("SearchScreen");
+  }
 
   const fetchData = async () => {
     setLoading(true);
@@ -41,15 +49,22 @@ const HomeScreen = () => {
     return <ActivityIndicator style = {styles.loading} size="large" />; 
   }
 
-  console.log(dataA);
-
   return (
     <ScrollView style={styles.container}>
       <ImageBackground
         style={styles.topImage}
-        source={require("../../assets/header.jpg")}
+        source={randomImage[Math.floor(Math.random()*randomImage.length)]}
       >
         <View style={styles.mask} />
+        <View style = {styles.headerTextBox}>
+          <Text style = {styles.headerText}>Date night?</Text>
+          <Text style = {styles.headerText}>Find a restaurant.</Text>
+          <CustomButton 
+            text = {"Search"}
+            onPress = {searchPressed}
+            type = {'SEARCH'}
+          />
+        </View>
       </ImageBackground>
 
       <View style={styles.vertical}>
@@ -77,15 +92,15 @@ const HomeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40,
+    // marginTop: 40,
   },
   topImage: {
-    height: 200,
+    height: 220,
     width: "100%",
   },
   mask: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.2)",
+    backgroundColor: "rgba(0,0,0,0.45)",
     position: "absolute",
     top: 0,
     left: 0,
@@ -115,7 +130,16 @@ const styles = StyleSheet.create({
   loading: {
     flex: 1,
     justifyContent: 'center',
-  }
+  },
+  headerText: {
+    fontSize: 18,
+    color: colors.background,
+    fontWeight: 'bold',
+  },
+  headerTextBox: {
+    marginTop: 61,
+    marginLeft: 10
+  },
 });
 
 export default HomeScreen;

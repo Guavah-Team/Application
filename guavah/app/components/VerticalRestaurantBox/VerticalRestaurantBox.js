@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Pressable, ImageBackground, Text, View, Alert} from 'react-native';
 import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
+import placeHolder from '../../assets/defaults/VerticalDefault.png';
 
 function VerticalRestaurantBox({restaurant}) {
     const {name, rating, distance, photo} = restaurant;
@@ -10,7 +11,7 @@ function VerticalRestaurantBox({restaurant}) {
         <Pressable 
         onPress={() => navigation.navigate("SearchScreen")}
         style = {[styles.container, styles.shadowProp]}>
-            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} source = {{uri: photo}}>
+            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} defaultSource={require('../../assets/defaults/VerticalDefault.png')} source = {{uri: photo}}>
                 <View style = {styles.mask}/>
                 <View style = {styles.topTextBox}>
                     <Text style = {styles.restaurantNameText}> {name} </Text>
@@ -61,8 +62,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'absolute',
         bottom: 21,
-        left: 45,
-        right: 45
+        left: 43,
+        right: 43
     },
     shadowProp: {
         shadowColor: '#171717',

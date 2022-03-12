@@ -12,11 +12,15 @@ import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/H
 import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/VerticalRestaurantBox';
 import HomeScreen from './app/screens/HomeScreen';
 
+import * as Location from 'expo-location';
+
+
 
 
 
 function App(props) {
   const temp = 2374;
+
 
   return (
     <View style = {styles.root}>
@@ -29,12 +33,14 @@ function App(props) {
       {/* <Navigation/> */}
 
       {/* <SearchPage/> */}
-      {/* <Navigation/> */}
+      <Navigation/>
 
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
       {/* <VerticalRestaurantBox name = "Toast" distance = "10000"/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
+
+
       
     </View>
   );

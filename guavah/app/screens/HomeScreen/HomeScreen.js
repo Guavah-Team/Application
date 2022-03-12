@@ -31,23 +31,23 @@ const HomeScreen = () => {
     navigation.navigate("SearchScreen");
   }
 
-  // const fetchData = async () => {
-  //   setLoading(true);
-  //   const fetchedData = await getDetailedRestaurantData();
-  //   setMessageA(fetchedData[0]);
-  //   setDataA(fetchedData[1]);
-  //   setMessageB(fetchedData[2]);
-  //   setDataB(fetchedData[3]);
-  //   setLoading(false);
-  // };
+  const fetchData = async () => {
+    setLoading(true);
+    const fetchedData = await getDetailedRestaurantData();
+    setMessageA(fetchedData[0]);
+    setDataA(fetchedData[1]);
+    setMessageB(fetchedData[2]);
+    setDataB(fetchedData[3]);
+    setLoading(false);
+  };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  // if (loading || !dataA || !messageA || !dataB || !messageB) {
-  //   return <ActivityIndicator style = {styles.loading} size="large" />; 
-  // }
+  if (loading || !dataA || !messageA || !dataB || !messageB) {
+    return <ActivityIndicator style = {styles.loading} size="large" />; 
+  }
 
   return (
     <ScrollView style={styles.container}>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { StyleSheet, View, FlatList, Text, ScrollView, ActivityIndicator, Alert, TextInput } from "react-native";
+import { StyleSheet, View, FlatList, Text, ScrollView, ActivityIndicator, RefreshControl, Alert, TextInput } from "react-native";
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
@@ -10,29 +10,42 @@ import Amplify, {Auth} from 'aws-amplify';
 import {useForm, Controller} from 'react-hook-form';
 import { Ionicons } from '@expo/vector-icons'; 
 
-import { getDetailedRestaurantData } from "../../services/requests";
+import { getDetailedRestaurantData, getSearchRestaurantData } from "../../services/requests";
 
 import config from '../../../src/aws-exports';
 import CustomSearch from "../../components/CustomSearch";
 import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/HorizontalRestaurantPage";
 Amplify.configure(config)
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+
 function SearchPage(props) {
     const [loading, setLoading] = useState(false);
     const [value, setValue] = useState();
     const [dataA, setDataA] = useState(null);
     const [messageA, setMessageA] = useState(null);
+    const [searchData, setSearchData] = useState(null);
+    const [pressed, setPressed] = useState(false);
+    const [refreshing, setRefreshing] = React.useState(false);
 
     const navigation = useNavigation();
     
     function updateSearch(value){
-        // Search logic goes HERE
         setValue(value);
     }
 
-    const onSearchPressed = () => {
-        console.log(value)
+    const onSearchPressed = async () => {
+        setPressed(true);
+        const fetchedData = await getSearchRestaurantData(value);
+        setSearchData(fetchedData[0]);
     }
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(500).then(() => setRefreshing(false), setPressed(false));
+    }, []);
 
     const fetchData = async () => {
         setLoading(true);
@@ -63,44 +76,22 @@ function SearchPage(props) {
                 </View>
             </View>
             <View style = {styles.resultsHeader}>
-                {/* <Text style = {styles.localText}>Riverside local</Text> */}
-                <Text style={styles.localText}>{messageA}</Text>
+                <Text style={styles.localText}>
+                    {pressed ? 'Results' : messageA}
+                </Text>
                 <Ionicons name="chevron-down-outline" style = {styles.downArrow}></Ionicons>
             </View>
-            <ScrollView style={styles.scroller}>
+            <ScrollView style={styles.scroller} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                 <View style={styles.resultsContainer}>
                     <View style={styles.horizontal}>
-                        <FlatList
+                        {pressed ? <FlatList
+                        data={searchData}
+                        renderItem={({ item }) => <HorizontalRestaurantPage restaurant={item} />}
+                        /> : <FlatList
                         data={dataA}
                         renderItem={({ item }) => <HorizontalRestaurantPage restaurant={item} />}
-                        />
+                        />}
                     </View>
-
-                    {/* <View style = {styles.horizontal}>
-
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-
-                        <HorizontalRestaurantPage style={styles.resultItem}></HorizontalRestaurantPage>
-                    </View> */}
                 </View>
             </ScrollView>
         </View>

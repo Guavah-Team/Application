@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import colors from '../../config/colors/colors';
-import { Text, View, TextInput, StyleSheet, Platform, Image  } from 'react-native';
+import { Text, View, TextInput, StyleSheet, Platform, Image, Pressable, Alert  } from 'react-native';
 import { Controller } from 'react-hook-form';
+import { Ionicons } from '@expo/vector-icons'; 
 
-export default function CustomSearch({value, updateSearch, style}) {
+export default function CustomSearch({value, updateSearch, style, onPress}) {
 
     const [query, setQuery] = useState(value);
     const [error, setError] = useState();
@@ -12,30 +13,25 @@ export default function CustomSearch({value, updateSearch, style}) {
         <View style={[styles.container, style]} >
             
             <View style={styles.searchContainer}>
-                <View style={styles.vwSearch}>
-                    {/* Add image from Figma */}
-                    <Image 
-                        style={styles.icSearch}
-                        source=
-                        {require('../../assets/FOOTER-ICONS/search.png')}
-                    />
-                </View>
+                <Pressable onPress = {onPress} style = {styles.vwSearch}>
+                        <Ionicons name = {'search'} size = {20}/>
+                </Pressable>
             
                 <TextInput 
-                        value={query}
-                        placeholder="Search"
-                        style={styles.textInput}
-                        onChangeText={(text) => {
-                            var letters = /^$|^[a-zA-z0-9._\b ]+$/; //Add regex for numbers
-                            if (text.match(letters)) {
-                                setQuery(text)
-                                updateSearch(text)
-                                if(error)
-                                    setError(false)
-                            }
-                            else setError("Please only enter alphanumeric characters.")
-                        } } 
-                    />
+                    value={query}
+                    placeholder="Search"
+                    style={styles.textInput}
+                    onChangeText={(text) => {
+                        var letters = /^$|^[a-zA-z0-9._\b ]+$/; //Add regex for numbers
+                        if (text.match(letters)) {
+                            setQuery(text)
+                            updateSearch(text)
+                            if(error)
+                                setError(false)
+                        }
+                        else setError("Please only enter alphanumeric characters.")
+                    } } 
+                />
             </View>
             
         </View>
@@ -43,15 +39,6 @@ export default function CustomSearch({value, updateSearch, style}) {
 }
 
 const styles = StyleSheet.create({
-    textContainer: {
-        
-    },
-    text: {
-        
-    },
-    
-    //Move margin and position stuff out of custom search
-    // to make it easier to use custom search again?
     container: {
         height: 80,
         
@@ -60,7 +47,7 @@ const styles = StyleSheet.create({
     },
     searchContainer: {
         backgroundColor: 'white',
-        width: '90%',
+        width: '100%',
         height: 40,
         flexDirection: 'row',
 
@@ -73,11 +60,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
-    icSearch: {
-        
-    },
-
     textInput: {
         color: colors.text,
     },

@@ -8,12 +8,8 @@ import {useNavigation} from '@react-navigation/native';
 import { Auth } from 'aws-amplify';
 import RestaurantReview from '../../components/RestaurantReview';
 
-function RestaurantScreen(){
-const [restaurantData, setData] = useState({
-    "id": "4321",
-    "name": "Olive Garden",
-    "distance": "49"
-})
+function RestaurantScreen({id}){
+
 const name = "Olive Garden";
 const location = "420 PushinP Ave Suite 69";
 const image = { uri: "https://reactjs.org/logo-og.png" };

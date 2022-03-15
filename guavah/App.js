@@ -14,13 +14,13 @@ import Navigation from './app/navigation';
 function App(props) {
   return (
     <SafeAreaView style = {styles.root}>
-      {/*<RestaurantScreen/>/*/}
+      <RestaurantScreen/> 
       {/* <LoginScreen/> */}
       {/* <SignUpScreen/> */}
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
-      <Navigation/>
+
     </SafeAreaView>
   );
 }

@@ -1,42 +1,46 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, ScrollView, Image, ImageBackground} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, Button, Alert} from 'react-native';
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
-import { Auth } from 'aws-amplify';
+import { Auth, button } from 'aws-amplify';
 import RestaurantReview from '../../components/RestaurantReview';
 
-function RestaurantScreen(){
-const [restaurantData, setData] = useState({
-    "id": "4321",
-    "name": "Olive Garden",
-    "distance": "49"
-})
+function RestaurantScreen({id}){
+
+const buttonPressed = () =>{
+    Alert.alert("Button Pressed");
+}
 const name = "Olive Garden";
 const location = "420 PushinP Ave Suite 69";
 const image = { uri: "https://reactjs.org/logo-og.png" };
     
     return(
         <View style = {styles.root}>
+        
         <ScrollView style = {styles.container}>
             
                 <View>
-                {/*<ImageBackground source = {image}/>*/}
-                    <Text style = {styles.text_Primary}>{name}</Text>
-                    <Text style = {styles.text_Secondary}>{location}</Text>
-                    <CustomButton text ={'Get Directions'} type = {'SPECIAL'}/>
+                    <ImageBackground style = {styles.image} source = {image}>
+                    
+                    <View style = {styles.special}>
+                        <Text style = {styles.text_Primary}>{name}</Text>
+                        <Text style = {styles.text_Secondary}>{location}</Text>
+                        <CustomButton OnPress = {buttonPressed} text ={'Get Directions'} type = {'SPECIAL'}/>
+                    </View>
+                    </ImageBackground>
                 </View>
-                <View>
+                <View style = {styles.special}>
                     <Text style = {styles.text_Tertiary}>Reviews</Text>
-                    <RestaurantReview/>
+                    <View style = {styles.reviews}>
+                        <RestaurantReview/>
+                    </View>
+                    
                 </View>
-                
-            
         </ScrollView>
-        <View style = {styles.add_review}><CustomButton text = {'Add Review'} type = {'FIXED'}/></View>
-        
+        <View style = {styles.add_review}><CustomButton OnPress = {buttonPressed} text = {'Add Review'} type = {'FIXED'}/></View>
         </View>
     )
 }
@@ -46,11 +50,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignContent: 'center',
-        paddingHorizontal: 10,
         
     },
     container:{
-        padding: '5%',
         flex:1
     },
     text_Primary: {
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
     },
     text_Tertiary:{
         paddingTop: '5%',
-        paddingBottom: '5%',
+        
         color: colors.dark,
         fontWeight: 'bold',
         fontSize: 17.5
@@ -73,6 +75,19 @@ const styles = StyleSheet.create({
     add_review:{
         left: '25%',
         bottom: '8%'
+    },
+    image:{
+        width: '100%',
+        height: 300,
+    },
+    restaurantInfo:{
+
+    },
+    special:{
+        paddingHorizontal: '5%'
+    },
+    reviews:{
+        paddingVertical: '5%'
     }
     
 })

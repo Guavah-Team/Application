@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
     container_SPECIAL:{
         backgroundColor: colors.accent,
         borderRadius: 15,
-        width: '40%'
+        width: '40%',
+        alignContent: 'flex-end'
+    
     },
     container_FIXED:{
         backgroundColor: colors.accent,

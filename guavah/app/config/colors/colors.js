@@ -5,4 +5,5 @@ export default {
     dark: '#696164',
     light: '#DBD3CE',
     white: 'white',
+    primaryText: '#F5F2F3',
 }

@@ -48,13 +48,6 @@ const styles = StyleSheet.create({
     container_TERTIARY: {
         marginVertical: 2,
     },
-    container_SPECIAL:{
-        backgroundColor: colors.accent,
-        borderRadius: 15,
-        width: '40%',
-        alignContent: 'flex-end'
-    
-    },
     container_FIXED:{
         backgroundColor: colors.accent,
         borderRadius: 100,
@@ -85,7 +78,7 @@ const styles = StyleSheet.create({
     },
     text_SEARCH: {
         color: colors.white,  
-    }
+    },
 })
 
 export default CustomButton;

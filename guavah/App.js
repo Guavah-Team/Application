@@ -34,7 +34,8 @@ function App(props) {
       {/* <Navigation/> */}
 
       {/* <SearchPage/> */}
-      <Navigation/>
+      {/* <Navigation/> */}
+      <RestaurantScreen/>
 
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
       {/* <VerticalRestaurantBox name = "Toast" distance = "10000"/> */}

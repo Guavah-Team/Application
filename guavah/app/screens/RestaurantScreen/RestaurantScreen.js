@@ -6,9 +6,9 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import { Auth, button } from 'aws-amplify';
-import RestaurantReview from '../../components/RestaurantReview';
+import HorizontalReviewBox from '../../components/HorizontalReviewBox';
 
-function RestaurantScreen({id}){
+function RestaurantScreen({}){
 
 const buttonPressed = () =>{
     Alert.alert("Button Pressed");
@@ -19,28 +19,30 @@ const image = { uri: "https://reactjs.org/logo-og.png" };
     
     return(
         <View style = {styles.root}>
-        
-        <ScrollView style = {styles.container}>
-            
+            <ImageBackground style = {styles.image} source = {image}>  
+                <View style = {styles.mask}/>
+                <View style = {styles.headerBox}>
+                    <Text style = {styles.text_Primary}>{name}</Text>
+                    <Text style = {styles.text_Secondary}>{location}</Text>
+                    <CustomButton text = {"Review"} type = {'SEARCH'}/>
+                </View>
+            </ImageBackground>
+
+            <ScrollView style = {styles.container}>
                 <View>
-                    <ImageBackground style = {styles.image} source = {image}>
-                    
-                    <View style = {styles.special}>
-                        <Text style = {styles.text_Primary}>{name}</Text>
-                        <Text style = {styles.text_Secondary}>{location}</Text>
-                        <CustomButton OnPress = {buttonPressed} text ={'Get Directions'} type = {'SPECIAL'}/>
+                    <Text style = {styles.headerText}>Directions</Text>
+                    <View>
+                        
                     </View>
-                    </ImageBackground>
                 </View>
+
                 <View style = {styles.special}>
-                    <Text style = {styles.text_Tertiary}>Reviews</Text>
+                    <Text style = {styles.headerText}>Reviews</Text>
                     <View style = {styles.reviews}>
-                        <RestaurantReview/>
+                        <HorizontalReviewBox/>
                     </View>
-                    
                 </View>
-        </ScrollView>
-        <View style = {styles.add_review}><CustomButton OnPress = {buttonPressed} text = {'Add Review'} type = {'FIXED'}/></View>
+            </ScrollView>
         </View>
     )
 }
@@ -52,43 +54,41 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         
     },
-    container:{
-        flex:1
+    container: {
+        marginLeft: 10,
+        marginRight: 10,
+        marginTop: 20,
     },
     text_Primary: {
-        color: colors.dark,
-        fontWeight: 'bold',
-        fontSize: 30
+        color: colors.primaryText,
+        fontWeight: '600',
+        fontSize: 32
     },
     text_Secondary: {
         paddingBottom: 10,
-        color: colors.dark,
-        fontSize: 20,
-    },
-    text_Tertiary:{
-        paddingTop: '5%',
-        
-        color: colors.dark,
-        fontWeight: 'bold',
-        fontSize: 17.5
-    },
-    add_review:{
-        left: '25%',
-        bottom: '8%'
+        color: colors.primaryText,
+        fontWeight: '600',
+        fontSize: 18,
     },
     image:{
         width: '100%',
-        height: 300,
+        height: 200,
     },
-    restaurantInfo:{
-
+    headerBox: {
+        marginLeft: 10,
+        marginTop: '8%',
     },
-    special:{
-        paddingHorizontal: '5%'
+    headerText: {
+        fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 10,
     },
-    reviews:{
-        paddingVertical: '5%'
-    }
-    
+    mask: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        position: 'absolute',
+        top: 0, left: 0, right: 0, bottom: 0, 
+        borderRadius: 10,
+    },
 })
 export default RestaurantScreen;

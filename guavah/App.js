@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import { Alert, View, Text, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import colors from './app/config/colors/colors';
 import LoginScreen from './app/screens/LoginScreen';
 import SignUpScreen from './app/screens/SignUpScreen/SignUpScreen';
@@ -18,6 +18,16 @@ import * as Location from 'expo-location';
 
 
 
+const data = [
+  {
+    name: "MarieCallendar’s Restaurant & Bakery",
+    distance: 13,
+  },
+  {
+    name: "MarieC",
+    distance: 13,
+  }
+]
 
 function App(props) {
   const temp = 2374;
@@ -31,13 +41,22 @@ function App(props) {
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
 
-      {/* <Navigation/> */}
+      <Navigation/>
 
       {/* <SearchPage/> */}
       {/* <Navigation/> */}
-      <RestaurantScreen/>
+      {/* <RestaurantScreen name = "test"/> */}
 
-      {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
+      {/* <HorizontalRestaurantPage restaurant={data}/> */}
+      {/* <FlatList
+          data={data}
+          renderItem={({ item }) => <HorizontalRestaurantPage restaurant={item} />}
+        /> */}
+      {/* <FlatList
+          data={data}
+          renderItem={({ item }) => <VerticalRestaurantBox restaurant={item} />}
+        /> */}
+        
       {/* <VerticalRestaurantBox name = "Toast" distance = "10000"/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}

@@ -2,20 +2,21 @@ import React from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
 import colors from '../../config/colors/colors';
 import { Auth } from 'aws-amplify';
-import HorizontalUserData from '../HorizontalUserData';
+import { Ionicons } from '@expo/vector-icons'; 
 
-function RestaurantReview({text}) {
+function RestaurantReview({username, userLevel, userMessage, icon}) {
 
     return (
         <View style = {styles.container}>
             <View style = {styles.userBox}>
                 <Image style = {styles.userImage} source = {require('../../assets/defaults/HorizontalDefault.png')}></Image>
                 <View style = {styles.textBox}>
-                    <Text style = {styles.user}>Dylan Guzman</Text>
-                    <Text style = {styles.rank}>Level 4</Text>
+                    <Text style = {styles.user}>{username}</Text>
+                    <Text style = {styles.rank}>{userLevel}</Text>
                 </View>
+                <Ionicons name = {icon} style = {styles.thumb}/>
             </View>
-            <Text style = {styles.message}>The young lady that helped us was very nice and they sat us very quickly and food was good.</Text>
+            <Text style = {styles.message}>{userMessage}</Text>
         </View>
         
     );
@@ -30,9 +31,9 @@ const styles = StyleSheet.create({
         backgroundColor: colors.white,
         borderRadius: 6,
         shadowColor: '#171717',
-        shadowOffset: {width: 4, height: 4},
+        shadowOffset: {width: 0, height: 4},
         shadowOpacity: 0.3,
-        shadowRadius: 3,
+        shadowRadius: 2,
     },
     userBox: {
         flexDirection: 'row',
@@ -56,6 +57,11 @@ const styles = StyleSheet.create({
     message: {
         fontSize: 12,
         fontWeight: '400',
+    },
+    thumb: {
+        fontSize: 20,
+        position: 'absolute',
+        right: 24,
     }
 })
 

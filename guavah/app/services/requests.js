@@ -11,6 +11,7 @@ export const getDetailedRestaurantData = async () => {
       sections.push(response.data["sectionA"]);
       sections.push(response.data["messageB"]);
       sections.push(response.data["sectionB"]);
+      // console.log(sections);
       return sections;
     }catch (e) {
       console.log(e);

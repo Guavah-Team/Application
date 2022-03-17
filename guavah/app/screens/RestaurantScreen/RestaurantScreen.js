@@ -7,39 +7,62 @@ import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import { Auth, button } from 'aws-amplify';
 import HorizontalReviewBox from '../../components/HorizontalReviewBox';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 
-function RestaurantScreen({}){
+const GOOGLE_MAPS_APIKEY = 'AIzaSyCtkgG8tkAaoKtARZwjazpggOspoSSArzI';
+const origin = {latitude: 37.3318456, longitude: -122.0296002};
+const destination = {latitude: 37.771707, longitude: -122.4053769};
 
-const buttonPressed = () =>{
-    Alert.alert("Button Pressed");
-}
-const name = "Olive Garden";
-const location = "420 PushinP Ave Suite 69";
-const image = { uri: "https://reactjs.org/logo-og.png" };
+function RestaurantScreen({route}){
+
+    const {name} = route.params;
+    const {photo} = route.params;
+    const {location} = route.params;
+
+    const buttonPressed = () => {
+        console.log(navigation)
+    }
     
     return(
         <View style = {styles.root}>
-            <ImageBackground style = {styles.image} source = {image}>  
+            <ImageBackground style = {styles.image} source = {{uri: photo}}>  
                 <View style = {styles.mask}/>
                 <View style = {styles.headerBox}>
                     <Text style = {styles.text_Primary}>{name}</Text>
                     <Text style = {styles.text_Secondary}>{location}</Text>
-                    <CustomButton text = {"Review"} type = {'SEARCH'}/>
+                    <CustomButton text = {"Review"} type = {'SEARCH'} onPress = {buttonPressed}/>
                 </View>
             </ImageBackground>
 
             <ScrollView style = {styles.container}>
                 <View>
                     <Text style = {styles.headerText}>Directions</Text>
-                    <View>
-                        
+                    <View style = {styles.mapBox}>
+                        {/* <MapView
+                            style={{ flex: 1 }}
+                            provider={PROVIDER_GOOGLE}
+                            showsUserLocation
+                            initialRegion={{
+                            latitude: 37.78825,
+                            longitude: -122.4324,
+                            latitudeDelta: 0.0922,
+                            longitudeDelta: 0.0421}}
+                        /> */}
+                        {/* <MapView>
+                            <MapViewDirections
+                                origin={origin}
+                                destination={destination}
+                                apikey={GOOGLE_MAPS_APIKEY}
+                            />
+                        </MapView> */}
                     </View>
                 </View>
 
                 <View style = {styles.special}>
                     <Text style = {styles.headerText}>Reviews</Text>
                     <View style = {styles.reviews}>
-                        <HorizontalReviewBox/>
+                        <HorizontalReviewBox username={"Dylan"} userLevel={"Level 5"} userMessage = {"Service was great"} icon = {'thumbs-up'}/>
                     </View>
                 </View>
             </ScrollView>
@@ -90,5 +113,10 @@ const styles = StyleSheet.create({
         top: 0, left: 0, right: 0, bottom: 0, 
         borderRadius: 10,
     },
+    mapBox: {
+        flex: 1,
+        width: '100%',
+        height: 150,
+    }
 })
 export default RestaurantScreen;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import NavigationBar from '../../components/NavigationBar/NavigationBar';
 
 function HomeScreen(props) {
     return (

@@ -12,6 +12,7 @@ import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/H
 import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/VerticalRestaurantBox';
 // import NavigationBar from './app/components/NavigationBar/NavigationBar';
 import HomeScreen from './app/screens/HomeScreen';
+import VersusScreen from './app/screens/VersusScreen/VersusScreen';
 
 
 
@@ -25,7 +26,8 @@ function App(props) {
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
-      <SearchPage/>
+      {/* <SearchPage/> */}
+      <VersusScreen/>
       {/* <Navigation/> */}
 
       {/* <HorizontalRestaurantPage/> */}

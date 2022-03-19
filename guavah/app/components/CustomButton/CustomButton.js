@@ -27,8 +27,8 @@ function CustomButton({onPress, text, type = "PRIMARY", bgColor, fgColor}) {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        flex: 1,
-
+        // flex: 1,
+        
         padding: 15,
         marginVertical: 5,
 
@@ -48,6 +48,14 @@ const styles = StyleSheet.create({
     container_TERTIARY: {
         marginVertical: 2,
     },
+    container_SEARCH: {
+        backgroundColor: colors.accent,
+        borderRadius: 6,
+        width: 89,
+        height: 26,
+        padding: 0,
+        justifyContent: 'center'
+    },
 
     text: {
         color: colors.white,        
@@ -59,6 +67,9 @@ const styles = StyleSheet.create({
     text_TERTIARY: {
         color: 'gray',
         // alignSelf: 'stretch',
+    },
+    text_SEARCH: {
+        color: colors.white,  
     }
 })
 

@@ -7,10 +7,9 @@ import colors from '../../config/colors/colors';
 function VersusScreen(props) {
     return (
         <View style={styles.container}>
-
             <View style={styles.refreshContainer}>
-                <Text style={styles.text}>versus</Text>
                 <View style={styles.refreshButtonContainer}>
+                    <Text style={styles.text}>versus</Text>
                     <CustomButton 
                         text={'Shuffle'}
                         type={'PRIMARY'}
@@ -19,7 +18,7 @@ function VersusScreen(props) {
             </View>
 
             <View styles={styles.versusContainer}>
-                <Text style={styles.text}>Which was better?</Text>
+                <Text style={styles.versusText}>Which was better?</Text>
             </View>
 
         </View>
@@ -35,14 +34,16 @@ const styles = StyleSheet.create({
     refreshContainer: {
         backgroundColor: colors.accent,
         width: '100%',
+        height: 100,
         //Do I need to add height value?
         //height: 0,
     },
     refreshButtonContainer: {
         flex: 1,
-        maxHeight: '16.6%',
+        height: '100%',
         marginLeft: '6%',
         marginRight: '6%',
+        marginTop: '11%',
     },
     versusContainer: {
         flex: 1,
@@ -54,14 +55,22 @@ const styles = StyleSheet.create({
         color: colors.background,
         textAlign: 'center',
         fontSize: 30,
+        height: '100%',
 
-        marginBottom: '10%',
+        // marginBottom: '10%',
 
-        ...Platform.select({
-            android: {
-                marginTop: '10%',
-            },
-        })
+        // ...Platform.select({
+        //     android: {
+        //         marginTop: '10%',
+        //     },
+        // })
+    },
+
+    versusText: {
+        color: colors.accent,
+        textAlign: 'center',
+        fontSize: 30,
+        marginTop: '40%',
     },
 })
 

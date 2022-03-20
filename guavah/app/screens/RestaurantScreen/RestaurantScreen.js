@@ -49,13 +49,13 @@ function RestaurantScreen({route}){
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421}}
                         /> */}
-                        {/* <MapView>
+                        <MapView>
                             <MapViewDirections
                                 origin={origin}
                                 destination={destination}
                                 apikey={GOOGLE_MAPS_APIKEY}
                             />
-                        </MapView> */}
+                        </MapView>
                     </View>
                 </View>
 

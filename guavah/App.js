@@ -45,7 +45,7 @@ function App(props) {
 
       {/* <SearchPage/> */}
       {/* <Navigation/> */}
-      {/* <RestaurantScreen name = "test"/> */}
+      {/* <RestaurantScreen/> */}
 
       {/* <HorizontalRestaurantPage restaurant={data}/> */}
       {/* <FlatList

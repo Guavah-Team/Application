@@ -36,10 +36,10 @@ function RestaurantScreen({route}){
             </ImageBackground>
 
             <ScrollView style = {styles.container}>
-                <View>
+                {/* <View>
                     <Text style = {styles.headerText}>Directions</Text>
                     <View style = {styles.mapBox}>
-                        {/* <MapView
+                        <MapView
                             style={{ flex: 1 }}
                             provider={PROVIDER_GOOGLE}
                             showsUserLocation
@@ -48,7 +48,7 @@ function RestaurantScreen({route}){
                             longitude: -122.4324,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421}}
-                        /> */}
+                        />
                         <MapView>
                             <MapViewDirections
                                 origin={origin}
@@ -57,7 +57,7 @@ function RestaurantScreen({route}){
                             />
                         </MapView>
                     </View>
-                </View>
+                </View> */}
 
                 <View style = {styles.special}>
                     <Text style = {styles.headerText}>Reviews</Text>

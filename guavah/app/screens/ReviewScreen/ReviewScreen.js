@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, ScrollView, Image, ImageBackground} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, TextInput, Modal} from 'react-native';
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
@@ -10,18 +10,27 @@ import RestaurantReview from '../../components/RestaurantReview';
 
 function ReviewScreen(){
     return(
+        <View style = {styles.container}>
         <View style = {styles.root}>
-            <Text style = {styles.text}>Review Screen</Text>
+            <Text style = {styles.text}>Leave a Comment</Text>
+            <TextInput placeholder='Optional'/>
+            <Text> 2 of 2 </Text>
+        </View>
+           
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    root:{
+    container:{
         flex: 1,
+        justifyContent: 'center',
+    },
+    root:{
+        alignContent: 'center'
     },
     text:{
-        color: colors.dark,
+        fontWeight: 'bold'
     },
 })
 

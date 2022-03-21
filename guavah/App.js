@@ -35,9 +35,11 @@ function App(props) {
       <Navigation/>
 
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
-      {/* <VerticalRestaurantBox name = "Toast" distance = "10000"/> */}
+      {/* <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1}/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
+
+      {/* <View style = {styles.polygon}></View> */}
 
 
       

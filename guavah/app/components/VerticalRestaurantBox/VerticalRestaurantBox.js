@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Pressable, ImageBackground, Text, View, Alert} from 'react-native';
+import {StyleSheet, Pressable, ImageBackground, Text, View, Alert, Image} from 'react-native';
 import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 import placeHolder from '../../assets/defaults/VerticalDefault.png';
@@ -7,6 +7,13 @@ import placeHolder from '../../assets/defaults/VerticalDefault.png';
 function VerticalRestaurantBox({restaurant}) {
     const {name, rating, distance, photo} = restaurant;
     const navigation = useNavigation();
+
+    const ratingDisplay = (rating) => {
+        if(rating === 1){
+            require('../../assets/ICONS/Tier-1-Badge-(Base).png')
+        }
+    }
+
     return (
         <Pressable 
         onPress={() => navigation.navigate("SearchScreen")}
@@ -15,6 +22,9 @@ function VerticalRestaurantBox({restaurant}) {
                 <View style = {styles.mask}/>
                 <View style = {styles.topTextBox}>
                     <Text style = {styles.restaurantNameText}> {name} </Text>
+                </View>
+                <View style = {styles.centerLogo}>
+                    <Image source = {require('../../assets/ICONS/Tier-1-Badge-(Base).png')}></Image>
                 </View>
                 <View style = {styles.bottomTextBox}>
                     <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text>
@@ -71,6 +81,13 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 2,
     },
+    centerLogo: {
+        position: 'absolute',
+        top: 89,
+        left: 57,
+        right: 56,
+        bottom: 78,
+    }
 })
 
 export default VerticalRestaurantBox;

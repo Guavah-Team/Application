@@ -3,6 +3,7 @@ import {ScrollView, View, Text, StyleSheet, Alert, ImageBackground, Image} from 
 import HorizontalProfileBox from '../../components/HorizontalProfileBox/HorizontalProfileBox';
 import Amplify, {Auth} from 'aws-amplify';
 import {useNavigation} from '@react-navigation/native';
+import colors from '../../config/colors/colors';
 
 
 function ProfileScreen(props) {
@@ -26,7 +27,7 @@ function ProfileScreen(props) {
     return (
         <ScrollView style = {styles.container}>
             <View style = {styles.topBox}>
-
+            
             </View>
             <View style = {styles.userBox}>
                 <Image style = {styles.topImage} source = {require('../../assets/icon.png')}/>
@@ -75,10 +76,11 @@ const styles = StyleSheet.create({
         fontWeight: '400',
     },
     topBox: {
-        // backgroundColor: 'red',
-        width: '100%',
-        height: 315,
         position: 'absolute',
+        height: 400,
+        width: 600,
+        backgroundColor: colors.accent,
+        transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -225}],
 
 
     }

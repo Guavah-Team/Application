@@ -23,7 +23,7 @@ export const getDetailedRestaurantData = async () => {
 export const getSearchRestaurantData = async (restaurantName) => {
   const restaurant = restaurantName.replace(' ', '%20');
   console.log(restaurant);
-  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=1600&latlong=33.9806,-117.3755&term=${restaurant}&category=13000&isOpen=false&doChains=true&minPrice=1&maxPrice=2&limit=10`
+  // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=1600&latlong=33.9806,-117.3755&term=${restaurant}&category=13000&isOpen=false&doChains=true&minPrice=1&maxPrice=2&limit=10`
   try{
     const response = await axios.get(url);
     let sections = [];

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, ScrollView, Alert} from 'react-native';
+import {StyleSheet, Image, View, Text, ScrollView, Alert, Pressable} from 'react-native';
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
@@ -11,13 +11,19 @@ import {Auth} from 'aws-amplify';
 
 function LikeDislikeScreen(){
     return(
-        <View>
-            <View>
-                <Text></Text>
+        <View style = {styles.container}>
+            <Text style = {styles.headerText}>Rate Your Experience</Text>
+            <View style = {styles.Thumbs}>
+                <View style = {styles.likes}>
+                    <Pressable style = {styles.pressables} onPress = {Alert.alert('ThumbsUp Pressed')}>
+                        <Image style = {styles.ThumbsUp} source = {require('../../assets/Thumbs/ThumbsUp.png')}/>
+                    </Pressable>
+                    <Pressable style = {styles.pressables} onPress = {Alert.alert('ThumbsDown Pressed')}>
+                        <Image style = {styles.ThumbsDown} source = {require('../../assets/Thumbs/ThumbDown.png')}/>
+                    </Pressable>
+                </View>
             </View>
-            <View>
-
-            </View>
+            <Text> 1 of 2 </Text>
         </View>
     );
 }
@@ -25,14 +31,37 @@ function LikeDislikeScreen(){
 const styles = StyleSheet.create({
     container:{
         backgroundColor: colors.background,
+        alignItems: 'center',
+        flex: 1
     },
-    header: {
-        backgroundColor: colors.accent,
+    Thumbs:{
+        justifyContent: 'center',
+        flex: 1
     },
     headerText:{
-        color: colors.white,
         fontWeight: 'bold',
-        justifyContent: 'flex-start'
-    }
-
+        fontSize: 20
+    },
+    likes: {
+        flexDirection: 'row',
+    },
+    pressables:{
+        paddingHorizontal: 20
+    },
+    ThumbsUp:{
+        height: 110,
+        width: 130,
+        paddingHorizontal: 10
+    },
+    ThumbsDown:{
+        height: 110,
+        width: 128,
+        paddingHorizontal: 10,
+        
+     
+        
+    },
+    
 })
+
+export default LikeDislikeScreen;

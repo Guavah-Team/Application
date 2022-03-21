@@ -6,7 +6,7 @@ import placeHolder from '../../assets/defaults/VerticalDefault.png';
 
 function VerticalRestaurantBox({restaurant}) {
     const {name, rating, distance, photo} = restaurant;
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
     return (
         <Pressable 
         onPress={() => navigation.navigate("SearchScreen")}

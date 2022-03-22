@@ -32,10 +32,10 @@ function App(props) {
       {/* <Navigation/> */}
 
       {/* <SearchPage/> */}
-      {/* <Navigation/> */}
+      <Navigation/>
 
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
-      <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1}/>
+      {/* <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1}/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
 

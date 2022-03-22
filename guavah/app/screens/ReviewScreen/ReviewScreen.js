@@ -15,8 +15,10 @@ function ReviewScreen(){
 
     return(
         <View>
+
+            {/* Comment Modal */}
             <Modal
-                animationType="slide"
+                animationType="none"
                 transparent={true}
                 visible={commentVisible}
                 onRequestClose={() => {
@@ -31,11 +33,16 @@ function ReviewScreen(){
                         <Pressable style = {styles.button} onPress={() => setCommentVisible(!commentVisible)}>
                             <Text style = {styles.textStyle}>Submit</Text>
                         </Pressable>
+                        <Pressable  onPress={() => setCommentVisible(false)}>
+                            <Text style = {styles.textStyleSecondary}>Skip</Text>
+                        </Pressable>
                     </View>
                 </View>
             </Modal>
+            
+            {/* Thumbs Modal */}
             <Modal
-                animationType="fade"
+                animationType="none"
                 transparent={true}
                 visible = {thumbsVisible}
                 onRequestClose={() => {
@@ -44,28 +51,24 @@ function ReviewScreen(){
                 }}
             >
                 <View style = {styles.container}>
-                <View style = {styles.modalView}>
-                    <Pressable style = {styles.button} onPress={() => setThumbsVisible(!thumbsVisible)}>
-                        <Text style = {styles.textStyle}>close</Text>
-                    </Pressable>
-                    
+                    <View style = {styles.modalView}>
+                        <Pressable style = {styles.button} onPress={() => setThumbsVisible(!thumbsVisible)}>
+                            <Text style = {styles.textStyle}>close</Text>
+                        </Pressable>
+                        <Pressable style={styles.button} onPress={() => {setCommentVisible(true); setThumbsVisible(false);}}>
+                            <Text style={styles.textStyle}>Write Review?</Text>
+                        </Pressable>
+                    </View>
                 </View>
-                </View>
-                
             </Modal>
-            
+
             <Pressable
-                style={[styles.tempbutton, styles.buttonOpen]}
-                onPress={() => setCommentVisible(true)}
-            >
-                <Text style={styles.textStyle}>Write Review?</Text>
-            </Pressable>
-            <Pressable
-                style={[styles.tempbutton, styles.buttonOpen]}
+                style={styles.button}
                 onPress={() => setThumbsVisible(true)}
-            >
-                <Text style={styles.textStyle}>Thumbs</Text>
+                >
+                <Text style={styles.textStyle}>Review</Text>
             </Pressable>
+
         </View>
         
     )
@@ -73,12 +76,9 @@ function ReviewScreen(){
 
 const styles = StyleSheet.create({
     container:{
-        flex: .5,
+        flex: 1,
         justifyContent: 'center',
         backgroundColor: colors.background
-    },
-    root:{
-        
     },
     modalView:{
         backgroundColor: colors.background,
@@ -90,26 +90,11 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5
     },
-    status:{
-        alignItems: 'center',
-        justifyContent: 'flex-end'
-    },
     header:{
-        fontWeight: 'bold',
-        textAlign: 'center',
-        paddingBottom: '15%',
-        paddingTop: '10%'
-    },
-    base:{
-        justifyContent: 'flex-end'
+        
     },
     input:{
-        width:'70%',
-        height: '40%',
-        borderWidth: 1,
-        borderColor: colors.light,
-        borderRadius: 5,
-        paddingBottom: '10%'
+       
     },
     button:{
         borderRadius: 30,
@@ -121,24 +106,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         
     },
-    tempbutton: {
-        borderRadius: 20,
-        padding: 10,
-        elevation: 2,
-        backgroundColor: colors.accent
-      },
-    buttons: {
-        paddingTop: '10%',
-        flex: 1,
-    },
-    buttonClose:{
-        backgroundColor: colors.accent,
-    },
-    buttonOpen: {
-        backgroundColor: colors.accent,
-    },
     textStyle:{
         color: colors.white,
+    },
+    textStyleSecondary:{
+        color: 'gray'
     }
 })
 

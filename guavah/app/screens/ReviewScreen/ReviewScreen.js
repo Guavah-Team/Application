@@ -11,12 +11,11 @@ import RestaurantReview from '../../components/RestaurantReview';
 function ReviewScreen(){
     return(
         <View style = {styles.container}>
-        <View style = {styles.root}>
             <Text style = {styles.text}>Leave a Comment</Text>
-            <TextInput placeholder='Optional'/>
-            <Text> 2 of 2 </Text>
-        </View>
-           
+            <TextInput style = {styles.input} placeholder = 'Optional' multiline = {true}/>
+            <View style = {styles.button}><CustomButton text = {'Submit'}/></View>
+            
+            <Text>2 of 2</Text>
         </View>
     )
 }
@@ -24,14 +23,31 @@ function ReviewScreen(){
 const styles = StyleSheet.create({
     container:{
         flex: 1,
-        justifyContent: 'center',
+        alignItems: 'center'
     },
     root:{
-        alignContent: 'center'
+        justifyContent: 'center'
+    },
+    center:{
+        alignItems: 'center',
+        justifyContent: 'flex-end'
     },
     text:{
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center',
+        paddingTop: '8%',
+        paddingBottom: '12%'
     },
+    input:{
+        width:'50%',
+        height: '15%',
+        borderWidth: 1,
+        borderColor: colors.light,
+    },
+    button:{
+        width: '50%',
+        height: '7%',
+    }
 })
 
 export default ReviewScreen;

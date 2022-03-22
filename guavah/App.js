@@ -34,9 +34,6 @@ function App(props) {
       <VersusScreen/>
       {/* <Navigation/> */}
 
-      {/* <SearchPage/> */}
-      {/* <Navigation/> */}
-
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
       {/* <VerticalRestaurantBox name = "Toast" distance = "10000"/> */}
       {/* <NavigationBar/> */}

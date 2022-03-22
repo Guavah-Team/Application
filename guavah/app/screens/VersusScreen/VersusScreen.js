@@ -10,13 +10,10 @@ function VersusScreen(props) {
 
     return (
         <View style={containerStyles.container}>
-            <View style={containerStyles.refreshContainer}>
+            <View style={containerStyles.headerContainer}>
                 <View style={containerStyles.refreshButtonContainer}>
                     <Text style={textStyle.text}>versus</Text>
-                    <CustomButton 
-                        text={'Shuffle'}
-                        type={'PRIMARY'}
-                    />
+                    
                 </View>
             </View>
 
@@ -39,7 +36,7 @@ const containerStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.background,
     },
-    refreshContainer: {
+    headerContainer: {
         backgroundColor: colors.accent,
         // backgroundColor: colors.background,
         width: '100%',
@@ -63,7 +60,7 @@ const containerStyles = StyleSheet.create({
     versusRestaurantContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: "space-around",
+        justifyContent: 'center',
     },
         
 })

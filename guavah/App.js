@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Alert, View, Text, SafeAreaView, StyleSheet } from 'react-native';
 import colors from './app/config/colors/colors';
 import LoginScreen from './app/screens/LoginScreen';
@@ -19,9 +19,18 @@ import * as Location from 'expo-location';
 
 
 function App(props) {
-  const temp = 2374;
+  // const [locationer, setLocation] = useState(null);
+  // const [errorMsg, setErrorMsg] = useState(null);
 
+  // useEffect(() => {
+  //   (async () => {
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLocation(location)
 
+      
+  //   })();
+  // }, []);
+  // console.log(locationer)
   return (
     <View style = {styles.root}>
       {/* <LoginScreen/> */}
@@ -38,7 +47,7 @@ function App(props) {
       {/* <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1}/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
-
+      {/* <Text>{text}</Text> */}
       {/* <View style = {styles.polygon}></View> */}
 
 

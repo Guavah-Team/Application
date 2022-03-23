@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityIndicator, Alert, RefreshControl} from "react-native";
+import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityIndicator, RefreshControlBase, Alert, RefreshControl} from "react-native";
 import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/HorizontalRestaurantPage";
 import VerticalRestaurantBox from "../../components/VerticalRestaurantBox";
 import Amplify, { Auth } from "aws-amplify";
@@ -8,12 +8,18 @@ import { getDetailedRestaurantData } from "../../services/requests";
 import colors from "../../config/colors/colors";
 import CustomButton from "../../components/CustomButton";
 
+import * as Location from 'expo-location';
+import { get } from "react-hook-form";
+
 const HomeScreen = () => {
   const [loading, setLoading] = useState(false);
   const [dataA, setDataA] = useState(null);
   const [messageA, setMessageA] = useState(null);
   const [dataB, setDataB] = useState(null);
   const [messageB, setMessageB] = useState(null);
+
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   const navigation = useNavigation();
 
@@ -31,9 +37,18 @@ const HomeScreen = () => {
     navigation.navigate("SearchScreen");
   }
 
+  // useEffect(() => {
+  //   (async () => {
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLongitude(location.coords.longitude);
+  //     setLatitude(location.coords.latitude);
+  //     console.log("test")
+  //   })();
+  // }, []);
+  
   const fetchData = async () => {
     setLoading(true);
-    const fetchedData = await getDetailedRestaurantData();
+    const fetchedData = await getDetailedRestaurantData(latitude, longitude);
     setMessageA(fetchedData[0]);
     setDataA(fetchedData[1]);
     setMessageB(fetchedData[2]);
@@ -41,11 +56,25 @@ const HomeScreen = () => {
     setLoading(false);
   };
 
+  const fetchLocation = async () => {
+    const location = await Location.getCurrentPositionAsync({});
+      setLongitude(location.coords.longitude);
+      setLatitude(location.coords.latitude);
+      console.log("test")
+  }
+
+  useEffect(() => {
+    console.log(latitude + 'eff')
+    fetchLocation();
+  })
+
   useEffect(() => {
     fetchData();
   }, []);
 
-  if (loading || !dataA || !messageA || !dataB || !messageB) {
+
+
+  if (loading || !dataA || !messageA || !dataB || !messageB || !latitude) {
     return <ActivityIndicator style = {styles.loading} size="large" />; 
   }
 

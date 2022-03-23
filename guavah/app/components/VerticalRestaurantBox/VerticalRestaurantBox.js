@@ -4,8 +4,8 @@ import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 import placeHolder from '../../assets/defaults/VerticalDefault.png';
 
-function VerticalRestaurantBox({restaurant}) {
-    const {name, rating, distance, photo, type = "SMALL"} = restaurant;
+function VerticalRestaurantBox({restaurant, type = "SMALL"}) {
+    const {name, rating, distance, photo} = restaurant;
     const navigation = useNavigation();
 
     const ratingDisplay = (rating) => {

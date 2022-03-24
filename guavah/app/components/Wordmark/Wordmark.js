@@ -11,7 +11,7 @@ function Wordmark(props) {
         CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
         CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
         CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
-
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
       });
 
     if (!loaded){
@@ -26,7 +26,7 @@ function Wordmark(props) {
 const styles = StyleSheet.create({
     wordmark:{
         fontSize: 60,
-        fontFamily: 'CeraMedium',
+        fontFamily: 'GigaSansReg',
         color: colors.accent
     }
     

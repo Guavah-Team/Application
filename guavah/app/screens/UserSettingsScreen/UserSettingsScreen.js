@@ -38,22 +38,24 @@ function UserSettingsScreen(){
             {/* Profile Box */}
             <Text style = {styles.sections}>Profile</Text>
             <View style = {styles.profileSettingsBox}>
-            
-                <Text style = {styles.profileText}>Name</Text>
-                <TextInput  
-                    style = {styles.input}
-                    value = {'Ryan Miller'}
-                    />
-                <Text style = {styles.profileText}>Email</Text>
-                <TextInput 
-                    style = {styles.input}
-                    value = {'ryanthomas.miller@calbaptist.edu'}
-                    />
+                <Image style = {styles.profilePic} source = {require('../../assets/ProfilePics/Guavah.jpg')}/>
+                <View>
+                    <Text style = {styles.profileText}>Name</Text>
+                    <TextInput  
+                        style = {styles.input}
+                        value = {'Ryan Miller'}
+                        />
+                    <Text style = {styles.profileText}>Email</Text>
+                    <TextInput 
+                        style = {styles.input}
+                        value = {'ryanthomas.miller@calbaptist.edu'}
+                        />
+                </View>
             </View>
 
             {/* Location Box */}
             <Text style = {styles.sections}>Location</Text>
-                <View style = {styles.profileSettingsBox}>
+                <View style = {styles.settingsBox}>
                     <View style = {styles.locations}>
                         <View style = {styles.locationView}><Image style = {styles.location} source={require('../../assets/userSettingsIcons/location.png')}/></View>
                         <Text>Search Radius</Text>
@@ -73,7 +75,7 @@ function UserSettingsScreen(){
 
             {/* Preference Box */}
             <Text style = {styles.sections}>Preferences</Text>
-            <View style = {styles.profileSettingsBox}>
+            <View style = {styles.settingsBox}>
                 <View style = {styles.preferences}>
                     <View style = {styles.moonView}><Image style = {styles.moon} source={require('../../assets/userSettingsIcons/DarkMode.png')}/></View>
                     
@@ -168,11 +170,25 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: colors.white,
     },
-    profileSettingsBox:{
-        
+    settingsBox:{
         width: 350,
         height: 120,
         alignSelf: 'center',
+        shadowColor: '#171717',
+        shadowOffset: {width: 0, height: 4},
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        elevation: 4,
+        backgroundColor: colors.background,
+        borderRadius: 5
+    },
+    profileSettingsBox:{
+        width: 350,
+        height: 120,
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
         shadowColor: '#171717',
         shadowOffset: {width: 0, height: 4},
         shadowOpacity: 0.3,
@@ -248,6 +264,11 @@ const styles = StyleSheet.create({
     },
     profileText:{
         color: "gray"
+    },
+    profilePic:{
+        width: 100,
+        height: 100,
+        borderRadius: 50,
     }
    
 })

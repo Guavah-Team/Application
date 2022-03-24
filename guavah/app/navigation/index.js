@@ -21,9 +21,8 @@ import SearchScreen from '../screens/SearchPage';
 const Stack = createNativeStackNavigator();
 
 
-const Navigation = () => {
+const Navigation = ({latitude, longitude}) => {
     const [user, setUser] = useState(undefined);
-
 
 
     const checkUser = async() => {
@@ -51,20 +50,13 @@ const Navigation = () => {
         return () => Hub.remove('auth', listener);
     }, []);
 
-    // if(user == undefined){
-    //     return (
-    //         <View style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-    //             <ActivityIndicator />
-    //         </View>
-    //     )
-    // }
-
     return (
         <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false}}>
                 {user ? (
                     <>
-                    <Stack.Screen name = 'HomeScreen' component={TabNavigator}/>
+                    {/* <Stack.Screen name = 'HomeScreen' component={TabNavigator}/> */}
+                    <Stack.Screen name = 'HomeScreen' component={() => <TabNavigator latitude={latitude} longitude={longitude}/>}/>
                     <Stack.Screen name = 'ProfileScreen' component={ProfileScreen}/>
                     <Stack.Screen name = 'HistoryScreen' component={HistoryScreen}/>
                     <Stack.Screen name = 'SettingsScreen' component={SettingsScreen}/>

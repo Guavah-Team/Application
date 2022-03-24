@@ -19,18 +19,19 @@ import * as Location from 'expo-location';
 
 
 function App(props) {
-  // const [locationer, setLocation] = useState(null);
-  // const [errorMsg, setErrorMsg] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLocation(location)
+  useEffect(() => {
+    (async () => {
+      let location = await Location.getCurrentPositionAsync({});
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
+    })();
 
-      
-  //   })();
-  // }, []);
-  // console.log(locationer)
+  }, []);
+
+
   return (
     <View style = {styles.root}>
       {/* <LoginScreen/> */}
@@ -41,7 +42,8 @@ function App(props) {
       {/* <Navigation/> */}
 
       {/* <SearchPage/> */}
-      <Navigation/>
+      <Navigation latitude={latitude} longitude={longitude}/>
+
 
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
       {/* <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1}/> */}

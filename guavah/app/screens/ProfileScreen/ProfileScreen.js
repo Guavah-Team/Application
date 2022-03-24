@@ -81,8 +81,6 @@ const styles = StyleSheet.create({
         width: 600,
         backgroundColor: colors.accent,
         transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -225}],
-
-
     }
 })
 

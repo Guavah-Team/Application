@@ -19,7 +19,8 @@ const profileName = "Profile";
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigator() {
+export default function TabNavigator({latitude, longitude}) {
+
   return (
       <Tab.Navigator
       initialRouteName={homeName}
@@ -53,8 +54,8 @@ export default function TabNavigator() {
       
       >
 
-        <Tab.Screen name={homeName} component={HomeScreen}/>
-        <Tab.Screen name={searchName} component={SearchScreen}/>
+        <Tab.Screen name={homeName} component={() => <HomeScreen latitude={latitude} longitude={longitude}/>} />
+        <Tab.Screen name={searchName} component={SearchScreen }/>
         <Tab.Screen name={versusName} component={SearchScreen}/>
         <Tab.Screen name={profileName} component={ProfileScreen}/>
 

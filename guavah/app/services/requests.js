@@ -10,8 +10,6 @@ export const getDetailedRestaurantData = async (latitude, longitude) => {
       sections.push(response.data["sectionA"]);
       sections.push(response.data["messageB"]);
       sections.push(response.data["sectionB"]);
-      console.log("print")
-      console.log(latitude + "hoe")
       return sections;
     }catch (e) {
       console.log(e);

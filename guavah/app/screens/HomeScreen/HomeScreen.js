@@ -11,15 +11,14 @@ import CustomButton from "../../components/CustomButton";
 import * as Location from 'expo-location';
 import { get } from "react-hook-form";
 
-const HomeScreen = () => {
+const HomeScreen = ({latitude, longitude}) => {
   const [loading, setLoading] = useState(false);
   const [dataA, setDataA] = useState(null);
   const [messageA, setMessageA] = useState(null);
   const [dataB, setDataB] = useState(null);
   const [messageB, setMessageB] = useState(null);
 
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  console.log(latitude)
 
   const navigation = useNavigation();
 
@@ -36,15 +35,6 @@ const HomeScreen = () => {
   const searchPressed = () => {
     navigation.navigate("SearchScreen");
   }
-
-  // useEffect(() => {
-  //   (async () => {
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLongitude(location.coords.longitude);
-  //     setLatitude(location.coords.latitude);
-  //     console.log("test")
-  //   })();
-  // }, []);
   
   const fetchData = async () => {
     setLoading(true);
@@ -55,18 +45,6 @@ const HomeScreen = () => {
     setDataB(fetchedData[3]);
     setLoading(false);
   };
-
-  const fetchLocation = async () => {
-    const location = await Location.getCurrentPositionAsync({});
-      setLongitude(location.coords.longitude);
-      setLatitude(location.coords.latitude);
-      console.log("test")
-  }
-
-  useEffect(() => {
-    console.log(latitude + 'eff')
-    fetchLocation();
-  })
 
   useEffect(() => {
     fetchData();

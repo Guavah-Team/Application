@@ -12,6 +12,10 @@ function Wordmark(props) {
         CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
         CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
         GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
       });
 
     if (!loaded){

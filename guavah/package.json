@@ -20,6 +20,7 @@
     "aws-amplify": "^4.3.14",
     "aws-amplify-react-native": "^6.0.2",
     "expo": "^44.0.6",
+    "expo-font": "~10.0.4",
     "expo-location": "~14.0.1",
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",

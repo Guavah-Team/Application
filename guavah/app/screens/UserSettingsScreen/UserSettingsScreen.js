@@ -12,14 +12,18 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!$#%&-]+@[a-zA-Z0-9]+\.[a-z]{2,3}/
 
 function UserSettingsScreen(){
 
-    const [range, setRange] = useState('0 Miles')
-    const [sliding, setSliding] = useState('Inactive')
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+
+    const [range, setRange] = useState('0')
 
     const [isDarkEnabled, setIsDarkEnabled] = useState(false);
     const toggleDarkSwitch = () => setIsDarkEnabled(previousState => !previousState);
 
     const [isVeganEnabled, setIsVeganEnabled] = useState(false);
     const toggleVeganSwitch = () => setIsVeganEnabled(previousState => !previousState);
+
+    const radius = 0;
     
 
     return (
@@ -43,12 +47,16 @@ function UserSettingsScreen(){
                     <Text style = {styles.profileText}>Name</Text>
                     <TextInput  
                         style = {styles.input}
-                        value = {'Ryan Miller'}
-                        />
+                        placeholder = {'John Doe'}
+                        onChangeText = {newName => setName(newName)}
+                        defaultValue = {name}
+                    />
                     <Text style = {styles.profileText}>Email</Text>
                     <TextInput 
                         style = {styles.input}
-                        value = {'ryanthomas.miller@calbaptist.edu'}
+                        placeholder = {'John@Doe.com'}
+                        onChangeText = {newEmail => setEmail(newEmail)}
+                        defaultValue = {email}
                         />
                 </View>
             </View>
@@ -59,7 +67,7 @@ function UserSettingsScreen(){
                     <View style = {styles.locations}>
                         <View style = {styles.locationView}><Image style = {styles.location} source={require('../../assets/userSettingsIcons/location.png')}/></View>
                         <Text>Search Radius</Text>
-                        <View  style = {styles.switch}><Text>{range}</Text></View>
+                        <View  style = {styles.switch}><Text>{range} Miles</Text></View>
                     </View>
                     
                     <Slider
@@ -69,8 +77,10 @@ function UserSettingsScreen(){
                         thumbTintColor= {colors.accent}
                         minimumTrackTintColor={colors.accent}
                         maximumTrackTintColor= "#1b1b1b"
-                        onValueChange={value => setRange(parseInt(value * 15.9) + " miles")}
+                        onValueChange={value => setRange(parseInt(value * 15.9))}
                     />
+
+
                 </View>
 
             {/* Preference Box */}

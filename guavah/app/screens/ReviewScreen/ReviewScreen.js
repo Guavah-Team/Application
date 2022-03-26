@@ -7,10 +7,21 @@ import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import { Auth } from 'aws-amplify';
 import RestaurantReview from '../../components/RestaurantReview';
+import  { postReviewData } from '../../services/postReviewData';
 
 function ReviewScreen(){
+
+    const [review, setReview] = useState('');
     const [commentVisible, setCommentVisible] = useState(false);
     const [thumbsVisible, setThumbsVisible] = useState(false);
+    const[rating, setRating] = useState(0);
+
+    
+    const pushData = async (rating, review) => {
+        postReviewData(rating, review);
+    };
+
+
 
     return(
         <View>
@@ -28,10 +39,16 @@ function ReviewScreen(){
                 <View style = {styles.containerModal}>
                     <View style = {styles.modalView}>
                         <Text style = {styles.header}>Leave a Comment</Text>
-                        <TextInput style = {styles.input} placeholder = 'Optional' multiline = {true}/>
+                        <TextInput 
+                            style = {styles.input} 
+                            placeholder = 'Optional' 
+                            multiline = {true}
+                            onChangeText = {newReview => setReview(newReview)}
+                            defaultValue = {review}
+                        />
                         <View style = {styles.buttonView}>
-                        <Pressable style = {styles.buttonModal} onPress={() => setCommentVisible(!commentVisible)}>
-                            <Text style = {styles.textStyleModal}>Submit</Text>
+                        <Pressable style = {styles.buttonModal} onPress={() => {setCommentVisible(!commentVisible); pushData(rating, review);}}>
+                            <Text style = {styles.textStyleModal}>Submit {rating}</Text>
                         </Pressable>
                         </View>
                         <Pressable  onPress={() => setCommentVisible(false)}>
@@ -55,10 +72,10 @@ function ReviewScreen(){
                     <View style = {styles.modalThumbView}>
                         <Text style = {styles.thumbHeader}>Rate Your Experience</Text>
                         <View style = {styles.thumbs}>
-                            <Pressable style = {styles.thumbLocation} onPress={() => {setCommentVisible(true); setThumbsVisible(false);}}>
+                            <Pressable style = {styles.thumbLocation} onPress={() => {setCommentVisible(true); setThumbsVisible(false); setRating(1);}}>
                                 <Image style = {styles.ThumbsUp} source = {require('../../assets/Thumbs/ThumbsUp.png')}/>
                             </Pressable>
-                            <Pressable  style = {styles.dislike} onPress={() => {setCommentVisible(true); setThumbsVisible(false);}}>
+                            <Pressable  style = {styles.dislike} onPress={() => {setCommentVisible(true); setThumbsVisible(false); setRating(0);}}>
                                 <Image style = {styles.ThumbsDown} source = {require('../../assets/Thumbs/ThumbDown.png')}/>
                             </Pressable>
                         </View> 
@@ -71,7 +88,7 @@ function ReviewScreen(){
             </Modal>
             <Pressable
                 style={styles.buttonModal}
-                onPress={() => setThumbsVisible(true)}
+                onPress={() => {setThumbsVisible(true);  }}
                 >
                 <Text style={styles.textStyleModal}>Review</Text>
             </Pressable>

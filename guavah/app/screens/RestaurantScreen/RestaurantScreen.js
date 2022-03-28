@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, Button, Alert} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, Button, Alert, Modal, TextInput, Pressable} from 'react-native';
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
@@ -20,14 +20,89 @@ function RestaurantScreen({route}){
     const {photo} = route.params;
     const {location} = route.params;
 
+    const [review, setReview] = useState('');
+    const [commentVisible, setCommentVisible] = useState(false);
+    const [thumbsVisible, setThumbsVisible] = useState(false);
+    const[rating, setRating] = useState(0);
+
+    
+    const pushData = async (rating, review) => {
+        postReviewData(rating, review);
+    };
+
     const buttonPressed = () => {
-        console.log(navigation)
+        setThumbsVisible(true);
     }
     
     return(
         <View style = {styles.root}>
+
+
+            {/* Comment Modal */}
+            <Modal
+                animationType="none"
+                transparent={true}
+                visible={commentVisible}
+                onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setCommentVisible(!commentVisible);
+                }}
+            >
+                <View style = {styles.containerModal}>
+                    <View style = {styles.modalView}>
+                        <Text style = {styles.modalheader}>Leave a Comment</Text>
+                        <TextInput 
+                            style = {styles.modalinput} 
+                            placeholder = 'Optional' 
+                            multiline = {true}
+                            onChangeText = {newReview => setReview(newReview)}
+                            defaultValue = {review}
+                        />
+                        <View style = {styles.modalbuttonView}>
+                            <Pressable style = {styles.buttonModal} onPress={() => {setCommentVisible(!commentVisible); pushData(rating, review);}}>
+                                <Text style = {styles.textStyleModal}>Submit</Text>
+                            </Pressable>
+                        </View>
+                        <Pressable  onPress={() => setCommentVisible(false)}>
+                            <Text style = {styles.textStyleSecondaryModal}>Skip</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
+            
+            {/* Thumbs Modal */}
+            <Modal
+                animationType="none"
+                transparent={true}
+                visible = {thumbsVisible}
+                onRequestClose={() => {
+                    Alert.alert("Thumbs has been closed"); 
+                setThumbsVisible(!thumbsVisible);
+                }}
+            >
+                <View style = {styles.containerModal}>
+                    <View style = {styles.modalThumbView}>
+                        <Text style = {styles.thumbHeader}>Rate Your Experience</Text>
+                        <View style = {styles.thumbs}>
+                            <Pressable style = {styles.thumbLocation} onPress={() => {setCommentVisible(true); setThumbsVisible(false); setRating(1);}}>
+                                <Image style = {styles.ThumbsUp} source = {require('../../assets/Thumbs/ThumbsUp.png')}/>
+                            </Pressable>
+                            <Pressable  style = {styles.dislike} onPress={() => {setCommentVisible(true); setThumbsVisible(false); setRating(0);}}>
+                                <Image style = {styles.ThumbsDown} source = {require('../../assets/Thumbs/ThumbDown.png')}/>
+                            </Pressable>
+                        </View> 
+                        <Pressable style = {styles.modalcancel} onPress={() => setThumbsVisible(false)}>
+                            <Text style = {styles.textStyleSecondaryModal}>Cancel</Text>
+                        </Pressable>
+                    </View>
+                    
+                </View>
+            </Modal>
+
+
             <ImageBackground style = {styles.image} source = {{uri: photo}}>  
                 <View style = {styles.mask}/>
+                
                 <View style = {styles.headerBox}>
                     <Text style = {styles.text_Primary}>{name}</Text>
                     <Text style = {styles.text_Secondary}>{location}</Text>
@@ -36,29 +111,6 @@ function RestaurantScreen({route}){
             </ImageBackground>
 
             <ScrollView style = {styles.container}>
-                {/* <View>
-                    <Text style = {styles.headerText}>Directions</Text>
-                    <View style = {styles.mapBox}>
-                        <MapView
-                            style={{ flex: 1 }}
-                            provider={PROVIDER_GOOGLE}
-                            showsUserLocation
-                            initialRegion={{
-                            latitude: 37.78825,
-                            longitude: -122.4324,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421}}
-                        />
-                        <MapView>
-                            <MapViewDirections
-                                origin={origin}
-                                destination={destination}
-                                apikey={GOOGLE_MAPS_APIKEY}
-                            />
-                        </MapView>
-                    </View>
-                </View> */}
-
                 <View style = {styles.special}>
                     <Text style = {styles.headerText}>Reviews</Text>
                     <View style = {styles.reviews}>
@@ -117,6 +169,94 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: 150,
-    }
+    },
+    containerModal:{
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        alignItems: 'center',
+        paddingTop: '20%'
+    },
+    modalView:{
+        backgroundColor: colors.background,
+        borderRadius: 5,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        height: '50%',
+        width: '90%',
+    },
+    modalThumbView:{
+        backgroundColor: colors.background,
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        height: '50%',
+        width: '90%',
+    },
+    modalheader:{
+        fontWeight: 'bold',
+        paddingTop: 40,
+        paddingBottom: 50,
+
+    },
+    modalcancel:{
+        alignItems: 'center',
+    },
+    thumbHeader:{
+        fontWeight: 'bold',
+        textAlign: 'center',
+        paddingTop: '10%',
+        paddingBottom: '25%',
+    },
+    modalinput:{
+       borderWidth: 1,
+       borderColor: 'gray',
+       borderRadius: 10,
+       width: '65%',
+       height: '25%',
+    },
+    buttonModal:{
+        borderRadius: 30,
+        elevation: 2,
+        backgroundColor: colors.accent,
+        width: 250,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    modalbuttonView:{
+       
+        alignItems: 'center',
+        paddingTop: '20%',
+        flex: 1
+    },
+    textStyleModal:{
+        color: colors.white,
+    },
+    textStyleSecondaryModal:{
+        color: 'gray',
+        paddingBottom: 10
+    },
+    thumbs:{
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        flex: 1,
+        
+    },
+    ThumbsUp:{
+        height: 116.7,
+        width: 135,
+    },
+    ThumbsDown:{
+        height: 116.7,
+        width: 134.8,
+    },
 })
 export default RestaurantScreen;

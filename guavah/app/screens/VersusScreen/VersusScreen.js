@@ -1,5 +1,7 @@
+import { container } from 'aws-amplify';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import CustomButton from '../../components/CustomButton';
 import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
@@ -10,19 +12,26 @@ function VersusScreen(props) {
 
     return (
         <View style={containerStyles.container}>
+            <View style={containerStyles.topBox}>
+
+            </View>
             <View style={containerStyles.headerContainer}>
-                <View style={containerStyles.refreshButtonContainer}>
-                    <Text style={textStyle.text}>versus</Text>
-                    
-                </View>
+                {/* <View style={containerStyles.headerTextContainer}> */}
+                    <Text style={textStyle.text}>{`Which was better?`}</Text>
+                    <Text style={textStyle.textSmall}>Tap One</Text>
+                {/* </View> */}
+            </View>
+
+            <View style={containerStyles.profileImageContainer}>
+                <Image style = {componentStyle.topImage} source = {require('../../assets/icon.png')}/>
             </View>
 
             <View style={containerStyles.versusContainer}>
-                <Text style={textStyle.versusText}>Which was better?</Text>
-                <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text>
+                {/* <Text style={textStyle.versusText}>Which was better?</Text>
+                <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
                 <View style={containerStyles.versusRestaurantContainer}>
-                    <VerticalRestaurantBox restaurant={item}/>
-                    <VerticalRestaurantBox restaurant={item}/>
+                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
+                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
                 </View>
             </View>
 
@@ -36,25 +45,31 @@ const containerStyles = StyleSheet.create({
         flex: 1,
         backgroundColor: colors.background,
     },
-    headerContainer: {
+    topBox: {
+        position: 'absolute',
+        height: 400,
+        width: 600,
         backgroundColor: colors.accent,
-        // backgroundColor: colors.background,
-        width: '100%',
-        height: '13%',
-        //Do I need to add height value?
-        //height: 0,
+        transform: [{skewY: '-20deg'}, {translateX: -100}, {translateY: -225}], 
     },
-    refreshButtonContainer: {
-        flex: 1,
-        height: '100%',
+    headerContainer: {
+        // backgroundColor: colors.accent,
+    },
+    headerTextContainer: {
+        marginTop: '10%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    profileImageContainer: {
         marginLeft: '6%',
         marginRight: '6%',
-        marginTop: '11%',
-        // How do I move shuffle button down more?
+        marginBottom: '10%',
+        alignItems: 'center',
     },
     versusContainer: {
         flex: 1,
         maxHeight: '100%',
+        // marginTop: '45%',
     },
 
     versusRestaurantContainer: {
@@ -64,13 +79,27 @@ const containerStyles = StyleSheet.create({
     },
         
 })
+
+    const componentStyle = StyleSheet.create({
+        topImage: {
+            height: 132,
+            width: 132,
+            borderRadius: 1000,
+            marginTop: '0%',
+        },
+    })
+
     const textStyle = StyleSheet.create({
         text: {
             color: colors.background,
             // color: colors.accent,
             textAlign: 'center',
+            textAlignVertical: 'bottom',
             fontSize: 30,
-            height: '100%',
+            
+            marginTop: '15%',
+            marginBottom: '0%',
+
     
             // marginBottom: '10%',
     
@@ -79,6 +108,13 @@ const containerStyles = StyleSheet.create({
             //         marginTop: '10%',
             //     },
             // })
+        },
+
+        textSmall: {
+            color: colors.background,
+            textAlign: 'center',
+            fontSize: 18,
+            marginBottom: '10%'
         },
 
         versusText: {

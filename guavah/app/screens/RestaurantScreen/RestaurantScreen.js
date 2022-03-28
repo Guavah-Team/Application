@@ -4,17 +4,19 @@ import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import { Auth, button } from 'aws-amplify';
 import HorizontalReviewBox from '../../components/HorizontalReviewBox';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
+import {Ionicons} from '@expo/vector-icons';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCtkgG8tkAaoKtARZwjazpggOspoSSArzI';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
 const destination = {latitude: 37.771707, longitude: -122.4053769};
 
 function RestaurantScreen({route}){
+    const navigation = useNavigation();
 
     const {name} = route.params;
     const {photo} = route.params;
@@ -32,6 +34,10 @@ function RestaurantScreen({route}){
 
     const buttonPressed = () => {
         setThumbsVisible(true);
+    }
+
+    const returnHome = () => {
+        navigation.navigate('HomeScreen');
     }
     
     return(
@@ -102,7 +108,7 @@ function RestaurantScreen({route}){
 
             <ImageBackground style = {styles.image} source = {{uri: photo}}>  
                 <View style = {styles.mask}/>
-                
+                <Ionicons onPress = {returnHome} name="chevron-back-outline" size="30" style = {styles.backArrow}/>
                 <View style = {styles.headerBox}>
                     <Text style = {styles.text_Primary}>{name}</Text>
                     <Text style = {styles.text_Secondary}>{location}</Text>
@@ -129,6 +135,11 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         
     },
+    backArrow: {
+        color: 'white',
+        marginLeft: 10,
+        marginTop: 35
+    },
     container: {
         marginLeft: 10,
         marginRight: 10,
@@ -147,11 +158,11 @@ const styles = StyleSheet.create({
     },
     image:{
         width: '100%',
-        height: 200,
+        height: 220,
     },
     headerBox: {
         marginLeft: 10,
-        marginTop: '8%',
+        // marginTop: '2%',
     },
     headerText: {
         fontSize: 18,

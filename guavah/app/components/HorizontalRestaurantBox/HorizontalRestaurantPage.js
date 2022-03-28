@@ -4,7 +4,7 @@ import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 
 function HorizontalRestaurantPage({restaurant}) {
-    const {name, rating, distance, photo, price} = restaurant;
+    const {name, rating, distance, photo, price, location} = restaurant;
     const navigation = useNavigation();
     
     

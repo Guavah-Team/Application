@@ -12,6 +12,7 @@ import SearchPage from './app/screens/SearchPage';
 import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/HorizontalRestaurantPage';
 import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/VerticalRestaurantBox';
 import HomeScreen from './app/screens/HomeScreen';
+import ReviewScreen from './app/screens/ReviewScreen';
 
 import * as Location from 'expo-location';
 
@@ -35,14 +36,17 @@ function App(props) {
 
   return (
     <View style = {styles.root}>
+      {/*<RestaurantScreen/>/*/}
       {/* <LoginScreen/> */}
       {/* <SignUpScreen/> */}
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
+      {/* <ReviewScreen/> */}
+      {/*<Navigation/>*/}
+      {/* <SearchPage/> */}
 
       <Navigation/>
-
       {/* <SearchPage/> */}
       {/* <Navigation/> */}
       {/* <RestaurantScreen/> */}
@@ -60,8 +64,6 @@ function App(props) {
       {/* <VerticalRestaurantBox name = "Toast" distance = "10000"/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
-
-
       
     </View>
   );

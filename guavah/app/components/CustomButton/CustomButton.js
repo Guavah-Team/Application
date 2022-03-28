@@ -48,6 +48,11 @@ const styles = StyleSheet.create({
     container_TERTIARY: {
         marginVertical: 2,
     },
+    container_SPECIAL:{
+        backgroundColor: colors.accent,
+        borderRadius: 15,
+        width: '40%'
+    },
     container_FIXED:{
         backgroundColor: colors.accent,
         borderRadius: 100,
@@ -55,7 +60,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
 
     },
-    
     container_SEARCH: {
         backgroundColor: colors.accent,
         borderRadius: 6,

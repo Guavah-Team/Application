@@ -32,11 +32,15 @@ function VerticalRestaurantBox({restaurant}) {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container_SMALL: {
         width: 150,
         height: 200,
         marginRight: 10,
-
+    },
+    container_LARGE: {
+        width: 150,
+        height: 316,
+        marginRight: 10,
     },
     restaurantNameText: {
         color: colors.white,

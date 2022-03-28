@@ -4,12 +4,19 @@ import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 import placeHolder from '../../assets/defaults/VerticalDefault.png';
 
-function VerticalRestaurantBox({restaurant}) {
-    const {name, rating, distance, photo, type = "SMALL"} = restaurant;
+function VerticalRestaurantBox({restaurant, type="SMALL"}) {
+    const {name, rating, distance, photo, location} = restaurant;
     const navigation = useNavigation();
+
     return (
         <Pressable 
-        onPress={() => navigation.navigate("SearchScreen")}
+        onPress={() => {
+            navigation.navigate('RestaurantScreen', {
+                name: name,
+                photo: photo,
+                location: location,
+            });
+        }}
         style = {[styles[`container_${type}`], styles.shadowProp]}>
             <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} defaultSource={require('../../assets/defaults/VerticalDefault.png')} source = {{uri: photo}}>
                 <View style = {styles.mask}/>

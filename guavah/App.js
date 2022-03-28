@@ -14,6 +14,7 @@ import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/Vertic
 import HomeScreen from './app/screens/HomeScreen';
 
 import * as Location from 'expo-location';
+import UserSettingsScreen from './app/screens/UserSettingsScreen';
 
 
 
@@ -68,6 +69,9 @@ function App(props) {
 
       {/*<Navigation/>*/}
       {/* <SearchPage/> */}
+      {/* <Navigation/> */}
+      {/* <UserSettingsScreen/> */}
+      {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
 
       <Navigation/>
       {/* <SearchPage/> */}

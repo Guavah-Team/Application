@@ -26,57 +26,6 @@
     "lodash" "^4.17.20"
     "uuid" "^3.2.1"
 
-"@aws-amplify/api-graphql@2.2.21":
-  version "2.2.21"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/api-graphql/-/api-graphql-2.2.21.tgz#d2d4236b93fc8d65fbe765fcdada049b036a5786"
-  integrity sha512-FPvZrvR9ixwLf95HzMMLuLV9O8GTFie+xCXC3wumPSiK/OlNTpZOdempbWQV+RIwVp7A7S4g0bhziBC8+MKWLw==
-  dependencies:
-    "@aws-amplify/api-rest" "2.0.32"
-    "@aws-amplify/auth" "4.4.1"
-    "@aws-amplify/cache" "4.0.34"
-    "@aws-amplify/core" "4.3.14"
-    "@aws-amplify/pubsub" "4.2.8"
-    graphql "15.8.0"
-    uuid "^3.2.1"
-    zen-observable-ts "0.8.19"
-
-"@aws-amplify/api-rest@2.0.32":
-  version "2.0.32"
-  resolved "https://registry.yarnpkg.com/@aws-amplify/api-rest/-/api-rest-2.0.32.tgz#015c614a7f4adde9606ce37fc264a655d2b4dddb"
-  integrity sha512-gMWE6vOaW5bg7LHuUvJ2iNZ1AM/GYJqjtRJMVRfxwBYiycJbtJI796MAOmG3fnanpSIzGHEnDw+IyUuydR4fzg==
-  dependencies:
-    "@aws-amplify/core" "4.3.14"
-    axios "0.21.4"
-
-"@aws-amplify/api@4.0.32":
-  version "4.0.32"
-  resolved "https://registry.npmjs.org/@aws-amplify/api/-/api-4.0.32.tgz"
-  integrity sha512-3B/gSDTxMPiQSBn9ZZ3Z0CqECkKcC8N0FIVaF6+jgd8GCZgkgLcD7NBc6msDnmC+1vWJB4SyRN/Fs+lV+EyHow==
-  dependencies:
-    "@aws-amplify/api-graphql" "2.2.21"
-    "@aws-amplify/api-rest" "2.0.32"
-
-"@aws-amplify/auth@4.4.1":
-  version "4.4.1"
-  resolved "https://registry.npmjs.org/@aws-amplify/auth/-/auth-4.4.1.tgz"
-  integrity sha512-aq3BOQ+v+ibt8cOue2tYMq22dbZ11ePauxMIdT3/dCi76nkcRjZYup1PturDIihlTgTxHgzaX1cYkFE29unzWw==
-  dependencies:
-    "@aws-amplify/cache" "4.0.34"
-    "@aws-amplify/core" "4.3.14"
-    amazon-cognito-identity-js "5.2.6"
-    crypto-js "^4.1.1"
-
-"@aws-amplify/cache@4.0.34":
-  version "4.0.34"
-  resolved "https://registry.npmjs.org/@aws-amplify/cache/-/cache-4.0.34.tgz"
-  integrity sha512-gWh3SwNsYBdVJ/zY3GM3wc3bAbwHl/aOF8MrjwxXLeiDWYNr97JfjU5FdeKLGdaXi/B1xa2HdClQQWsieg+q2g==
-  dependencies:
-    "@aws-amplify/core" "4.3.14"
-
-"@aws-amplify/core@4.3.14":
-  version "4.3.14"
-  resolved "https://registry.npmjs.org/@aws-amplify/core/-/core-4.3.14.tgz"
-  integrity sha512-xJZigjhH3CwP6sMmTRRyobAfFtP151MtxjDP6lbGiBWMHeUYwzIvjM7YQoDCTWEj6Ix4yV+UKb2SYUY1wyc0uw==
 "@aws-amplify/api-graphql@2.2.22":
   "integrity" "sha512-hwFQngNpN2MVlL0jae2+uJO+t4EySpV1p6NnXF7euVsBLJcR2vUCuj79FYzeiHEX2Ow4lRjLqwjKsK0XhY4wTQ=="
   "resolved" "https://registry.npmjs.org/@aws-amplify/api-graphql/-/api-graphql-2.2.22.tgz"
@@ -138,29 +87,6 @@
     "universal-cookie" "^4.0.4"
     "zen-observable-ts" "0.8.19"
 
-"@aws-amplify/datastore@3.7.6":
-  version "3.7.6"
-  resolved "https://registry.npmjs.org/@aws-amplify/datastore/-/datastore-3.7.6.tgz"
-  integrity sha512-Kq6dicmBJueRatNCilcWz2euazQOsdyrL4qK3cwUBX3m+XD7dUOcT3utQysT02/nkKWiQgfDtRf71RmjQNS+Ng==
-  dependencies:
-    "@aws-amplify/api" "4.0.32"
-    "@aws-amplify/auth" "4.4.1"
-    "@aws-amplify/core" "4.3.14"
-    "@aws-amplify/pubsub" "4.2.8"
-    amazon-cognito-identity-js "5.2.6"
-    idb "5.0.6"
-    immer "9.0.6"
-    ulid "2.3.0"
-    uuid "3.3.2"
-    zen-observable-ts "0.8.19"
-    zen-push "0.2.1"
-
-"@aws-amplify/geo@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/@aws-amplify/geo/-/geo-1.2.0.tgz"
-  integrity sha512-ZxVn5bZmfPVD6oOMiiAyYp5VnsEPTEVMm+Im39pMfNc0qOnpMqeDghXY33yt+EAquRXBd2KcJuJ5Esk5ZbwEqg==
-  dependencies:
-    "@aws-amplify/core" "4.3.14"
 "@aws-amplify/datastore@3.7.7":
   "integrity" "sha512-ACLpNqagh+0KwVGT2/pIf73HcVkVbS7JWCv24X8XHecx5RNMuucMYt+VdiSnWiwa63o+hPFqKETr71ZQoOc10A=="
   "resolved" "https://registry.npmjs.org/@aws-amplify/datastore/-/datastore-3.7.7.tgz"
@@ -211,25 +137,6 @@
     "@aws-sdk/util-utf8-node" "3.6.1"
     "uuid" "^3.2.1"
 
-"@aws-amplify/pubsub@4.2.8":
-  version "4.2.8"
-  resolved "https://registry.npmjs.org/@aws-amplify/pubsub/-/pubsub-4.2.8.tgz"
-  integrity sha512-IoucgeI06qFuPuEuZukddFv/tLkDvbyUmEEsFtNJV5nP8uW2B4A1t8Fd6gu4yfcOTANHiPclSe54p4clbVWMVA==
-  dependencies:
-    "@aws-amplify/auth" "4.4.1"
-    "@aws-amplify/cache" "4.0.34"
-    "@aws-amplify/core" "4.3.14"
-    graphql "15.8.0"
-    paho-mqtt "^1.1.0"
-    uuid "^3.2.1"
-    zen-observable-ts "0.8.19"
-
-"@aws-amplify/storage@4.4.15":
-  version "4.4.15"
-  resolved "https://registry.npmjs.org/@aws-amplify/storage/-/storage-4.4.15.tgz"
-  integrity sha512-T+LEmbtY58DKaNZ7s5dzr6fkZXbwHbBbwPEw1Qp3f6g9l6ShtbaCmxf3el/DxnDiwncN9Pb1DoRbRXeMZYdDaw==
-  dependencies:
-    "@aws-amplify/core" "4.3.14"
 "@aws-amplify/pubsub@4.2.9":
   "integrity" "sha512-wf/usyDy4hZn4didiSMUMf5EmQ9UB5wT8FQkNANZBPI3gk100v1QN0S7SuQ19os8VTfet77b9JGIg+ghpPORBQ=="
   "resolved" "https://registry.npmjs.org/@aws-amplify/pubsub/-/pubsub-4.2.9.tgz"
@@ -3404,6 +3311,11 @@
   "resolved" "https://registry.npmjs.org/@react-native-community/netinfo/-/netinfo-8.0.0.tgz"
   "version" "8.0.0"
 
+"@react-native-community/slider@^4.2.1":
+  "integrity" "sha512-6HUS5HbB9bvEN4GiwBlxECgPWQIugHE+kfnxqX2jHUl1SE57MRpw00m1qVs4hXtEPQndBl6mAQiGbKCOtLPVbg=="
+  "resolved" "https://registry.npmjs.org/@react-native-community/slider/-/slider-4.2.1.tgz"
+  "version" "4.2.1"
+
 "@react-native-picker/picker@^2.2.1", "@react-native-picker/picker@>=1.2":
   "integrity" "sha512-bdpo8T0Bye0TN+xUIMMgmkFk8jYLxHq1GuBeO9fsLMtElGE9iIDQRe5wbIRIih2w+Iw/t6c8nNCROWEFkjj6Sg=="
   "resolved" "https://registry.npmjs.org/@react-native-picker/picker/-/picker-2.3.0.tgz"
@@ -5032,7 +4944,7 @@
   "resolved" "https://registry.npmjs.org/flow-parser/-/flow-parser-0.121.0.tgz"
   "version" "0.121.0"
 
-"follow-redirects@^1.14.0":
+"follow-redirects@^1.14.0", "follow-redirects@^1.14.8":
   "integrity" "sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w=="
   "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.9.tgz"
   "version" "1.14.9"
@@ -7013,7 +6925,6 @@
     "css-select" "^2.0.2"
     "css-tree" "^1.0.0-alpha.37"
 
-"react-native-web@0.17.1":
 "react-native-web@>= 0.11", "react-native-web@0.17.1":
   "integrity" "sha512-lUnn+2O8ynQ6/gJKylSxm7DLi2vHw6AujdDV1+LSa8Epe1bYFJNUcJTEhJf0jNYUFGOujzMtuG8Mkz3HdWTkag=="
   "resolved" "https://registry.npmjs.org/react-native-web/-/react-native-web-0.17.1.tgz"
@@ -7027,7 +6938,6 @@
     "normalize-css-color" "^1.0.2"
     "prop-types" "^15.6.0"
 
-"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.67 || 1000.0.0", "react-native@>=0.50.0", "react-native@>=0.56", "react-native@>=0.57", "react-native@>=0.59", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@0.64.3":
 "react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.67 || 1000.0.0", "react-native@>= 0.46", "react-native@>= 0.51", "react-native@>=0.50.0", "react-native@>=0.56", "react-native@>=0.57", "react-native@>=0.59", "react-native@>=0.64.0-rc.0 || 0.0.0-*", "react-native@0.64.3":
   "integrity" "sha512-2OEU74U0Ek1/WeBzPbg6XDsCfjF/9fhrNX/5TFgEiBKd5mNc9LOZ/OlMmkb7iues/ZZ/oc51SbEfLRQdcW0fVw=="
   "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.64.3.tgz"
@@ -7078,7 +6988,6 @@
   dependencies:
     "react-native-svg" "^9.13.6"
 
-"react@*", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^17.0.0", "react@>=16.0", "react@>=17.0.1", "react@16 || 17", "react@17.0.1":
 "react@*", "react@^16.8.0 || ^17", "react@^16.8.0 || ^17.0.0", "react@^17.0.0", "react@>= 16.0 || < 18.0", "react@>=16.0", "react@>=17.0.1", "react@16 || 17", "react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"

@@ -17,6 +17,7 @@ import TabNavigator from './TabNavigator';
 import ProfileScreen from '../screens/ProfileScreen';
 import SearchScreen from '../screens/SearchPage';
 import RestaurantScreen from '../screens/RestaurantScreen/RestaurantScreen';
+import UserSettingsScreen from '../screens/UserSettingsScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -60,7 +61,7 @@ const Navigation = ({latitude, longitude}) => {
                         {/* <Stack.Screen name = 'HomeScreen' component={() => <TabNavigator latitude={latitude} longitude={longitude}/>}/> */}
                         <Stack.Screen name = 'ProfileScreen' component={ProfileScreen}/>
                         <Stack.Screen name = 'HistoryScreen' component={HistoryScreen}/>
-                        <Stack.Screen name = 'SettingsScreen' component={SettingsScreen}/>
+                        <Stack.Screen name = 'SettingsScreen' component={UserSettingsScreen}/>
                         <Stack.Screen name = 'SearchScreen' component={SearchScreen}/>
                         <Stack.Screen name = 'RestaurantScreen' component={RestaurantScreen}/>
                     </>

@@ -18,8 +18,6 @@ const HomeScreen = ({latitude, longitude}) => {
   const [dataB, setDataB] = useState(null);
   const [messageB, setMessageB] = useState(null);
 
-  console.log(latitude)
-
   const navigation = useNavigation();
 
   const randomImage = [
@@ -52,7 +50,7 @@ const HomeScreen = ({latitude, longitude}) => {
 
 
 
-  if (loading || !dataA || !messageA || !dataB || !messageB || !latitude) {
+  if (loading || !dataA || !messageA || !dataB || !messageB) {
     return <ActivityIndicator style = {styles.loading} size="large" />; 
   }
 

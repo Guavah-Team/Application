@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getDetailedRestaurantData = async (latitude, longitude) => {
+export const getDetailedRestaurantData = async () => {
   // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/home?latlong=${latitude},${longitude}&radius=2000`;
   url = "https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/home?latlong=33.4936,-117.1484&radius=2000";
     try{

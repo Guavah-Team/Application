@@ -62,7 +62,6 @@ const Navigation = ({latitude, longitude}) => {
                         <Stack.Screen name = 'HistoryScreen' component={HistoryScreen}/>
                         <Stack.Screen name = 'SettingsScreen' component={SettingsScreen}/>
                         <Stack.Screen name = 'SearchScreen' component={SearchScreen}/>
-                        <Stack.Screen name = 'HomeScreen' component={TabNavigator}/>
                         <Stack.Screen name = 'RestaurantScreen' component={RestaurantScreen}/>
                     </>
 

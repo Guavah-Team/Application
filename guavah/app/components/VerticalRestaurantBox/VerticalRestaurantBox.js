@@ -4,23 +4,10 @@ import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 import placeHolder from '../../assets/defaults/VerticalDefault.png';
 
-<<<<<<< HEAD
-function VerticalRestaurantBox({restaurant, type = "SMALL"}) {
-    const {name, rating, distance, photo} = restaurant;
-    const navigation = useNavigation();
-
-    const ratingDisplay = (rating) => {
-        if(rating === 1){
-            require('../../assets/ICONS/Tier-1-Badge-(Base).png')
-        }
-    }
-
-=======
 function VerticalRestaurantBox({restaurant, type="SMALL"}) {
     const {name, rating, distance, photo, location} = restaurant;
     const navigation = useNavigation();
 
->>>>>>> 4c97118ab65e082d00e0d21030be3cb0fb85d423
     return (
         <Pressable 
         onPress={() => {

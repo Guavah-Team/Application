@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Alert, View, Text, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import colors from './app/config/colors/colors';
 import LoginScreen from './app/screens/LoginScreen';
@@ -30,17 +30,17 @@ const data = [
 ]
 
 function App(props) {
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+  // const [latitude, setLatitude] = useState(null);
+  // const [longitude, setLongitude] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      let location = await Location.getCurrentPositionAsync({});
-      setLatitude(location.coords.latitude);
-      setLongitude(location.coords.longitude);
-    })();
+  // useEffect(() => {
+  //   (async () => {
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLatitude(location.coords.latitude);
+  //     setLongitude(location.coords.longitude);
+  //   })();
 
-  }, []);
+  // }, []);
 
 
   return (
@@ -54,7 +54,7 @@ function App(props) {
       {/* <Navigation/> */}
 
       {/* <SearchPage/> */}
-      
+
       {/* <Navigation latitude={latitude} longitude={longitude}/> */}
 
 

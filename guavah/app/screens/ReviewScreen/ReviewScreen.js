@@ -38,15 +38,15 @@ function ReviewScreen(){
             >
                 <View style = {styles.containerModal}>
                     <View style = {styles.modalView}>
-                        <Text style = {styles.header}>Leave a Comment</Text>
+                        <Text style = {styles.modalheader}>Leave a Comment</Text>
                         <TextInput 
-                            style = {styles.input} 
+                            style = {styles.modalinput} 
                             placeholder = 'Optional' 
                             multiline = {true}
                             onChangeText = {newReview => setReview(newReview)}
                             defaultValue = {review}
                         />
-                        <View style = {styles.buttonView}>
+                        <View style = {styles.modalbuttonView}>
                         <Pressable style = {styles.buttonModal} onPress={() => {setCommentVisible(!commentVisible); pushData(rating, review);}}>
                             <Text style = {styles.textStyleModal}>Submit {rating}</Text>
                         </Pressable>
@@ -79,7 +79,7 @@ function ReviewScreen(){
                                 <Image style = {styles.ThumbsDown} source = {require('../../assets/Thumbs/ThumbDown.png')}/>
                             </Pressable>
                         </View> 
-                        <Pressable style = {styles.cancel} onPress={() => setThumbsVisible(false)}>
+                        <Pressable style = {styles.modalcancel} onPress={() => setThumbsVisible(false)}>
                             <Text style = {styles.textStyleSecondaryModal}>Cancel</Text>
                         </Pressable>
                     </View>
@@ -129,13 +129,13 @@ const styles = StyleSheet.create({
         height: '50%',
         width: '90%',
     },
-    header:{
+    modalheader:{
         fontWeight: 'bold',
         paddingTop: 40,
         paddingBottom: 50,
 
     },
-    cancel:{
+    modalcancel:{
         alignItems: 'center',
     },
     thumbHeader:{
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
         paddingTop: '10%',
         paddingBottom: '25%',
     },
-    input:{
+    modalinput:{
        borderWidth: 1,
        borderColor: 'gray',
        borderRadius: 10,
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    buttonView:{
+    modalbuttonView:{
        
         alignItems: 'center',
         paddingTop: '20%',
@@ -187,8 +187,7 @@ const styles = StyleSheet.create({
         height: 116.7,
         width: 134.8,
     },
-    thumbLocation:{
-    },
+    
 })
 
 export default ReviewScreen;

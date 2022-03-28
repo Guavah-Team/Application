@@ -55,17 +55,10 @@ export default function TabNavigator({latitude, longitude}) {
       
       >
 
-<<<<<<< HEAD
         <Tab.Screen name={homeName} component={HomeScreen}/>
         <Tab.Screen name={searchName} component={SearchScreen}/>
         <Tab.Screen name={versusName} component={VersusScreen}/>
-        <Tab.Screen name={profileName} component={SearchScreen}/>
-=======
-        <Tab.Screen name={homeName} component={HomeScreen} />
-        <Tab.Screen name={searchName} component={SearchScreen }/>
-        <Tab.Screen name={versusName} component={SearchScreen}/>
         <Tab.Screen name={profileName} component={ProfileScreen}/>
->>>>>>> 2395db939cd70c498aa5a304d502c77c0ca00e8c
 
       </Tab.Navigator>
 

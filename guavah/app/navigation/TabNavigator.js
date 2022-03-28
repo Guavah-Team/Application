@@ -9,6 +9,7 @@ import colors from '../config/colors/colors';
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SearchScreen from '../screens/SearchPage';
+import VersusScreen from '../screens/VersusScreen/VersusScreen';
 
 //Screen Names
 const homeName = "Home";
@@ -54,7 +55,7 @@ export default function TabNavigator() {
 
         <Tab.Screen name={homeName} component={HomeScreen}/>
         <Tab.Screen name={searchName} component={SearchScreen}/>
-        <Tab.Screen name={versusName} component={SearchScreen}/>
+        <Tab.Screen name={versusName} component={VersusScreen}/>
         <Tab.Screen name={profileName} component={SearchScreen}/>
 
       </Tab.Navigator>

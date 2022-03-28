@@ -16,6 +16,7 @@ import {Auth, Hub} from 'aws-amplify';
 import TabNavigator from './TabNavigator';
 import ProfileScreen from '../screens/ProfileScreen';
 import SearchScreen from '../screens/SearchPage';
+import RestaurantScreen from '../screens/RestaurantScreen/RestaurantScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -55,12 +56,14 @@ const Navigation = ({latitude, longitude}) => {
             <Stack.Navigator screenOptions={{headerShown: false}}>
                 {user ? (
                     <>
-                    {/* <Stack.Screen name = 'HomeScreen' component={TabNavigator}/> */}
-                    <Stack.Screen name = 'HomeScreen' component={() => <TabNavigator latitude={latitude} longitude={longitude}/>}/>
-                    <Stack.Screen name = 'ProfileScreen' component={ProfileScreen}/>
-                    <Stack.Screen name = 'HistoryScreen' component={HistoryScreen}/>
-                    <Stack.Screen name = 'SettingsScreen' component={SettingsScreen}/>
-                    <Stack.Screen name = 'SearchScreen' component={SearchScreen}/>
+                        <Stack.Screen name = 'HomeScreen' component={TabNavigator}/>
+                        {/* <Stack.Screen name = 'HomeScreen' component={() => <TabNavigator latitude={latitude} longitude={longitude}/>}/> */}
+                        <Stack.Screen name = 'ProfileScreen' component={ProfileScreen}/>
+                        <Stack.Screen name = 'HistoryScreen' component={HistoryScreen}/>
+                        <Stack.Screen name = 'SettingsScreen' component={SettingsScreen}/>
+                        <Stack.Screen name = 'SearchScreen' component={SearchScreen}/>
+                        <Stack.Screen name = 'HomeScreen' component={TabNavigator}/>
+                        <Stack.Screen name = 'RestaurantScreen' component={RestaurantScreen}/>
                     </>
 
                     

@@ -53,14 +53,16 @@ function UserSettingsScreen(){
                     <Text style = {styles.profileText}>Name</Text>
                     <TextInput  
                         style = {styles.input}
-                        placeholder = {'John Doe'}
+                        placeholder = {'Dylan Guzman'}
+                        placeholderTextColor = 'black'
                         onChangeText = {newName => setName(newName)}
                         defaultValue = {name}
                     />
                     <Text style = {styles.profileText}>Email</Text>
                     <TextInput 
                         style = {styles.input}
-                        placeholder = {'John@Doe.com'}
+                        placeholder = {'dylan@guzman.com'}
+                        placeholderTextColor = 'black'
                         onChangeText = {newEmail => setEmail(newEmail)}
                         defaultValue = {email}
                         />

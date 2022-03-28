@@ -1,17 +1,23 @@
 import React from 'react';
-import {StyleSheet, Pressable, ImageBackground, Text, View} from 'react-native';
+import {StyleSheet, Pressable, ImageBackground, Text, View, Alert} from 'react-native';
 import colors from '../../config/colors/colors';
+import {useNavigation} from '@react-navigation/native';
+import placeHolder from '../../assets/defaults/VerticalDefault.png';
 
-function VerticalRestaurantBox({onPress, name, rating, distance, backgroundImage}) {
+function VerticalRestaurantBox({restaurant}) {
+    const {name, rating, distance, photo, type = "SMALL"} = restaurant;
+    const navigation = useNavigation();
     return (
-        <Pressable onPress = {onPress} style = {[styles.container, styles.shadowProp]}>
-            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} source = {backgroundImage}>
+        <Pressable 
+        onPress={() => navigation.navigate("SearchScreen")}
+        style = {[styles[`container_${type}`], styles.shadowProp]}>
+            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} defaultSource={require('../../assets/defaults/VerticalDefault.png')} source = {{uri: photo}}>
                 <View style = {styles.mask}/>
                 <View style = {styles.topTextBox}>
                     <Text style = {styles.restaurantNameText}> {name} </Text>
                 </View>
                 <View style = {styles.bottomTextBox}>
-                    <Text style = {styles.distanceText}> {distance} </Text>
+                    <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text>
                 </View>
             </ImageBackground>
         </Pressable>
@@ -19,9 +25,14 @@ function VerticalRestaurantBox({onPress, name, rating, distance, backgroundImage
 }
 
 const styles = StyleSheet.create({
-    container: {
+    container_SMALL: {
         width: 150,
         height: 200,
+        marginRight: 10,
+    },
+    container_LARGE: {
+        width: 150,
+        height: 316,
         marginRight: 10,
     },
     restaurantNameText: {
@@ -29,6 +40,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         textTransform: 'capitalize',
+        textAlign: 'center',
     },
     backgroundImage: {
         flex: 1,
@@ -48,11 +60,14 @@ const styles = StyleSheet.create({
     topTextBox: {
         marginTop: 14,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     bottomTextBox: {
-        marginTop: 126,
         alignItems: 'center',
+        position: 'absolute',
+        bottom: 21,
+        left: 43,
+        right: 43
     },
     shadowProp: {
         shadowColor: '#171717',

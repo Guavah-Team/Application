@@ -10,6 +10,7 @@ import HorizontalReviewBox from '../../components/HorizontalReviewBox';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {Ionicons} from '@expo/vector-icons';
+import  { postReviewData } from '../../services/postReviewData';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCtkgG8tkAaoKtARZwjazpggOspoSSArzI';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};

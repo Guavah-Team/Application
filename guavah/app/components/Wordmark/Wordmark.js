@@ -30,7 +30,7 @@ function Wordmark(props) {
 const styles = StyleSheet.create({
     wordmark:{
         fontSize: 60,
-        fontFamily: 'GigaSansReg',
+        fontFamily: 'CeraMedium',
         color: colors.accent
     }
     

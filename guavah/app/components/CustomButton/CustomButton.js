@@ -1,8 +1,24 @@
 import React from 'react';
 import {StyleSheet, View, Text, Pressable} from 'react-native';
 import colors from '../../config/colors/colors';
+import {useFonts} from 'expo-font';
 
 function CustomButton({onPress, text, type = "PRIMARY", bgColor, fgColor}) {
+
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+      });
+
     return (
         <Pressable 
             onPress={onPress} 
@@ -15,6 +31,7 @@ function CustomButton({onPress, text, type = "PRIMARY", bgColor, fgColor}) {
                 style = {[
                     styles.text, 
                     styles[`text_${type}`],
+                    fontFamily ? {font}: {},
                     fgColor ? {color : fgColor} : {},
                 ]}
             >
@@ -35,7 +52,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 5,
     },
-
+    
     container_PRIMARY: {
         backgroundColor: colors.accent,
         borderRadius: 100,
@@ -70,15 +87,18 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: colors.white,        
+        color: colors.white,
+        fontFamily: 'Source Sans Pro',    
 
     },
     text_SECONDARY: {
         color: colors.accent,
+         
     },
     text_TERTIARY: {
         color: 'gray',
         // alignSelf: 'stretch',
+        fontFamily: 'GigaSansMedium'
     },
     text_SEARCH: {
         color: colors.white,  

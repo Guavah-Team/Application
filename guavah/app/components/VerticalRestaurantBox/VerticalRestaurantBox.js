@@ -5,8 +5,10 @@ import {useNavigation} from '@react-navigation/native';
 import placeHolder from '../../assets/defaults/VerticalDefault.png';
 
 function VerticalRestaurantBox({restaurant, type="SMALL"}) {
-    const {name, rating, distance, photo, location} = restaurant;
+    const {name, rating, distance, photo, location, id} = restaurant;
     const navigation = useNavigation();
+
+    // console.log(photo);
 
     return (
         <Pressable 
@@ -15,6 +17,7 @@ function VerticalRestaurantBox({restaurant, type="SMALL"}) {
                 name: name,
                 photo: photo,
                 location: location,
+                FSQID: id,
             });
         }}
         style = {[styles[`container_${type}`], styles.shadowProp]}>

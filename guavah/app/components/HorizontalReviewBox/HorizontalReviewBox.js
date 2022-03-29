@@ -3,15 +3,16 @@ import {StyleSheet, View, Image, Text} from 'react-native';
 import colors from '../../config/colors/colors';
 import { Auth } from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons'; 
+import {SvgUri} from 'react-native-svg';
 
 function RestaurantReview({restaurant}) {
-    const {Name, Rating, Review, ProfilePhoto} = restaurant;
+    const {Name, Rating, Review, ProfilePhoto, icon} = restaurant;
     
     return (
         <View style = {styles.container}>
             <View style = {styles.userBox}>
-                {/* <Image style = {styles.userImage} source = {require('../../assets/defaults/HorizontalDefault.png')}></Image> */}
-                <Image style = {styles.userImage} source = {{uri: ProfilePhoto}}></Image>
+                {/* <Image style = {styles.userImage} source = {{uri: "https://fastly.4sqi.net/img/general/original/77124221_3W_pIRAP9ESb7aEAN90y1l2Hfq4lXSSLx5erlFHCyRA.jpg"}}></Image> */}
+                <SvgUri style = {styles.userImage} uri={ProfilePhoto}/>
                 <View style = {styles.textBox}>
                     <Text style = {styles.user}>{Name}</Text>
                     {/* <Text style = {styles.rank}>{userLevel}</Text> */}
@@ -27,7 +28,7 @@ function RestaurantReview({restaurant}) {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 100,
+        height: 110,
         paddingLeft: 24,
         paddingTop: 20,
         backgroundColor: colors.white,
@@ -48,9 +49,8 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     userImage: {
-        width: 32,
-        height: 32,
-        borderRadius: 100
+        width: 45,
+        height: 45,
     },
     rank: {
         fontSize: 12,
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         position: 'absolute',
         right: 24,
-    }
+    },
 })
 
 export default RestaurantReview;

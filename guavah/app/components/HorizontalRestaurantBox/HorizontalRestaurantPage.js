@@ -4,7 +4,7 @@ import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 
 function HorizontalRestaurantPage({restaurant}) {
-    const {name, rating, distance, photo, price, location} = restaurant;
+    const {name, rating, distance, photo, price, location, id} = restaurant;
     const navigation = useNavigation();
     
     
@@ -16,6 +16,7 @@ function HorizontalRestaurantPage({restaurant}) {
                 name: name,
                 photo: photo,
                 location: location,
+                FSQID: id,
             });
         }}
         style = {[styles.container, styles.shadowProp]}

@@ -11,6 +11,7 @@ import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {Ionicons} from '@expo/vector-icons';
 import { getRestaurantReviews } from '../../services/requests';
+import { postReviewData } from '../../services/postReviewData';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCtkgG8tkAaoKtARZwjazpggOspoSSArzI';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
@@ -23,6 +24,7 @@ function RestaurantScreen({route}){
     const {name} = route.params;
     const {photo} = route.params;
     const {location} = route.params;
+    const {FSQID} = route.params;
 
     const [review, setReview] = useState('');
     const [commentVisible, setCommentVisible] = useState(false);
@@ -30,16 +32,18 @@ function RestaurantScreen({route}){
     const[rating, setRating] = useState(0);
 
     const fetchReviews = async () => {
-        const fetchedReviews = await getRestaurantReviews();
+        const fetchedReviews = await getRestaurantReviews(FSQID);
         setData(fetchedReviews[0]);
     }
+
+    console.log(FSQID);
 
     useEffect(() => {
         fetchReviews();
     }, []);
     
-    const pushData = async (rating, review) => {
-        postReviewData(rating, review);
+    const pushData = async () => {
+        postReviewData(rating, review, FSQID);
     };
 
     const buttonPressed = () => {
@@ -162,7 +166,7 @@ const styles = StyleSheet.create({
     text_Primary: {
         color: colors.primaryText,
         fontWeight: '600',
-        fontSize: 32
+        fontSize: 32,
     },
     text_Secondary: {
         paddingBottom: 10,

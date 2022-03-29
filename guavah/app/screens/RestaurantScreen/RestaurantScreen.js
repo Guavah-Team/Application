@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, Button, Alert, Modal, TextInput, Pressable} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, Button, Alert, Modal, FlatList, TextInput, Pressable} from 'react-native';
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
@@ -10,6 +10,7 @@ import HorizontalReviewBox from '../../components/HorizontalReviewBox';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {Ionicons} from '@expo/vector-icons';
+import { getRestaurantReviews } from '../../services/requests';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCtkgG8tkAaoKtARZwjazpggOspoSSArzI';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
@@ -17,6 +18,7 @@ const destination = {latitude: 37.771707, longitude: -122.4053769};
 
 function RestaurantScreen({route}){
     const navigation = useNavigation();
+    const [data, setData] = useState(null);
 
     const {name} = route.params;
     const {photo} = route.params;
@@ -26,6 +28,11 @@ function RestaurantScreen({route}){
     const [commentVisible, setCommentVisible] = useState(false);
     const [thumbsVisible, setThumbsVisible] = useState(false);
     const[rating, setRating] = useState(0);
+
+    const fetchReviews = async () => {
+        const fetchedReviews = await getRestaurantReviews();
+        setData(fetchReviews[0]);
+    }
 
     
     const pushData = async (rating, review) => {
@@ -120,7 +127,11 @@ function RestaurantScreen({route}){
                 <View style = {styles.special}>
                     <Text style = {styles.headerText}>Reviews</Text>
                     <View style = {styles.reviews}>
-                        <HorizontalReviewBox username={"Dylan"} userLevel={"Level 5"} userMessage = {"Service was great"} icon = {'thumbs-up'}/>
+                        {/* <HorizontalReviewBox username={"Dylan"} userLevel={"Level 5"} userMessage = {"Service was great"} icon = {'thumbs-up'}/> */}
+                        <FlatList
+                            data={data}
+                            renderItem={({ item }) => <HorizontalReviewBox restaurant={item} />}
+                        />
                     </View>
                 </View>
             </ScrollView>

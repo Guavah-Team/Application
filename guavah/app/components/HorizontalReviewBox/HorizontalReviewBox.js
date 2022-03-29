@@ -4,19 +4,21 @@ import colors from '../../config/colors/colors';
 import { Auth } from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons'; 
 
-function RestaurantReview({username, userLevel, userMessage, icon}) {
-
+function RestaurantReview({restaurant}) {
+    const {Name, Rating, Review, ProfilePhoto} = restaurant;
+    
     return (
         <View style = {styles.container}>
             <View style = {styles.userBox}>
-                <Image style = {styles.userImage} source = {require('../../assets/defaults/HorizontalDefault.png')}></Image>
+                {/* <Image style = {styles.userImage} source = {require('../../assets/defaults/HorizontalDefault.png')}></Image> */}
+                <Image style = {styles.userImage} source = {{uri: ProfilePhoto}}></Image>
                 <View style = {styles.textBox}>
-                    <Text style = {styles.user}>{username}</Text>
-                    <Text style = {styles.rank}>{userLevel}</Text>
+                    <Text style = {styles.user}>{Name}</Text>
+                    {/* <Text style = {styles.rank}>{userLevel}</Text> */}
                 </View>
                 <Ionicons name = {icon} style = {styles.thumb}/>
             </View>
-            <Text style = {styles.message}>{userMessage}</Text>
+            <Text style = {styles.message}>{Review}</Text>
         </View>
         
     );

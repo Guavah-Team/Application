@@ -31,9 +31,12 @@ function RestaurantScreen({route}){
 
     const fetchReviews = async () => {
         const fetchedReviews = await getRestaurantReviews();
-        setData(fetchReviews[0]);
+        setData(fetchedReviews[0]);
     }
 
+    useEffect(() => {
+        fetchReviews();
+    }, []);
     
     const pushData = async (rating, review) => {
         postReviewData(rating, review);

@@ -12,6 +12,7 @@ import SearchPage from './app/screens/SearchPage';
 import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/HorizontalRestaurantPage';
 import VerticalRestaurantBox from './app/components/VerticalRestaurantBox/VerticalRestaurantBox';
 import HomeScreen from './app/screens/HomeScreen';
+import VersusScreen from './app/screens/VersusScreen/VersusScreen';
 
 import * as Location from 'expo-location';
 import UserSettingsScreen from './app/screens/UserSettingsScreen';
@@ -52,6 +53,9 @@ function App(props) {
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
+      {/* <SearchPage/> */}
+      {/* <VersusScreen/> */}
+      {/* <Navigation/> */}
       {/* <Navigation/> */}
 
       {/* <SearchPage/> */}

@@ -10,6 +10,7 @@ import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SearchScreen from '../screens/SearchPage';
+import VersusScreen from '../screens/VersusScreen/VersusScreen';
 
 //Screen Names
 const homeName = "Home";
@@ -54,9 +55,9 @@ export default function TabNavigator({latitude, longitude}) {
       
       >
 
-        <Tab.Screen name={homeName} component={HomeScreen} />
-        <Tab.Screen name={searchName} component={SearchScreen }/>
-        <Tab.Screen name={versusName} component={SearchScreen}/>
+        <Tab.Screen name={homeName} component={HomeScreen}/>
+        <Tab.Screen name={searchName} component={SearchScreen}/>
+        <Tab.Screen name={versusName} component={VersusScreen}/>
         <Tab.Screen name={profileName} component={ProfileScreen}/>
 
       </Tab.Navigator>

@@ -145,6 +145,12 @@ const styles = StyleSheet.create({
     },
     resultsHeader: {
         flexDirection: 'row',
+        ...Platform.select({
+            android: {
+                marginTop: '10%',
+            },
+        })
+        
     },
     downArrow: {
         fontSize: 25,

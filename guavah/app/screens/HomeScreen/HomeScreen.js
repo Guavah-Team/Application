@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityIndicator, Alert, RefreshControl} from "react-native";
+import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityIndicator, RefreshControlBase, Alert, RefreshControl} from "react-native";
 import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/HorizontalRestaurantPage";
 import VerticalRestaurantBox from "../../components/VerticalRestaurantBox";
 import Amplify, { Auth } from "aws-amplify";
@@ -8,7 +8,10 @@ import { getDetailedRestaurantData } from "../../services/requests";
 import colors from "../../config/colors/colors";
 import CustomButton from "../../components/CustomButton";
 
-const HomeScreen = () => {
+import * as Location from 'expo-location';
+import { get } from "react-hook-form";
+
+const HomeScreen = ({latitude, longitude}) => {
   const [loading, setLoading] = useState(false);
   const [dataA, setDataA] = useState(null);
   const [messageA, setMessageA] = useState(null);
@@ -30,10 +33,10 @@ const HomeScreen = () => {
   const searchPressed = () => {
     navigation.navigate("SearchScreen");
   }
-
+  
   const fetchData = async () => {
     setLoading(true);
-    const fetchedData = await getDetailedRestaurantData();
+    const fetchedData = await getDetailedRestaurantData(latitude, longitude);
     setMessageA(fetchedData[0]);
     setDataA(fetchedData[1]);
     setMessageB(fetchedData[2]);
@@ -44,6 +47,8 @@ const HomeScreen = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+
 
   if (loading || !dataA || !messageA || !dataB || !messageB) {
     return <ActivityIndicator style = {styles.loading} size="large" />; 

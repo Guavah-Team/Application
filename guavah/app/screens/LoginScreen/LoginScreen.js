@@ -8,8 +8,9 @@ import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 import Amplify, {Auth} from 'aws-amplify';
 import {useForm, Controller} from 'react-hook-form';
-
+import { useFonts } from 'expo-font';
 import config from '../../../src/aws-exports';
+
 Amplify.configure(config);
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!$#%&-]+@[a-zA-Z0-9]+\.[a-z]{2,3}/

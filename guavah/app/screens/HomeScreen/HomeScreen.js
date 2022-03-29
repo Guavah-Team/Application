@@ -7,11 +7,27 @@ import {useNavigation} from '@react-navigation/native';
 import { getDetailedRestaurantData } from "../../services/requests";
 import colors from "../../config/colors/colors";
 import CustomButton from "../../components/CustomButton";
+import {useFonts} from 'expo-font';
 
 import * as Location from 'expo-location';
 import { get } from "react-hook-form";
 
 const HomeScreen = ({latitude, longitude}) => {
+
+  const [loaded] = useFonts({
+    CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+    CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+    CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+    CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+    CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+    CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+    GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+    GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+    GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+    GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+    GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+  });
+
   const [loading, setLoading] = useState(false);
   const [dataA, setDataA] = useState(null);
   const [messageA, setMessageA] = useState(null);
@@ -129,7 +145,7 @@ const styles = StyleSheet.create({
   },
   localText: {
     fontSize: 18,
-    fontWeight: "600",
+    fontFamily: 'GigaSansSemiBold',
     marginBottom: 10,
   },
   loading: {
@@ -139,7 +155,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 18,
     color: colors.background,
-    fontWeight: 'bold',
+    fontFamily: 'GigaSansSemiBold',
   },
   headerTextBox: {
     marginTop: 61,

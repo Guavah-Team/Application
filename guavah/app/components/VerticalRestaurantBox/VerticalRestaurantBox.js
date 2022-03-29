@@ -3,8 +3,24 @@ import {StyleSheet, Pressable, ImageBackground, Text, View, Alert, Image} from '
 import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 import placeHolder from '../../assets/defaults/VerticalDefault.png';
+import { useFonts } from 'expo-font';
 
 function VerticalRestaurantBox({restaurant, type="SMALL"}) {
+
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+      });
+
     const {name, rating, distance, photo, location} = restaurant;
     const navigation = useNavigation();
 
@@ -48,7 +64,7 @@ const styles = StyleSheet.create({
     restaurantNameText: {
         color: colors.white,
         fontSize: 18,
-        fontWeight: 'bold',
+        fontFamily: 'GigaSansSemiBold',
         textTransform: 'capitalize',
         textAlign: 'center',
     },
@@ -66,6 +82,7 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontSize: 12,
         textTransform: 'capitalize',
+        fontFamily: 'GigaSansReg'
     },
     topTextBox: {
         marginTop: 14,

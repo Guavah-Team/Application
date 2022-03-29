@@ -15,6 +15,7 @@ import { getDetailedRestaurantData, getSearchRestaurantData } from "../../servic
 import config from '../../../src/aws-exports';
 import CustomSearch from "../../components/CustomSearch";
 import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/HorizontalRestaurantPage";
+import { useFonts } from 'expo-font';
 Amplify.configure(config)
 
 const wait = (timeout) => {
@@ -22,6 +23,22 @@ const wait = (timeout) => {
   }
 
 function SearchPage(props) {
+
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+    });
+
+
     const [loading, setLoading] = useState(false);
     const [value, setValue] = useState();
     const [dataA, setDataA] = useState(null);
@@ -112,7 +129,7 @@ const styles = StyleSheet.create({
         color: colors.background,
         textAlign: 'center',
         fontSize: 18,
-
+        fontFamily: 'GigaSansSemiBold',
         ...Platform.select({
             android: {
                 marginTop: '10%',
@@ -138,7 +155,7 @@ const styles = StyleSheet.create({
     },
     localText: {
         fontSize: 18,
-        fontWeight: "600",
+        fontFamily: 'GigaSansSemiBold',
         marginLeft: 15,
         marginTop: 40,
         marginBottom: 10,

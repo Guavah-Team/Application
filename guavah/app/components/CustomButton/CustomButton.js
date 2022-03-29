@@ -31,7 +31,6 @@ function CustomButton({onPress, text, type = "PRIMARY", bgColor, fgColor}) {
                 style = {[
                     styles.text, 
                     styles[`text_${type}`],
-                    fontFamily ? {font}: {},
                     fgColor ? {color : fgColor} : {},
                 ]}
             >
@@ -87,9 +86,7 @@ const styles = StyleSheet.create({
     },
 
     text: {
-        color: colors.white,
-        fontFamily: 'Source Sans Pro',    
-
+        color: colors.white,   
     },
     text_SECONDARY: {
         color: colors.accent,

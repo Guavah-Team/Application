@@ -3,6 +3,7 @@ import {StyleSheet, View, Image, Text} from 'react-native';
 import colors from '../../config/colors/colors';
 import { Auth } from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons'; 
+import { useFonts } from 'expo-font';
 
 function RestaurantReview({username, userLevel, userMessage, icon}) {
 

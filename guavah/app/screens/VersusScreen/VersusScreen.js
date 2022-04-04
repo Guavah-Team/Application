@@ -82,8 +82,8 @@ const containerStyles = StyleSheet.create({
 
     const componentStyle = StyleSheet.create({
         topImage: {
-            height: 132,
-            width: 132,
+            height: 104,
+            width: 104,
             borderRadius: 1000,
             marginTop: '0%',
         },

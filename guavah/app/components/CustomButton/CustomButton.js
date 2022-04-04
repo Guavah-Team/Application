@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     text_TERTIARY: {
         color: 'gray',
         // alignSelf: 'stretch',
-        fontFamily: 'GigaSansMedium'
+        //fontFamily: 'GigaSansMedium'
     },
     text_SEARCH: {
         color: colors.white,  

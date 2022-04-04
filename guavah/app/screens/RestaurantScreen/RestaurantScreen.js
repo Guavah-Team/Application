@@ -5,13 +5,16 @@ import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
-import { Auth, button } from 'aws-amplify';
+import Amplify, { Auth, button } from 'aws-amplify';
 import HorizontalReviewBox from '../../components/HorizontalReviewBox';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {Ionicons} from '@expo/vector-icons';
 import { getRestaurantReviews } from '../../services/requests';
 import { postReviewData } from '../../services/postReviewData';
+
+import config from '../../../src/aws-exports';
+Amplify.configure(config);
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCtkgG8tkAaoKtARZwjazpggOspoSSArzI';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
@@ -20,6 +23,7 @@ const destination = {latitude: 37.771707, longitude: -122.4053769};
 function RestaurantScreen({route}){
     const navigation = useNavigation();
     const [data, setData] = useState(null);
+
 
     const {name} = route.params;
     const {photo} = route.params;
@@ -36,7 +40,10 @@ function RestaurantScreen({route}){
         setData(fetchedReviews[0]);
     }
 
+    
+
     console.log(FSQID);
+    console.log(Auth.currentSession);
 
     useEffect(() => {
         fetchReviews();

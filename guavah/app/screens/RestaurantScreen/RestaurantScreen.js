@@ -15,6 +15,7 @@ import { postReviewData } from '../../services/postReviewData';
 
 import config from '../../../src/aws-exports';
 Amplify.configure(config);
+import {useFonts} from 'expo-font';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCtkgG8tkAaoKtARZwjazpggOspoSSArzI';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
@@ -24,6 +25,20 @@ function RestaurantScreen({route}){
     const navigation = useNavigation();
     const [data, setData] = useState(null);
 
+
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+      });
 
     const {name} = route.params;
     const {photo} = route.params;
@@ -172,13 +187,13 @@ const styles = StyleSheet.create({
     },
     text_Primary: {
         color: colors.primaryText,
-        fontWeight: '600',
-        fontSize: 32,
+        fontFamily: 'GigaSansSemiBold',
+        fontSize: 32
     },
     text_Secondary: {
         paddingBottom: 10,
         color: colors.primaryText,
-        fontWeight: '600',
+        fontFamily: 'GigaSansSemiBold',
         fontSize: 18,
     },
     image:{
@@ -191,8 +206,8 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: 18,
-    fontWeight: "600",
-    marginBottom: 10,
+        fontFamily: 'GigaSansSemiBold',
+        marginBottom: 10,
     },
     mask: {
         flex: 1,
@@ -237,7 +252,7 @@ const styles = StyleSheet.create({
         width: '90%',
     },
     modalheader:{
-        fontWeight: 'bold',
+        fontFamily: 'GigaSansSemiBold',
         paddingTop: 40,
         paddingBottom: 50,
 

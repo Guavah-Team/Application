@@ -4,10 +4,24 @@ import colors from '../../config/colors/colors';
 import { Auth } from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons'; 
 import {SvgUri} from 'react-native-svg';
+import { useFonts } from 'expo-font';
 
 function RestaurantReview({restaurant}) {
     const {Name, Rating, Review, ProfilePhoto, icon} = restaurant;
-    
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+      });
+
     return (
         <View style = {styles.container}>
             <View style = {styles.userBox}>
@@ -46,7 +60,7 @@ const styles = StyleSheet.create({
     },
     user: {
         fontSize: 16,
-        fontWeight: '600',
+        fontFamily: 'GigaSansSemiBold',
     },
     userImage: {
         width: 45,
@@ -54,11 +68,11 @@ const styles = StyleSheet.create({
     },
     rank: {
         fontSize: 12,
-        fontWeight: '400',
+        fontFamily: 'GigaSansReg',
     },
     message: {
         fontSize: 12,
-        fontWeight: '400',
+        fontFamily: 'GigaSansReg',
     },
     thumb: {
         fontSize: 20,

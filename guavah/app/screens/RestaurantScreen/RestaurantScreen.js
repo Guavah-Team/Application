@@ -58,6 +58,8 @@ function RestaurantScreen({route}){
         setData(fetchedReviews[0]);
     }
 
+    // console.log(Auth.Credentials)
+
     const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
 
     useEffect(() => {
@@ -144,7 +146,7 @@ function RestaurantScreen({route}){
 
             <ImageBackground style = {styles.image} source = {{uri: photo}}>  
                 <View style = {styles.mask}/>
-                <Ionicons onPress = {returnHome} name="chevron-back-outline" size="30" style = {styles.backArrow}/>
+                <Ionicons onPress = {returnHome} name="chevron-back-outline" size={30} style = {styles.backArrow}/>
                 <View style = {styles.headerBox}>
                     <Text style = {styles.text_Primary}>{name}</Text>
                     <Text style = {styles.text_Secondary}>{location}</Text>

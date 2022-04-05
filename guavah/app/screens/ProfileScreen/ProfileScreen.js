@@ -40,6 +40,8 @@ function ProfileScreen(props) {
         navigation.navigate('HistoryScreen');
     }
 
+    console.log(Auth.Credentials)
+
     return (
         <ScrollView style = {styles.container}>
             <View style = {styles.topBox}>

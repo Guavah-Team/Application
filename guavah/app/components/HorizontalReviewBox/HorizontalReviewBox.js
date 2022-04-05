@@ -2,9 +2,10 @@ import React from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
 import colors from '../../config/colors/colors';
 import { Auth } from 'aws-amplify';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'; 
 import {SvgUri} from 'react-native-svg';
 import { useFonts } from 'expo-font';
+
 
 function RestaurantReview({restaurant}) {
     const {Name, Rating, Review, ProfilePhoto, icon} = restaurant;
@@ -24,9 +25,9 @@ function RestaurantReview({restaurant}) {
 
       function thumbIndicator(Rating) {
           if(Rating === 1){
-            iconName = 'home';
+            iconName = 'thumb-up';
           }else{
-            iconName = 'search';
+            iconName = 'thumb-down';
           }
           return iconName;
       }
@@ -38,7 +39,7 @@ function RestaurantReview({restaurant}) {
                 <View style = {styles.textBox}>
                     <Text style = {styles.user}>{Name}</Text>
                 </View>
-                <Ionicons name = {thumbIndicator(Rating)} style = {styles.thumb}/>
+                <MaterialIcons name = {thumbIndicator(Rating)} style = {styles.thumb}/>
             </View>
             <Text style = {styles.message}>{Review}</Text>
             
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         fontFamily: 'GigaSansReg',
     },
     thumb: {
-        fontSize: 20,
+        fontSize: 25,
         position: 'absolute',
         right: 24,
     },

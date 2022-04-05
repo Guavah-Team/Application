@@ -13,9 +13,9 @@ import {Ionicons} from '@expo/vector-icons';
 import { getRestaurantReviews } from '../../services/requests';
 import { postReviewData } from '../../services/postReviewData';
 
-import config from '../../../src/aws-exports';
-Amplify.configure(config);
 import {useFonts} from 'expo-font';
+import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
+import FeaturedPhotos from '../../components/FeaturedPhotos/FeaturedPhotos';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCtkgG8tkAaoKtARZwjazpggOspoSSArzI';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
@@ -44,28 +44,28 @@ function RestaurantScreen({route}){
     const {photo} = route.params;
     const {location} = route.params;
     const {FSQID} = route.params;
+    const {photo_gallary} = route.params;
 
     const [review, setReview] = useState('');
     const [commentVisible, setCommentVisible] = useState(false);
     const [thumbsVisible, setThumbsVisible] = useState(false);
     const[rating, setRating] = useState(0);
 
+    console.log(photo_gallary);
+
     const fetchReviews = async () => {
         const fetchedReviews = await getRestaurantReviews(FSQID);
         setData(fetchedReviews[0]);
     }
 
-    
-
-    console.log(FSQID);
-    console.log(Auth.currentSession);
+    const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
 
     useEffect(() => {
         fetchReviews();
     }, []);
     
     const pushData = async () => {
-        postReviewData(rating, review, FSQID);
+        postReviewData(rating, review, FSQID, userId);
     };
 
     const buttonPressed = () => {
@@ -153,6 +153,16 @@ function RestaurantScreen({route}){
             </ImageBackground>
 
             <ScrollView style = {styles.container}>
+                <View>
+                    <Text style = {styles.headerText}>Featured Photos</Text>
+                    <ScrollView horizontal={true} style={styles.margin}>
+                        <FlatList
+                            data={photo_gallary}
+                            renderItem={({ item }) => <FeaturedPhotos restaurant={item} />}
+                            numColumns={10}
+                        />
+                    </ScrollView>
+                </View>
                 <View style = {styles.special}>
                     <Text style = {styles.headerText}>Reviews</Text>
                     <View style = {styles.reviews}>
@@ -188,20 +198,23 @@ const styles = StyleSheet.create({
     text_Primary: {
         color: colors.primaryText,
         fontFamily: 'GigaSansSemiBold',
-        fontSize: 32
+        fontSize: 28
     },
     text_Secondary: {
         paddingBottom: 10,
         color: colors.primaryText,
         fontFamily: 'GigaSansSemiBold',
-        fontSize: 18,
+        fontSize: 14,
     },
     image:{
         width: '100%',
-        height: 220,
+        height: 240,
     },
     headerBox: {
+        flex: 1,
         marginLeft: 10,
+        marginRight: 10,
+        justifyContent: 'flex-start',
         // marginTop: '2%',
     },
     headerText: {

@@ -18,8 +18,6 @@ import * as Location from 'expo-location';
 import UserSettingsScreen from './app/screens/UserSettingsScreen';
 
 
-
-
 const data = [
   {
     name: "MarieCallendar’s Restaurant & Bakery",
@@ -43,6 +41,8 @@ function App(props) {
   //   })();
 
   // }, []);
+
+
 
 
   return (

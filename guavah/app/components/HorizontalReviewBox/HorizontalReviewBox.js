@@ -22,18 +22,26 @@ function RestaurantReview({restaurant}) {
         GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
       });
 
+      function thumbIndicator(Rating) {
+          if(Rating === 1){
+            iconName = 'home';
+          }else{
+            iconName = 'search';
+          }
+          return iconName;
+      }
+
     return (
         <View style = {styles.container}>
             <View style = {styles.userBox}>
-                {/* <Image style = {styles.userImage} source = {{uri: "https://fastly.4sqi.net/img/general/original/77124221_3W_pIRAP9ESb7aEAN90y1l2Hfq4lXSSLx5erlFHCyRA.jpg"}}></Image> */}
                 <SvgUri style = {styles.userImage} uri={ProfilePhoto}/>
                 <View style = {styles.textBox}>
                     <Text style = {styles.user}>{Name}</Text>
-                    {/* <Text style = {styles.rank}>{userLevel}</Text> */}
                 </View>
-                <Ionicons name = {icon} style = {styles.thumb}/>
+                <Ionicons name = {thumbIndicator(Rating)} style = {styles.thumb}/>
             </View>
             <Text style = {styles.message}>{Review}</Text>
+            
         </View>
         
     );
@@ -51,6 +59,7 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 4},
         shadowOpacity: 0.3,
         shadowRadius: 2,
+        marginBottom: 10,
     },
     userBox: {
         flexDirection: 'row',

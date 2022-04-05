@@ -65,7 +65,6 @@ const HomeScreen = ({latitude, longitude}) => {
   }, []);
 
 
-
   if (loading || !dataA || !messageA || !dataB || !messageB) {
     return <ActivityIndicator style = {styles.loading} size="large" />; 
   }

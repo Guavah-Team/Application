@@ -1,11 +1,12 @@
-import React from 'react';
-import { Alert, View, Text, SafeAreaView, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Alert, View, Text, FlatList, SafeAreaView, StyleSheet } from 'react-native';
 import colors from './app/config/colors/colors';
 import LoginScreen from './app/screens/LoginScreen';
 import SignUpScreen from './app/screens/SignUpScreen/SignUpScreen';
 import ConfirmEmailScreen from './app/screens/ConfirmEmailScreen';
 import ForgotPasswordScreen from './app/screens/ForgotPasswordScreen';
 import NewPasswordScreen from './app/screens/NewPasswordScreen';
+import RestaurantScreen from './app/screens/RestaurantScreen/RestaurantScreen';
 import Navigation from './app/navigation';
 import SearchPage from './app/screens/SearchPage';
 import HorizontalRestaurantPage from './app/components/HorizontalRestaurantBox/HorizontalRestaurantPage';
@@ -14,32 +15,86 @@ import HomeScreen from './app/screens/HomeScreen';
 import VersusScreen from './app/screens/VersusScreen/VersusScreen';
 
 import * as Location from 'expo-location';
+import UserSettingsScreen from './app/screens/UserSettingsScreen';
 
 
 
 
+const data = [
+  {
+    name: "MarieCallendar’s Restaurant & Bakery",
+    distance: 13,
+  },
+  {
+    name: "MarieC",
+    distance: 13,
+  }
+]
 
 function App(props) {
-  const temp = 2374;
+  // const [latitude, setLatitude] = useState(null);
+  // const [longitude, setLongitude] = useState(null);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLatitude(location.coords.latitude);
+  //     setLongitude(location.coords.longitude);
+  //   })();
+
+  // }, []);
 
 
   return (
     <View style = {styles.root}>
+      {/*<RestaurantScreen/>/*/}
       {/* <LoginScreen/> */}
       {/* <SignUpScreen/> */}
       {/* <ConfirmEmailScreen/> */}
       {/* <ForgotPasswordScreen/> */}
       {/* <NewPasswordScreen/> */}
       {/* <SearchPage/> */}
-      <VersusScreen/>
+      {/* <VersusScreen/> */}
+      {/* <Navigation/> */}
       {/* <Navigation/> */}
 
+      {/* <SearchPage/> */}
+
+      {/* <Navigation latitude={latitude} longitude={longitude}/> */}
+
+
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
+      {/* <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1}/> */}
+      {/* <NavigationBar/> */}
+      {/* <HomeScreen/> */}
+      {/* <Text>{text}</Text> */}
+      {/* <View style = {styles.polygon}></View> */}
+
+
+      {/*<Navigation/>*/}
+      {/* <SearchPage/> */}
+      {/* <Navigation/> */}
+      {/* <UserSettingsScreen/> */}
+      {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
+
+      <Navigation/>
+      {/* <SearchPage/> */}
+      {/* <Navigation/> */}
+      {/* <RestaurantScreen/> */}
+
+      {/* <HorizontalRestaurantPage restaurant={data}/> */}
+      {/* <FlatList
+          data={data}
+          renderItem={({ item }) => <HorizontalRestaurantPage restaurant={item} />}
+        /> */}
+      {/* <FlatList
+          data={data}
+          renderItem={({ item }) => <VerticalRestaurantBox restaurant={item} />}
+        /> */}
+        
       {/* <VerticalRestaurantBox name = "Toast" distance = "10000"/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
-
-
       
     </View>
   );

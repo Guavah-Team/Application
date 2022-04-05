@@ -7,8 +7,10 @@ import colors from '../config/colors/colors';
 
 //Screens
 import HomeScreen from '../screens/HomeScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SearchScreen from '../screens/SearchPage';
+import VersusScreen from '../screens/VersusScreen/VersusScreen';
 
 //Screen Names
 const homeName = "Home";
@@ -18,7 +20,8 @@ const profileName = "Profile";
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavigator() {
+export default function TabNavigator({latitude, longitude}) {
+
   return (
       <Tab.Navigator
       initialRouteName={homeName}
@@ -55,7 +58,7 @@ export default function TabNavigator() {
         <Tab.Screen name={homeName} component={HomeScreen}/>
         <Tab.Screen name={searchName} component={SearchScreen}/>
         <Tab.Screen name={versusName} component={VersusScreen}/>
-        <Tab.Screen name={profileName} component={SearchScreen}/>
+        <Tab.Screen name={profileName} component={ProfileScreen}/>
 
       </Tab.Navigator>
 

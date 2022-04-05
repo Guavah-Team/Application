@@ -9,19 +9,19 @@ import {useFonts} from 'expo-font';
 
 function HorizontalProfileBox({onPress, name, description, iconName}) {
 
-    const [loaded] = useFonts({
-        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
-        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
-        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
-        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
-        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
-        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
-        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
-        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
-        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
-        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
-        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
-    });
+    // const [loaded] = useFonts({
+    //     CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+    //     CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+    //     CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+    //     CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+    //     CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+    //     CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+    //     GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+    //     GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+    //     GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+    //     GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+    //     GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+    // });
 
     return (
         <Pressable onPress = {onPress} style = {[styles.container, styles.shadowProp]}>
@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
         marginLeft: 25,
     },
     name: {
-        fontSize: 18,
-        fontFamily: 'GigaSansBold',
-        textTransform: 'capitalize',
+        // fontSize: 18,
+        // fontFamily: 'GigaSansBold',
+        // textTransform: 'capitalize',
     },
     description: {
-        fontSize: 14,
-        fontFamily: 'GigaSansReg',
+        // fontSize: 14,
+        // fontFamily: 'GigaSansReg',
         // textTransform: 'capitalize',
     }
     

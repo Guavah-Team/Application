@@ -1,5 +1,5 @@
 import { container } from 'aws-amplify';
-import React from 'react';
+import React, {useState} from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -7,8 +7,23 @@ import CustomButton from '../../components/CustomButton';
 import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
 import colors from '../../config/colors/colors';
 import {useFonts} from 'expo-font';
+import { getVersusData } from '../../services/requests';
+import { useEffect } from 'react';
+import Amplify, { Auth } from "aws-amplify";
 
 function VersusScreen(props) {
+    const [data, setData] = useState(null);
+
+    const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
+
+    const fetchData = async () => {
+        const fetchedData = await getVersusData(userId);
+        setData(fetchedData[0]);
+    };
+
+    useEffect(() => {
+        fetchData();
+      }, []);
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),

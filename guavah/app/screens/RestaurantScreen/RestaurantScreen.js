@@ -79,6 +79,7 @@ function RestaurantScreen({route}){
                             multiline = {true}
                             onChangeText = {newReview => setReview(newReview)}
                             defaultValue = {review}
+                            maxLength = {105}
                         />
                         <View style = {styles.modalbuttonView}>
                             <Pressable style = {styles.buttonModal} onPress={() => {setCommentVisible(!commentVisible); pushData(rating, review);}}>

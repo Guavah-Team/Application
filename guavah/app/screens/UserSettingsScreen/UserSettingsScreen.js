@@ -101,7 +101,7 @@ function UserSettingsScreen(){
                         thumbTintColor= {colors.accent}
                         minimumTrackTintColor={colors.accent}
                         maximumTrackTintColor= "#1b1b1b"
-                        onValueChange={value => setRange(parseInt(value * 15.9))}
+                        onValueChange={value => setRange(parseInt(value * 10.9))}
                     />
 
 
@@ -140,11 +140,6 @@ function UserSettingsScreen(){
             
             </View>
 
-            {/* Rate Box */}
-            <Text style = {styles.sections}>More</Text>
-            <View style = {styles.rate}>
-                <Pressable style = {styles.ratePress} onPress={() => {alert('Redirecting to App Store');}}><Text style = {styles.textFonts}>Rate our app</Text></Pressable>
-            </View>
 
             <View style = {styles.save}>
                 <Pressable style = {styles.button} onPress={() => {alert('Changes Saved!');}}>
@@ -277,7 +272,8 @@ const styles = StyleSheet.create({
         
     },
     backArrow: {
-        marginTop: 15
+        marginTop: 15,
+        color: colors.white,
     },
     plantView:{
         paddingHorizontal: 10

@@ -5,6 +5,7 @@ import Amplify, { Auth } from 'aws-amplify';
 
 
 
+
 function HorizontalUserData({name, level, iconName}) {
     
     

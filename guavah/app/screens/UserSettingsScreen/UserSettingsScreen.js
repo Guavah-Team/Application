@@ -8,10 +8,26 @@ import {useForm, Controller} from 'react-hook-form';
 import {Auth} from 'aws-amplify';
 import Slider from '@react-native-community/slider';
 import {Ionicons} from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!$#%&-]+@[a-zA-Z0-9]+\.[a-z]{2,3}/
 
 function UserSettingsScreen(){
+
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+    });
+
     const navigation = useNavigation();
 
     const [name, setName] = useState('');
@@ -53,14 +69,16 @@ function UserSettingsScreen(){
                     <Text style = {styles.profileText}>Name</Text>
                     <TextInput  
                         style = {styles.input}
-                        placeholder = {'John Doe'}
+                        placeholder = {'Dylan Guzman'}
+                        placeholderTextColor = 'black'
                         onChangeText = {newName => setName(newName)}
                         defaultValue = {name}
                     />
                     <Text style = {styles.profileText}>Email</Text>
                     <TextInput 
                         style = {styles.input}
-                        placeholder = {'John@Doe.com'}
+                        placeholder = {'dylan@guzman.com'}
+                        placeholderTextColor = 'black'
                         onChangeText = {newEmail => setEmail(newEmail)}
                         defaultValue = {email}
                         />
@@ -72,8 +90,8 @@ function UserSettingsScreen(){
                 <View style = {styles.settingsBox}>
                     <View style = {styles.locations}>
                         <View style = {styles.locationView}><Image style = {styles.location} source={require('../../assets/userSettingsIcons/location.png')}/></View>
-                        <Text>Search Radius</Text>
-                        <View  style = {styles.switch}><Text>{range} Miles</Text></View>
+                        <Text style = {styles.textFonts}>Search Radius</Text>
+                        <View  style = {styles.switch}><Text style = {styles.textFonts}>{range} Miles</Text></View>
                     </View>
                     
                     <Slider
@@ -95,7 +113,7 @@ function UserSettingsScreen(){
                 <View style = {styles.preferences}>
                     <View style = {styles.moonView}><Image style = {styles.moon} source={require('../../assets/userSettingsIcons/DarkMode.png')}/></View>
                     
-                    <Text>Dark Theme (cs approved)</Text>
+                    <Text style = {styles.textFonts}>Dark Theme (cs approved)</Text>
                     <View style = {styles.switch}>
                         <Switch
                             trackColor={{ false: "#1b1b1b" , true: "#1b1b1b" }}
@@ -108,7 +126,7 @@ function UserSettingsScreen(){
                 </View>
                 <View style = {styles.preferences}>
                 <View style = {styles.plantView}><Image style = {styles.plant} source={require('../../assets/userSettingsIcons/VeganPrio.png')}/></View>
-                    <Text>Vegan Prioritization</Text>
+                    <Text style = {styles.textFonts}>Vegan Prioritization</Text>
                     <View style = {styles.switch}>
                         <Switch
                             trackColor={{ false: "#1b1b1b" , true: "#1b1b1b" }}
@@ -125,7 +143,7 @@ function UserSettingsScreen(){
             {/* Rate Box */}
             <Text style = {styles.sections}>More</Text>
             <View style = {styles.rate}>
-                <Pressable style = {styles.ratePress} onPress={() => {alert('Redirecting to App Store');}}><Text>Rate our app</Text></Pressable>
+                <Pressable style = {styles.ratePress} onPress={() => {alert('Redirecting to App Store');}}><Text style = {styles.textFonts}>Rate our app</Text></Pressable>
             </View>
 
             <View style = {styles.save}>
@@ -173,7 +191,7 @@ const styles = StyleSheet.create({
         borderRadius: 30
     },
     sections:{
-        fontWeight: 'bold',
+        fontFamily: 'GigaSansSemiBold',
         fontSize: 20,
         paddingLeft: 15,
         paddingVertical: 10,
@@ -182,7 +200,7 @@ const styles = StyleSheet.create({
         color: colors.white,
     },
     textStyleHeader:{
-        fontWeight: 'bold',
+        fontFamily: 'GigaSansSemiBold',
         fontSize: 20,
         color: colors.white,
     },
@@ -212,6 +230,9 @@ const styles = StyleSheet.create({
         elevation: 4,
         backgroundColor: colors.background,
         borderRadius: 5
+    },
+    textFonts:{
+        fontFamily: 'GigaSansReg',
     },
     rate:{
         width: 350,
@@ -279,10 +300,12 @@ const styles = StyleSheet.create({
         borderTopColor: colors.background,
         borderLeftColor: colors.background,
         borderRightColor: colors.background,
-        width: 220
+        width: 220,
+        fontFamily: 'GigaSansReg'
     },
     profileText:{
-        color: "gray"
+        color: "gray",
+        fontFamily: 'GigaSansExtraLight'
     },
     profilePic:{
         width: 100,

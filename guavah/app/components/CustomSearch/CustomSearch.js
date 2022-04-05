@@ -3,8 +3,23 @@ import colors from '../../config/colors/colors';
 import { Text, View, TextInput, StyleSheet, Platform, Image, Pressable, Alert  } from 'react-native';
 import { Controller } from 'react-hook-form';
 import { Ionicons } from '@expo/vector-icons'; 
+import { useFonts } from 'expo-font';
 
 export default function CustomSearch({value, updateSearch, style, onPress}) {
+
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+    });
 
     const [query, setQuery] = useState(value);
     const [error, setError] = useState();
@@ -62,5 +77,6 @@ const styles = StyleSheet.create({
     },
     textInput: {
         color: colors.text,
+        fontFamily: 'GigaSansReg',
     },
 })

@@ -6,8 +6,24 @@ import { ScrollView } from 'react-native-gesture-handler';
 import CustomButton from '../../components/CustomButton';
 import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
 import colors from '../../config/colors/colors';
+import {useFonts} from 'expo-font';
 
 function VersusScreen(props) {
+
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+    });
+
     const item = ["testName", 2, 20, null];
 
     return (
@@ -96,7 +112,7 @@ const containerStyles = StyleSheet.create({
             textAlign: 'center',
             textAlignVertical: 'bottom',
             fontSize: 30,
-            
+            fontFamily: 'GigaSansSemiBold',
             marginTop: '15%',
             marginBottom: '0%',
 
@@ -114,7 +130,8 @@ const containerStyles = StyleSheet.create({
             color: colors.background,
             textAlign: 'center',
             fontSize: 18,
-            marginBottom: '10%'
+            marginBottom: '10%',
+            fontFamily: 'GigaSansReg',
         },
 
         versusText: {

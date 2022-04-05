@@ -2,7 +2,7 @@ import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons, MaterialIcons } from '@expo/vector-icons'; 
 import colors from '../config/colors/colors';
 
 //Screens
@@ -13,10 +13,10 @@ import SearchScreen from '../screens/SearchPage';
 import VersusScreen from '../screens/VersusScreen/VersusScreen';
 
 //Screen Names
-const homeName = "Home";
-const searchName = "Search";
-const versusName = "Versus";
-const profileName = "Profile";
+const homeName = " ";
+const searchName = "   ";
+const versusName = "     ";
+const profileName = "  ";
 
 const Tab = createBottomTabNavigator();
 
@@ -38,16 +38,17 @@ export default function TabNavigator({latitude, longitude}) {
           let rn = route.name;
 
           if(rn === homeName){
-            iconName = focused ? 'home' : 'home-outline';
+            iconName = focused ? 'home' : 'home';
           }else if(rn === searchName){
-            iconName = focused ? 'search' : 'search-outline';
+            iconName = focused ? 'search' : 'search';
           }else if(rn === versusName){
-            iconName = focused ? 'copy' : 'copy-outline';
+            iconName = focused ? 'trophy' : 'trophy';
           }else if(rn === profileName){
-            iconName = focused ? 'person' : 'person-outline';
+            iconName = focused ? 'person' : 'person';
           }
 
           return <Ionicons name = {iconName} size = {27} color = {color}/>
+          // return <MaterialIcons name = {iconName} size = {27} color = {color}/>
 
         },
       })}

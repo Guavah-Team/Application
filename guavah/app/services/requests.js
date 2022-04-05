@@ -30,3 +30,17 @@ export const getSearchRestaurantData = async (restaurantName) => {
     console.log(e);
   }
 }
+
+export const getRestaurantReviews = async (restaurantId) => {
+  console.log(restaurantId);
+  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/get-restaurant-reviews?FSQID=${restaurantId}`;
+  try{
+    const response = await axios.get(url);
+    let sections = [];
+    sections.push(response.data);
+    console.log(sections);
+    return sections;
+  }catch (e) {
+    console.log(e);
+  }
+}

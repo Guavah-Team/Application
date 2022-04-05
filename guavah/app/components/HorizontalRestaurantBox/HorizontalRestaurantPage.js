@@ -2,10 +2,25 @@ import React from 'react';
 import {View, Text, Pressable, StyleSheet, ImageBackground} from 'react-native';
 import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
+import {useFonts} from 'expo-font';
 
 function HorizontalRestaurantPage({restaurant}) {
-    const {name, rating, distance, photo, price, location} = restaurant;
+    const {name, rating, distance, photo, price, location, id, photo_gallary} = restaurant;
     const navigation = useNavigation();
+
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+      });
     
     
 
@@ -16,6 +31,8 @@ function HorizontalRestaurantPage({restaurant}) {
                 name: name,
                 photo: photo,
                 location: location,
+                FSQID: id,
+                photo_gallary: photo_gallary,
             });
         }}
         style = {[styles.container, styles.shadowProp]}
@@ -45,7 +62,7 @@ const styles = StyleSheet.create({
     restaurantNameText: {
         color: colors.white,
         fontSize: 18,
-        fontWeight: 'bold',
+        fontFamily: 'GigaSansSemiBold',
         textTransform: 'capitalize',
         textAlign: 'left',
     },
@@ -63,6 +80,7 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontSize: 12,
         textTransform: 'capitalize',
+        fontFamily: 'GigaSansReg'
     },
     textBox: {
         marginLeft: 25,

@@ -5,7 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useFonts} from 'expo-font';
 
 function HorizontalRestaurantPage({restaurant}) {
-    const {name, rating, distance, photo, price, location} = restaurant;
+    const {name, rating, distance, photo, price, location, id, photo_gallary} = restaurant;
     const navigation = useNavigation();
 
     const [loaded] = useFonts({
@@ -31,6 +31,8 @@ function HorizontalRestaurantPage({restaurant}) {
                 name: name,
                 photo: photo,
                 location: location,
+                FSQID: id,
+                photo_gallary: photo_gallary,
             });
         }}
         style = {[styles.container, styles.shadowProp]}

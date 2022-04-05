@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, Button, Alert, Modal, TextInput, Pressable} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, Button, Alert, Modal, FlatList, TextInput, Pressable} from 'react-native';
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
-import { Auth, button } from 'aws-amplify';
+import Amplify, { Auth, button } from 'aws-amplify';
 import HorizontalReviewBox from '../../components/HorizontalReviewBox';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {Ionicons} from '@expo/vector-icons';
-import  { postReviewData } from '../../services/postReviewData';
+import { getRestaurantReviews } from '../../services/requests';
+import { postReviewData } from '../../services/postReviewData';
+
 import {useFonts} from 'expo-font';
+import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
+import FeaturedPhotos from '../../components/FeaturedPhotos/FeaturedPhotos';
 
 const GOOGLE_MAPS_APIKEY = 'AIzaSyCtkgG8tkAaoKtARZwjazpggOspoSSArzI';
 const origin = {latitude: 37.3318456, longitude: -122.0296002};
@@ -19,6 +23,8 @@ const destination = {latitude: 37.771707, longitude: -122.4053769};
 
 function RestaurantScreen({route}){
     const navigation = useNavigation();
+    const [data, setData] = useState(null);
+
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -37,15 +43,31 @@ function RestaurantScreen({route}){
     const {name} = route.params;
     const {photo} = route.params;
     const {location} = route.params;
+    const {FSQID} = route.params;
+    const {photo_gallary} = route.params;
 
     const [review, setReview] = useState('');
     const [commentVisible, setCommentVisible] = useState(false);
     const [thumbsVisible, setThumbsVisible] = useState(false);
     const[rating, setRating] = useState(0);
 
+    console.log(photo_gallary);
+
+    const fetchReviews = async () => {
+        const fetchedReviews = await getRestaurantReviews(FSQID);
+        setData(fetchedReviews[0]);
+    }
+
+    // console.log(Auth.Credentials)
+
+    const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
+
+    useEffect(() => {
+        fetchReviews();
+    }, []);
     
-    const pushData = async (rating, review) => {
-        postReviewData(rating, review);
+    const pushData = async () => {
+        postReviewData(rating, review, FSQID, userId);
     };
 
     const buttonPressed = () => {
@@ -125,7 +147,7 @@ function RestaurantScreen({route}){
 
             <ImageBackground style = {styles.image} source = {{uri: photo}}>  
                 <View style = {styles.mask}/>
-                <Ionicons onPress = {returnHome} name="chevron-back-outline" size="30" style = {styles.backArrow}/>
+                <Ionicons onPress = {returnHome} name="chevron-back-outline" size={30} style = {styles.backArrow}/>
                 <View style = {styles.headerBox}>
                     <Text style = {styles.text_Primary}>{name}</Text>
                     <Text style = {styles.text_Secondary}>{location}</Text>
@@ -134,10 +156,24 @@ function RestaurantScreen({route}){
             </ImageBackground>
 
             <ScrollView style = {styles.container}>
+                <View>
+                    <Text style = {styles.headerText}>Featured Photos</Text>
+                    <ScrollView horizontal={true} style={styles.margin}>
+                        <FlatList
+                            data={photo_gallary}
+                            renderItem={({ item }) => <FeaturedPhotos restaurant={item} />}
+                            numColumns={10}
+                        />
+                    </ScrollView>
+                </View>
                 <View style = {styles.special}>
                     <Text style = {styles.headerText}>Reviews</Text>
                     <View style = {styles.reviews}>
-                        <HorizontalReviewBox username={"Dylan"} userLevel={"Level 5"} userMessage = {"Service was great"} icon = {'thumbs-up'}/>
+                        {/* <HorizontalReviewBox username={"Dylan"} userLevel={"Level 5"} userMessage = {"Service was great"} icon = {'thumbs-up'}/> */}
+                        <FlatList
+                            data={data}
+                            renderItem={({ item }) => <HorizontalReviewBox restaurant={item} />}
+                        />
                     </View>
                 </View>
             </ScrollView>
@@ -165,20 +201,23 @@ const styles = StyleSheet.create({
     text_Primary: {
         color: colors.primaryText,
         fontFamily: 'GigaSansSemiBold',
-        fontSize: 32
+        fontSize: 28
     },
     text_Secondary: {
         paddingBottom: 10,
         color: colors.primaryText,
         fontFamily: 'GigaSansSemiBold',
-        fontSize: 18,
+        fontSize: 14,
     },
     image:{
         width: '100%',
-        height: 220,
+        height: 240,
     },
     headerBox: {
+        flex: 1,
         marginLeft: 10,
+        marginRight: 10,
+        justifyContent: 'flex-start',
         // marginTop: '2%',
     },
     headerText: {

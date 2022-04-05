@@ -57,7 +57,7 @@ function UserSettingsScreen(){
                     <Text style = {styles.textStyleHeader}>settings</Text>
                 </SafeAreaView>
                 <Pressable style = {styles.backButton} onPress={() => {alert('Back');}}>
-                    <Ionicons onPress = {returnHome} name="chevron-back-outline" size={30} style = {styles.backArrow}/>
+                    <Ionicons onPress = {returnHome} name="chevron-back-outline" size="30" style = {styles.backArrow}/>
                 </Pressable>
             </View>
 
@@ -140,6 +140,7 @@ function UserSettingsScreen(){
             
             </View>
 
+            
 
             <View style = {styles.save}>
                 <Pressable style = {styles.button} onPress={() => {alert('Changes Saved!');}}>

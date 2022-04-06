@@ -13,7 +13,6 @@ import * as Location from 'expo-location';
 import { get } from "react-hook-form";
 
 const HomeScreen = ({latitude, longitude}) => {
-
   const [loaded] = useFonts({
     CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
     CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
@@ -52,7 +51,7 @@ const HomeScreen = ({latitude, longitude}) => {
   
   const fetchData = async () => {
     setLoading(true);
-    const fetchedData = await getDetailedRestaurantData(latitude, longitude);
+    const fetchedData = await getDetailedRestaurantData({latitude, longitude});
     setMessageA(fetchedData[0]);
     setDataA(fetchedData[1]);
     setMessageB(fetchedData[2]);

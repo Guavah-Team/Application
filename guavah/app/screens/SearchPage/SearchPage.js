@@ -22,7 +22,7 @@ const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   }
 
-function SearchPage(props) {
+function SearchPage({latitude, longitude}) {
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -59,7 +59,7 @@ function SearchPage(props) {
     const onSearchPressed = async (data) => {
         console.log(data);
         setPressed(true);
-        const fetchedData = await getSearchRestaurantData(data);
+        const fetchedData = await getSearchRestaurantData(data, {latitude, longitude});
         setSearchData(fetchedData[0]);
     }
 
@@ -70,7 +70,7 @@ function SearchPage(props) {
 
     const fetchData = async () => {
         setLoading(true);
-        const fetchedData = await getDetailedRestaurantData();
+        const fetchedData = await getDetailedRestaurantData({latitude, longitude});
         setMessageA(fetchedData[0]);
         setDataA(fetchedData[1]);
         setLoading(false);

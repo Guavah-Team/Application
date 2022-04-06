@@ -31,21 +31,17 @@ const data = [
 ]
 
 function App(props) {
-  // const [latitude, setLatitude] = useState(null);
-  // const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLatitude(location.coords.latitude);
-  //     setLongitude(location.coords.longitude);
-  //   })();
+  useEffect(() => {
+    (async () => {
+      let location = await Location.getCurrentPositionAsync({});
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
+    })();
 
-  // }, []);
-
-
-  const [searchPhrase, setSearchPhrase] = useState("");
-  const [clicked, setClicked] = useState(false);
+  }, []);
 
 
 
@@ -64,7 +60,7 @@ function App(props) {
 
       {/* <SearchPage/> */}
 
-      {/* <Navigation latitude={latitude} longitude={longitude}/> */}
+      <Navigation latitude={latitude} longitude={longitude}/>
 
 
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
@@ -81,7 +77,7 @@ function App(props) {
       {/* <UserSettingsScreen/> */}
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
 
-      <Navigation/>
+      {/* <Navigation/> */}
 {/* 
       <CustomSearch
         searchPhrase={searchPhrase}

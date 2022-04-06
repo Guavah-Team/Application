@@ -44,7 +44,7 @@ function VerticalRestaurantBox({restaurant, type="SMALL"}) {
                     <Text style = {styles.restaurantNameText}> {name} </Text>
                 </View>
                 <View style = {styles.centerLogo}>
-                    <Image source = {require('../../assets/ICONS/Tier-1-Badge-(Base).png')}></Image>
+                    {/* <Image source = {require('../../assets/ICONS/Tier-1-Badge-(Base).png')}></Image> */}
                 </View>
                 <View style = {styles.bottomTextBox}>
                     <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text>

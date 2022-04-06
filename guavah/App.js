@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Alert, View, Text, FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { Alert, View, Text, FlatList, SafeAreaView, StyleSheet, TextInput } from 'react-native';
 import colors from './app/config/colors/colors';
 import LoginScreen from './app/screens/LoginScreen';
 import SignUpScreen from './app/screens/SignUpScreen/SignUpScreen';
@@ -16,6 +16,7 @@ import VersusScreen from './app/screens/VersusScreen/VersusScreen';
 
 import * as Location from 'expo-location';
 import UserSettingsScreen from './app/screens/UserSettingsScreen';
+import CustomSearch from './app/components/CustomSearch';
 
 
 const data = [
@@ -42,6 +43,9 @@ function App(props) {
 
   // }, []);
 
+
+  const [searchPhrase, setSearchPhrase] = useState("");
+  const [clicked, setClicked] = useState(false);
 
 
 
@@ -78,6 +82,14 @@ function App(props) {
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
 
       <Navigation/>
+{/* 
+      <CustomSearch
+        searchPhrase={searchPhrase}
+        setSearchPhrase={setSearchPhrase}
+        clicked={clicked}
+        setClicked={setClicked}
+      /> */}
+
       {/* <SearchPage/> */}
       {/* <Navigation/> */}
       {/* <RestaurantScreen/> */}

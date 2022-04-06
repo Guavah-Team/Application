@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { StyleSheet, View, FlatList, Text, ScrollView, ActivityIndicator, RefreshControl, Alert, TextInput } from "react-native";
+import { StyleSheet, View, FlatList, Text, ScrollView, ActivityIndicator, Button, Keyboard, Pressable, RefreshControl, Alert, TextInput } from "react-native";
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
@@ -8,7 +8,7 @@ import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 import Amplify, {Auth} from 'aws-amplify';
 import {useForm, Controller} from 'react-hook-form';
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons, Feather, Entypo } from '@expo/vector-icons'; 
 
 import { getDetailedRestaurantData, getSearchRestaurantData } from "../../services/requests";
 
@@ -47,15 +47,19 @@ function SearchPage(props) {
     const [pressed, setPressed] = useState(false);
     const [refreshing, setRefreshing] = React.useState(false);
 
+    const [searchPhrase, setSearchPhrase] = useState("");
+    const [clicked, setClicked] = useState(false);
+
     const navigation = useNavigation();
     
     function updateSearch(value){
         setValue(value);
     }
 
-    const onSearchPressed = async () => {
+    const onSearchPressed = async (data) => {
+        console.log(data);
         setPressed(true);
-        const fetchedData = await getSearchRestaurantData(value);
+        const fetchedData = await getSearchRestaurantData(data);
         setSearchData(fetchedData[0]);
     }
 
@@ -84,13 +88,61 @@ function SearchPage(props) {
         <View style={styles.container}> 
             <View style={styles.searchContainer}>
                 <View style = {styles.searchBox}>
-                    <Text style={styles.text}>search</Text>
-                    <CustomSearch
-                        value={value}
-                        updateSearch={updateSearch}
-                        onPress={onSearchPressed}
-                    ></CustomSearch>
+                    <View style={styles.innerContainer}>
+                        <View
+                            style={
+                            clicked
+                                ? styles.searchBar__clicked
+                                : styles.searchBar__unclicked
+                            }
+                        >
+                            {/* search Icon */}
+                            <Feather
+                            name="search"
+                            size={20}
+                            color="black"
+                            style={{ marginLeft: 1 }}
+                            />
+                            {/* Input field */}
+                            <TextInput
+                            style={styles.input}
+                            placeholder="Search"
+                            value={searchPhrase}
+                            onChangeText={setSearchPhrase}
+                            onFocus={() => {
+                                setClicked(true)
+                            }}
+                            onSubmitEditing = {() => {
+                                // console.log(searchPhrase)
+                                onSearchPressed(searchPhrase);
+                            }}
+                            />
+                            {/* cross Icon, depending on whether the search bar is clicked or not */}
+                            {clicked && (
+                            <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
+                                setSearchPhrase("")
+                            }}/>
+                            )}
+                        </View>
+                        {/* cancel button, depending on whether the search bar is clicked or not */}
+                        {clicked && (
+                            <View>
+                            <Button
+                                title="Cancel"
+                                color={'white'}
+                                onPress={() => {
+                                Keyboard.dismiss();
+                                setClicked(false);
+                                setPressed(false);
+                                setSearchPhrase("");
+                                }}
+                                style = {styles.cancel}
+                            ></Button>
+                            </View>
+                        )}
+                        </View>
                 </View>
+
             </View>
             <View style = {styles.resultsHeader}>
                 <Text style={styles.localText}>
@@ -157,7 +209,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'GigaSansSemiBold',
         marginLeft: 15,
-        marginTop: 40,
+        marginTop: 20,
         marginBottom: 10,
     },
     resultsHeader: {
@@ -171,7 +223,7 @@ const styles = StyleSheet.create({
     },
     downArrow: {
         fontSize: 25,
-        marginTop: 38,
+        marginTop: 20,
         marginBottom: 10,
         alignSelf: 'flex-end',
     },
@@ -179,6 +231,51 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
     },
+    input: {
+        height: 48,
+      },
+    searchContainerNew: {
+        borderRadius: 4,
+        backgroundColor: colors.background,
+        flexDirection: 'row'
+    },
+    searchBar__unclicked: {
+        paddingLeft: 10,
+        paddingRight: 10,
+        height: 35,
+        flexDirection: "row",
+        width: "100%",
+        backgroundColor: colors.background,
+        borderRadius: 4,
+        alignItems: "center",
+      },
+      searchBar__clicked: {
+        paddingLeft: 15,
+        paddingRight: 10,
+        height: 35,
+        flexDirection: "row",
+        width: "83%",
+        backgroundColor: colors.background,
+        borderRadius: 4,
+        alignItems: "center",
+        justifyContent: "space-evenly",
+      },
+      innerContainer: {
+        margin: 15,
+        justifyContent: "flex-start",
+        alignItems: "center",
+        flexDirection: "row",
+        width: "90%",
+        
+      },
+      input: {
+        fontSize: 20,
+        marginLeft: 10,
+        width: "90%",
+      },
+      cancel: {
+        color: colors.accent
+      }
 })
 
 export default SearchPage;

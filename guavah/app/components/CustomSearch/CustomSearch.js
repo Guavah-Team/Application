@@ -1,82 +1,102 @@
-import React, { useState } from 'react';
-import colors from '../../config/colors/colors';
-import { Text, View, TextInput, StyleSheet, Platform, Image, Pressable, Alert  } from 'react-native';
-import { Controller } from 'react-hook-form';
-import { Ionicons } from '@expo/vector-icons'; 
-import { useFonts } from 'expo-font';
+import React from "react";
+import { StyleSheet, TextInput, View, Keyboard, Button } from "react-native";
+import { Feather, Entypo } from "@expo/vector-icons";
+import colors from "../../config/colors/colors";
 
-export default function CustomSearch({value, updateSearch, style, onPress}) {
+const CustomSearch = ({clicked, searchPhrase, setSearchPhrase, setClicked}) => {
 
-    const [loaded] = useFonts({
-        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
-        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
-        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
-        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
-        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
-        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
-        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
-        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
-        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
-        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
-        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
-    });
-
-    const [query, setQuery] = useState(value);
-    const [error, setError] = useState();
-
-    return (
-        <View style={[styles.container, style]} >
-            
-            <View style={styles.searchContainer}>
-                <Pressable onPress = {onPress} style = {styles.vwSearch}>
-                        <Ionicons name = {'search'} size = {20}/>
-                </Pressable>
-            
-                <TextInput 
-                    value={query}
-                    placeholder="Search"
-                    style={styles.textInput}
-                    onChangeText={(text) => {
-                        var letters = /^$|^[a-zA-z0-9._\b ]+$/; //Add regex for numbers
-                        if (text.match(letters)) {
-                            setQuery(text)
-                            updateSearch(text)
-                            if(error)
-                                setError(false)
-                        }
-                        else setError("Please only enter alphanumeric characters.")
-                    } } 
-                />
-            </View>
-            
+    console.log(searchPhrase);
+  return (
+    <View style={styles.container}>
+      <View
+        style={
+          clicked
+            ? styles.searchBar__clicked
+            : styles.searchBar__unclicked
+        }
+      >
+        {/* search Icon */}
+        <Feather
+          name="search"
+          size={20}
+          color="black"
+          style={{ marginLeft: 1 }}
+        />
+        {/* Input field */}
+        <TextInput
+          style={styles.input}
+          placeholder="Search"
+          value={searchPhrase}
+          onChangeText={setSearchPhrase}
+          onFocus={() => {
+            setClicked(true)
+          }}
+          onSubmitEditing = {() => {
+            alert(`Your message is ${searchPhrase}`)
+          }}
+        />
+        {/* cross Icon, depending on whether the search bar is clicked or not */}
+        {clicked && (
+          <Entypo name="cross" size={20} color="black" style={{ padding: 1 }} onPress={() => {
+              setSearchPhrase("")
+          }}/>
+        )}
+      </View>
+      {/* cancel button, depending on whether the search bar is clicked or not */}
+      {clicked && (
+        <View>
+          <Button
+            title="Cancel"
+            onPress={() => {
+              Keyboard.dismiss();
+              setClicked(false);
+            }}
+            style = {styles.cancel}
+          ></Button>
         </View>
-    )
-}
+      )}
+    </View>
+  );
+};
+export default CustomSearch;
 
+// styles
 const styles = StyleSheet.create({
-    container: {
-        height: 80,
-        
-        alignItems: 'center',
-        marginTop: '8%',
-    },
-    searchContainer: {
-        backgroundColor: 'white',
-        width: '100%',
-        height: 40,
-        flexDirection: 'row',
-
-        borderWidth: 1,
-        borderRadius: 4,
-        borderColor: colors.light,
-    },
-    vwSearch: {
-        flex: 0.2,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    textInput: {
-        color: colors.text,
-        fontFamily: 'GigaSansReg',
-    },
-})
+  container: {
+    margin: 15,
+    justifyContent: "flex-start",
+    alignItems: "center",
+    flexDirection: "row",
+    width: "90%",
+    
+  },
+  searchBar__unclicked: {
+    paddingLeft: 10,
+    paddingRight: 10,
+    height: 35,
+    flexDirection: "row",
+    width: "100%",
+    backgroundColor: colors.background,
+    borderRadius: 4,
+    alignItems: "center",
+  },
+  searchBar__clicked: {
+    paddingLeft: 15,
+    paddingRight: 10,
+    height: 35,
+    flexDirection: "row",
+    width: "83%",
+    backgroundColor: colors.background,
+    borderRadius: 4,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+  input: {
+    fontSize: 20,
+    marginLeft: 10,
+    width: "90%",
+  },
+  cancel: {
+    color: colors.accent
+  }
+});

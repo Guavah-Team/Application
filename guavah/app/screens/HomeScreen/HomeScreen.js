@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityIndicator, RefreshControlBase, Alert, RefreshControl} from "react-native";
+import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityIndicator, RefreshControlBase, Alert, RefreshControl, LayoutAnimation} from "react-native";
 import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/HorizontalRestaurantPage";
 import VerticalRestaurantBox from "../../components/VerticalRestaurantBox";
 import Amplify, { Auth } from "aws-amplify";
@@ -12,7 +12,7 @@ import {useFonts} from 'expo-font';
 import * as Location from 'expo-location';
 import { get } from "react-hook-form";
 
-const HomeScreen = ({latitude, longitude}) => {
+const HomeScreen = () => {
   const [loaded] = useFonts({
     CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
     CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
@@ -26,6 +26,19 @@ const HomeScreen = ({latitude, longitude}) => {
     GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
     GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
   });
+
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let location = await Location.getCurrentPositionAsync({});
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
+    })();
+
+  }, []);
+
 
   const [loading, setLoading] = useState(false);
   const [dataA, setDataA] = useState(null);
@@ -60,8 +73,10 @@ const HomeScreen = ({latitude, longitude}) => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if(latitude != null && longitude != null){
+      fetchData();
+    }
+  }, [latitude, longitude]);
 
 
   if (loading || !dataA || !messageA || !dataB || !messageB) {

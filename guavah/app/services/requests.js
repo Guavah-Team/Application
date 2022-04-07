@@ -48,3 +48,15 @@ export const getRestaurantReviews = async (restaurantId) => {
     console.log(e);
   }
 }
+
+export const getUserData = async (userId) => {
+  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/get-user?UserID=${userId}`
+  try{
+    const response = await axios.get(url);
+    let sections = [];
+    sections.push(response.data["body"]);
+    return sections;
+  }catch (e) {
+    console.log(e);
+  }
+}

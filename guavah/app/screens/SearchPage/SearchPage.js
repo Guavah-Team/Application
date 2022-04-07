@@ -9,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import Amplify, {Auth} from 'aws-amplify';
 import {useForm, Controller} from 'react-hook-form';
 import { Ionicons, Feather, Entypo } from '@expo/vector-icons'; 
+import * as Location from 'expo-location';
 
 import { getDetailedRestaurantData, getSearchRestaurantData } from "../../services/requests";
 
@@ -22,7 +23,19 @@ const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   }
 
-function SearchPage({latitude, longitude}) {
+function SearchPage() {
+
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
+
+    useEffect(() => {
+        (async () => {
+        let location = await Location.getCurrentPositionAsync({});
+        setLatitude(location.coords.latitude);
+        setLongitude(location.coords.longitude);
+        })();
+
+    }, []);
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -77,8 +90,10 @@ function SearchPage({latitude, longitude}) {
     };
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        if(latitude != null && longitude != null){
+            fetchData();
+        }
+    }, [latitude, longitude]);
 
     if (loading || !dataA || !messageA) {
         return <ActivityIndicator style = {styles.loading} size="large" />; 

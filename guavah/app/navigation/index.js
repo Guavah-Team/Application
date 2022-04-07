@@ -57,8 +57,7 @@ const Navigation = ({latitude, longitude}) => {
             <Stack.Navigator screenOptions={{headerShown: false}}>
                 {user ? (
                     <>
-                        {/* <Stack.Screen name = 'HomeScreen' component={TabNavigator}/> */}
-                        <Stack.Screen name = 'HomeScreen' component={() => <TabNavigator latitude={latitude} longitude={longitude}/>}/>
+                        <Stack.Screen name = 'HomeScreen' component={TabNavigator}/>
                         <Stack.Screen name = 'ProfileScreen' component={ProfileScreen}/>
                         <Stack.Screen name = 'HistoryScreen' component={HistoryScreen}/>
                         <Stack.Screen name = 'SettingsScreen' component={UserSettingsScreen}/>

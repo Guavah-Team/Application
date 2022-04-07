@@ -11,7 +11,7 @@ import {useForm, Controller} from 'react-hook-form';
 import { Ionicons, Feather, Entypo } from '@expo/vector-icons'; 
 import * as Location from 'expo-location';
 
-import { getDetailedRestaurantData, getSearchRestaurantData } from "../../services/requests";
+import { getDetailedRestaurantData, getOpeningSearchRestaurantData, getSearchRestaurantData } from "../../services/requests";
 
 import config from '../../../src/aws-exports';
 import CustomSearch from "../../components/CustomSearch";
@@ -54,7 +54,7 @@ function SearchPage() {
 
     const [loading, setLoading] = useState(false);
     const [value, setValue] = useState();
-    const [dataA, setDataA] = useState(null);
+    const [data, setData] = useState(null);
     const [messageA, setMessageA] = useState(null);
     const [searchData, setSearchData] = useState(null);
     const [pressed, setPressed] = useState(false);
@@ -83,9 +83,9 @@ function SearchPage() {
 
     const fetchData = async () => {
         setLoading(true);
-        const fetchedData = await getDetailedRestaurantData({latitude, longitude});
-        setMessageA(fetchedData[0]);
-        setDataA(fetchedData[1]);
+        const fetchedData = await getOpeningSearchRestaurantData({latitude, longitude});
+        setData(fetchedData[0]);
+        console.log(fetchedData);
         setLoading(false);
     };
 
@@ -95,7 +95,7 @@ function SearchPage() {
         }
     }, [latitude, longitude]);
 
-    if (loading || !dataA || !messageA) {
+    if (loading || !data) {
         return <ActivityIndicator style = {styles.loading} size="large" />; 
     }
 
@@ -161,7 +161,7 @@ function SearchPage() {
             </View>
             <View style = {styles.resultsHeader}>
                 <Text style={styles.localText}>
-                    {pressed ? 'Results' : messageA}
+                    {pressed ? 'Results' : 'Local Restaurants'}
                 </Text>
                 <Ionicons name="chevron-down-outline" style = {styles.downArrow}></Ionicons>
             </View>
@@ -172,7 +172,7 @@ function SearchPage() {
                         data={searchData}
                         renderItem={({ item }) => <HorizontalRestaurantPage restaurant={item} />}
                         /> : <FlatList
-                        data={dataA}
+                        data={data}
                         renderItem={({ item }) => <HorizontalRestaurantPage restaurant={item} />}
                         />}
                     </View>

@@ -27,18 +27,33 @@ const HomeScreen = () => {
     GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
   });
 
+
+
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
 
+  // useEffect(() => {
+  //   (async () => {
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLatitude(location.coords.latitude);
+  //     setLongitude(location.coords.longitude);
+  //   })();
+
+  // }, []);
+
   useEffect(() => {
     (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
       let location = await Location.getCurrentPositionAsync({});
       setLatitude(location.coords.latitude);
       setLongitude(location.coords.longitude);
     })();
-
   }, []);
-
 
   const [loading, setLoading] = useState(false);
   const [dataA, setDataA] = useState(null);

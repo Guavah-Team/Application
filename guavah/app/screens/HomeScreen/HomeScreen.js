@@ -3,7 +3,7 @@ import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityI
 import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/HorizontalRestaurantPage";
 import VerticalRestaurantBox from "../../components/VerticalRestaurantBox";
 import Amplify, { Auth } from "aws-amplify";
-import {useNavigation} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import { getDetailedRestaurantData } from "../../services/requests";
 import colors from "../../config/colors/colors";
 import CustomButton from "../../components/CustomButton";
@@ -11,6 +11,7 @@ import {useFonts} from 'expo-font';
 
 import * as Location from 'expo-location';
 import { get } from "react-hook-form";
+import TabNavigator from "../../navigation/TabNavigator";
 
 const HomeScreen = () => {
   const [loaded] = useFonts({

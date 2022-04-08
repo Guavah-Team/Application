@@ -7,7 +7,7 @@ import CustomButton from '../../components/CustomButton/CustomButton';
 import SocialSignInButtons from '../../components/SocialSignInButtons';
 import {useNavigation} from '@react-navigation/native';
 import Amplify, {Auth} from 'aws-amplify';
-import {useForm, Controller} from 'react-hook-form';
+import {useForm, Controller, set} from 'react-hook-form';
 import { Ionicons, Feather, Entypo } from '@expo/vector-icons'; 
 import * as Location from 'expo-location';
 
@@ -63,17 +63,58 @@ function SearchPage() {
     const [searchPhrase, setSearchPhrase] = useState("");
     const [clicked, setClicked] = useState(false);
 
+    const [oneDollar, setOneDollar] = useState(true);
+    const [oneColor, setOneColor] = useState(colors.dark);
+    const [twoDollar, setTwoDollar] = useState(false);
+    const [twoColor, setTwoColor] = useState("");
+    const [threeDollar, setThreeDollar] = useState(false);
+    const [threeColor, setThreeColor] = useState("");
+
     const navigation = useNavigation();
     
     function updateSearch(value){
         setValue(value);
     }
 
+    const onOnePressed = () => {
+        setOneDollar(true);
+        setTwoDollar(false);
+        setThreeDollar(false);
+        setOneColor(colors.dark);
+        setTwoColor("");
+        setThreeColor("");
+    }
+    const onTwoPressed = () => {
+        setTwoDollar(true);
+        setOneDollar(false);
+        setThreeDollar(false);
+        setTwoColor(colors.dark);
+        setOneColor("");
+        setThreeColor("");
+    }
+    const onThreePressed = () => {
+        setThreeDollar(true);
+        setOneDollar(false);
+        setTwoDollar(false);
+        setThreeColor(colors.dark);
+        setOneColor('');
+        setTwoColor('');
+    }
+
     const onSearchPressed = async (data) => {
         console.log(data);
         setPressed(true);
-        const fetchedData = await getSearchRestaurantData(data, {latitude, longitude});
-        setSearchData(fetchedData[0]);
+
+        if(threeDollar){
+            const fetchedData = await getSearchRestaurantData(data, 3, {latitude, longitude});
+            setSearchData(fetchedData[0]);
+        }else if(twoDollar){
+            const fetchedData = await getSearchRestaurantData(data, 2, {latitude, longitude});
+            setSearchData(fetchedData[0]);
+        }else{
+            const fetchedData = await getSearchRestaurantData(data, 1, {latitude, longitude});
+            setSearchData(fetchedData[0]);
+        }
     }
 
     const onRefresh = React.useCallback(() => {
@@ -85,7 +126,6 @@ function SearchPage() {
         setLoading(true);
         const fetchedData = await getOpeningSearchRestaurantData({latitude, longitude});
         setData(fetchedData[0]);
-        console.log(fetchedData);
         setLoading(false);
     };
 
@@ -157,6 +197,26 @@ function SearchPage() {
                         )}
                         </View>
                 </View>
+                <View style = {styles.dollarButtons}>
+                    <CustomButton 
+                        text = {"$"}
+                        type = {'SEARCHBOX'}
+                        onPress = {onOnePressed}
+                        bgColor = {oneColor}
+                    />
+                    <CustomButton 
+                        text = {"$$"}
+                        type = {'SEARCHBOX'}
+                        onPress = {onTwoPressed}
+                        bgColor = {twoColor}
+                    />
+                    <CustomButton 
+                        text = {"$$$"}
+                        type = {'SEARCHBOX'}
+                        onPress = {onThreePressed}
+                        bgColor = {threeColor}
+                    />
+                </View>
 
             </View>
             <View style = {styles.resultsHeader}>
@@ -190,7 +250,7 @@ const styles = StyleSheet.create({
     searchContainer: {
         backgroundColor: colors.accent,
         width: '100%',
-        height: 100,
+        height: 140,
     },
     text: {
         color: colors.background,
@@ -290,6 +350,12 @@ const styles = StyleSheet.create({
       },
       cancel: {
         color: colors.accent
+      },
+      dollarButtons: {
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          marginLeft: 10,
+          marginRight: 10,
       }
 })
 

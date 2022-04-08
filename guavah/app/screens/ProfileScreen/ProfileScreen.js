@@ -6,6 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 import colors from '../../config/colors/colors';
 import {useFonts} from 'expo-font';
 import { getUserData } from '../../services/requests';
+import {SvgUri} from 'react-native-svg';
 
 
 function ProfileScreen(props) {
@@ -35,10 +36,10 @@ function ProfileScreen(props) {
 
     const fetchUserData = async () => {
         const fetchedUserData = await getUserData(userId);
-        setUserData(fetchedUserData[0]);
-        setUserLevel(userData.Level);
-        setUserName(userData.Name);
-        setUserPhoto(userData.ProphilePhoto);
+        // console.log(fetchedUserData)
+        setUserName(fetchedUserData[0]);
+        setUserLevel(fetchedUserData[1]);
+        setUserPhoto(fetchedUserData[2]);
     }
 
     useEffect(() => {
@@ -57,10 +58,6 @@ function ProfileScreen(props) {
         navigation.navigate('HistoryScreen');
     }
 
-    console.log(userName)
-    console.log(userLevel)
-    console.log(userPhoto)
-
 
     return (
         <ScrollView style = {styles.container}>
@@ -68,9 +65,11 @@ function ProfileScreen(props) {
             
             </View>
             <View style = {styles.userBox}>
-                <Image style = {styles.topImage} uri = {userPhoto}/>
+                <View style = {styles.imageBorder}>
+                    <SvgUri style = {styles.topImage} uri={userPhoto}/>
+                </View>
                 <Text style = {styles.userName}>{userName}</Text>
-                <Text style = {styles.userLevel}>{userLevel}</Text>
+                <Text style = {styles.userLevel}>Level {userLevel}</Text>
             </View>
 
             <View style = {styles.horizontalBox}>
@@ -94,9 +93,18 @@ const styles = StyleSheet.create({
         
     },
     topImage: {
+        height: 128,
+        width: 128,
+        borderRadius: 1000,
+    },
+    imageBorder: {
         height: 132,
         width: 132,
-        borderRadius: 1000
+        borderRadius: 1000,
+        backgroundColor: colors.white,
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
     userBox: {
         flex: 1,
@@ -115,10 +123,10 @@ const styles = StyleSheet.create({
     },
     topBox: {
         position: 'absolute',
-        height: 400,
-        width: 600,
+        height: '100%',
+        width: '150%',
         backgroundColor: colors.accent,
-        transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -225}],
+        transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -550}],
     }
 })
 

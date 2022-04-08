@@ -11,7 +11,7 @@ import {useForm, Controller, set} from 'react-hook-form';
 import { Ionicons, Feather, Entypo } from '@expo/vector-icons'; 
 import * as Location from 'expo-location';
 
-import { getDetailedRestaurantData, getOpeningSearchRestaurantData, getSearchRestaurantData } from "../../services/requests";
+import { getDetailedRestaurantData, getOpeningSearchRestaurantData, getSearchRestaurantData, getUserData } from "../../services/requests";
 
 import config from '../../../src/aws-exports';
 import CustomSearch from "../../components/CustomSearch";
@@ -63,6 +63,8 @@ function SearchPage() {
     const [searchPhrase, setSearchPhrase] = useState("");
     const [clicked, setClicked] = useState(false);
 
+    const[userRadius, setUserRadius] = useState("");
+
     const [oneDollar, setOneDollar] = useState(true);
     const [oneColor, setOneColor] = useState(colors.dark);
     const [twoDollar, setTwoDollar] = useState(false);
@@ -76,46 +78,64 @@ function SearchPage() {
         setValue(value);
     }
 
-    const onOnePressed = () => {
+    const onOnePressed = async () => {
         setOneDollar(true);
         setTwoDollar(false);
         setThreeDollar(false);
         setOneColor(colors.dark);
         setTwoColor("");
         setThreeColor("");
+        const fetchedData = await getOpeningSearchRestaurantData(1, {latitude, longitude, userRadius});
+        setData(fetchedData[0]);
     }
-    const onTwoPressed = () => {
+    const onTwoPressed = async () => {
         setTwoDollar(true);
         setOneDollar(false);
         setThreeDollar(false);
         setTwoColor(colors.dark);
         setOneColor("");
         setThreeColor("");
+        const fetchedData = await getOpeningSearchRestaurantData(2, {latitude, longitude, userRadius});
+        setData(fetchedData[0]);
     }
-    const onThreePressed = () => {
+    const onThreePressed = async () => {
         setThreeDollar(true);
         setOneDollar(false);
         setTwoDollar(false);
         setThreeColor(colors.dark);
         setOneColor('');
         setTwoColor('');
+        const fetchedData = await getOpeningSearchRestaurantData(3, {latitude, longitude, userRadius});
+        setData(fetchedData[0]);
     }
 
+    const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
+
+    const fetchUserData = async () => {
+        const fetchedUserData = await getUserData(userId)
+        setUserRadius(fetchedUserData[3]);
+    }
+
+    useEffect(() => {
+        fetchUserData();
+    }, [])
+
     const onSearchPressed = async (data) => {
-        console.log(data);
+        // console.log(data);
         setPressed(true);
 
         if(threeDollar){
-            const fetchedData = await getSearchRestaurantData(data, 3, {latitude, longitude});
+            const fetchedData = await getSearchRestaurantData(data, 3, {latitude, longitude, userRadius});
             setSearchData(fetchedData[0]);
         }else if(twoDollar){
-            const fetchedData = await getSearchRestaurantData(data, 2, {latitude, longitude});
+            const fetchedData = await getSearchRestaurantData(data, 2, {latitude, longitude, userRadius});
             setSearchData(fetchedData[0]);
         }else{
-            const fetchedData = await getSearchRestaurantData(data, 1, {latitude, longitude});
+            const fetchedData = await getSearchRestaurantData(data, 1, {latitude, longitude, userRadius});
             setSearchData(fetchedData[0]);
         }
     }
+
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -124,16 +144,16 @@ function SearchPage() {
 
     const fetchData = async () => {
         setLoading(true);
-        const fetchedData = await getOpeningSearchRestaurantData({latitude, longitude});
+        const fetchedData = await getOpeningSearchRestaurantData(1, {latitude, longitude, userRadius});
         setData(fetchedData[0]);
         setLoading(false);
     };
 
     useEffect(() => {
-        if(latitude != null && longitude != null){
+        if(latitude != null && longitude != null && userRadius != null){
             fetchData();
         }
-    }, [latitude, longitude]);
+    }, [latitude, longitude, userRadius]);
 
     if (loading || !data) {
         return <ActivityIndicator style = {styles.loading} size="large" />; 

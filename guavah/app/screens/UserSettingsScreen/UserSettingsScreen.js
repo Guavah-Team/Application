@@ -28,7 +28,7 @@ function UserSettingsScreen(){
         GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
     });
 
-    const navigation = useNavigation();
+   
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');

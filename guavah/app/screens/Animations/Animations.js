@@ -1,44 +1,33 @@
+import { container } from 'aws-amplify';
 import React from 'react';
-import {
-  NativeModules,
-  LayoutAnimation,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  Image,
-} from 'react-native';
-import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import { ScrollView } from 'react-native-gesture-handler';
+import CustomButton from '../../components/CustomButton';
+import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
 import colors from '../../config/colors/colors';
 import {useFonts} from 'expo-font';
+import BoxAnimations from '../BoxAnimations';
 
+function VersusScreen(props) {
 
+    const [loaded] = useFonts({
+        CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
+        CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
+        CeraBold: require('../../assets/fonts/CeraPro-Bold.otf'),
+        CeraItalic: require('../../assets/fonts/CeraPro-Italic.otf'),
+        CeraLight: require('../../assets/fonts/CeraPro-Light.otf'),
+        CeraMedium: require('../../assets/fonts/CeraPro-Medium.otf'),
+        GigaSansReg: require('../../assets/fonts/GigaSans-Regular.otf'),
+        GigaSansBold: require('../../assets/fonts/GigaSans-Bold.otf'),
+        GigaSansExtraLight: require('../../assets/fonts/GigaSans-ExtraLight.otf'),
+        GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
+        GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
+    });
 
-const { UIManager } = NativeModules;
+    const item = ["testName", 2, 20, null];
 
-UIManager.setLayoutAnimationEnabledExperimental &&
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-
-  const item = ["testName", 2, 20, null];
-
-export default class App extends React.Component {
-  state = {
-    w: 100,
-    h: 100,
-  };
-
-  _onPress = () => {
-    // Animate the update
-    LayoutAnimation.spring();
-    this.setState({w: this.state.w + 80, h: this.state.h + 80})
-  }
-
-  
-
-  render() {
     return (
-      <View style={styles.container}>
         <View style={containerStyles.container}>
             <View style={containerStyles.topBox}>
 
@@ -53,54 +42,20 @@ export default class App extends React.Component {
             <View style={containerStyles.profileImageContainer}>
                 <Image style = {componentStyle.topImage} source = {require('../../assets/icon.png')}/>
             </View>
-            <View style={[styles.box2, {width: this.state.w, height: this.state.h}]}>
-            <TouchableOpacity onPress={this._onPress} style = {{opacity: 1, flex: 1}}/>
-            </View>
+
             <View style={containerStyles.versusContainer}>
                 {/* <Text style={textStyle.versusText}>Which was better?</Text>
                 <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
                 <View style={containerStyles.versusRestaurantContainer}>
-                    {/* <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
-                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/> */}
+                    <BoxAnimations/>
+                    <BoxAnimations/>
                 </View>
             </View>
 
         </View>
         
-          
-        
-        
-      </View>
     );
-  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box2: {
-    width: 200,
-    height: 200,
-    backgroundColor: 'red',
-    flexDirection: 'row',
-    alignSelf: 'flex-end'
-  },
-  button: {
-    backgroundColor: 'black',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    marginTop: 15,
-    opacity: 1,
-    flex: 1,
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-  },
-});
 
 const containerStyles = StyleSheet.create({
     container: {
@@ -195,3 +150,6 @@ const containerStyles = StyleSheet.create({
             marginTop: '0%',
         },
     });
+
+
+export default VersusScreen;

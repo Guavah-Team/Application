@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {ScrollView, View, Text, StyleSheet, Alert, ImageBackground, Image} from 'react-native';
 import HorizontalProfileBox from '../../components/HorizontalProfileBox/HorizontalProfileBox';
 import Amplify, {Auth} from 'aws-amplify';
 import {useNavigation} from '@react-navigation/native';
 import colors from '../../config/colors/colors';
 import {useFonts} from 'expo-font';
+import { getUserData } from '../../services/requests';
+import {SvgUri} from 'react-native-svg';
 
 
 function ProfileScreen(props) {
+    const [userData, setUserData] = useState(null);
+    const [userName, setUserName] = useState(null);
+    const [userPhoto, setUserPhoto] = useState(null);
+    const [userLevel, setUserLevel] = useState(null);
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -25,9 +31,20 @@ function ProfileScreen(props) {
 
     const navigation = useNavigation();
 
-    const test = () => {
-        Alert.alert("HOE")
+
+    const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
+
+    const fetchUserData = async () => {
+        const fetchedUserData = await getUserData(userId);
+        // console.log(fetchedUserData)
+        setUserName(fetchedUserData[0]);
+        setUserLevel(fetchedUserData[1]);
+        setUserPhoto(fetchedUserData[2]);
     }
+
+    useEffect(() => {
+        fetchUserData();
+    }, [])
 
     const logout = () => {
         Auth.signOut();
@@ -36,11 +53,11 @@ function ProfileScreen(props) {
     const onSettingsPressed = () => {
         navigation.navigate('SettingsScreen')
     }
+    
     const onHistoryPressed = () => {
         navigation.navigate('HistoryScreen');
     }
 
-    console.log(Auth.Credentials)
 
     return (
         <ScrollView style = {styles.container}>
@@ -48,9 +65,11 @@ function ProfileScreen(props) {
             
             </View>
             <View style = {styles.userBox}>
-                <Image style = {styles.topImage} source = {require('../../assets/icon.png')}/>
-                <Text style = {styles.userName}>dylan guzman</Text>
-                <Text style = {styles.userLevel}>Level 4</Text>
+                <View style = {styles.imageBorder}>
+                    <SvgUri style = {styles.topImage} uri={userPhoto}/>
+                </View>
+                <Text style = {styles.userName}>{userName}</Text>
+                <Text style = {styles.userLevel}>Level {userLevel}</Text>
             </View>
 
             <View style = {styles.horizontalBox}>
@@ -74,9 +93,18 @@ const styles = StyleSheet.create({
         
     },
     topImage: {
+        height: 128,
+        width: 128,
+        borderRadius: 1000,
+    },
+    imageBorder: {
         height: 132,
         width: 132,
-        borderRadius: 1000
+        borderRadius: 1000,
+        backgroundColor: colors.white,
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
     userBox: {
         flex: 1,
@@ -95,10 +123,10 @@ const styles = StyleSheet.create({
     },
     topBox: {
         position: 'absolute',
-        height: 400,
-        width: 600,
+        height: '100%',
+        width: '150%',
         backgroundColor: colors.accent,
-        transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -225}],
+        transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -550}],
     }
 })
 

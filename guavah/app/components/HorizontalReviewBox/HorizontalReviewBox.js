@@ -8,7 +8,7 @@ import { useFonts } from 'expo-font';
 
 
 function RestaurantReview({restaurant}) {
-    const {Name, Rating, Review, ProfilePhoto, icon} = restaurant;
+    const {Name, Rating, Review, ProfilePhoto, Level} = restaurant;
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
         CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
@@ -38,6 +38,7 @@ function RestaurantReview({restaurant}) {
                 <SvgUri style = {styles.userImage} uri={ProfilePhoto}/>
                 <View style = {styles.textBox}>
                     <Text style = {styles.user}>{Name}</Text>
+                    <Text style = {styles.level}>Level {Level}</Text>
                 </View>
                 <MaterialIcons name = {thumbIndicator(Rating)} style = {styles.thumb}/>
             </View>
@@ -51,7 +52,7 @@ function RestaurantReview({restaurant}) {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 110,
+        height: 105,
         paddingLeft: 24,
         paddingTop: 20,
         backgroundColor: colors.white,
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
     },
     message: {
         fontSize: 12,
+        marginTop: 3,
         fontFamily: 'GigaSansReg',
     },
     thumb: {
@@ -89,6 +91,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 24,
     },
+    level: {
+        fontSize: 12,
+        fontFamily: 'GigaSansReg',
+    }
 })
 
 export default RestaurantReview;

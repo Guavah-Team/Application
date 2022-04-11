@@ -51,14 +51,10 @@ function RestaurantScreen({route}){
     const [thumbsVisible, setThumbsVisible] = useState(false);
     const[rating, setRating] = useState(0);
 
-    console.log(photo_gallary);
-
     const fetchReviews = async () => {
         const fetchedReviews = await getRestaurantReviews(FSQID);
         setData(fetchedReviews[0]);
     }
-
-    // console.log(Auth.Credentials)
 
     const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
 

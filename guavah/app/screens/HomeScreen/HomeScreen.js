@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityIndicator, RefreshControlBase, Alert, RefreshControl} from "react-native";
+import {View, Text, FlatList, StyleSheet, ScrollView, ImageBackground, ActivityIndicator, RefreshControlBase, Alert, RefreshControl, LayoutAnimation} from "react-native";
 import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/HorizontalRestaurantPage";
 import VerticalRestaurantBox from "../../components/VerticalRestaurantBox";
 import Amplify, { Auth } from "aws-amplify";
-import {useNavigation} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import { getDetailedRestaurantData } from "../../services/requests";
 import colors from "../../config/colors/colors";
 import CustomButton from "../../components/CustomButton";
@@ -11,9 +11,9 @@ import {useFonts} from 'expo-font';
 
 import * as Location from 'expo-location';
 import { get } from "react-hook-form";
+import TabNavigator from "../../navigation/TabNavigator";
 
-const HomeScreen = ({latitude, longitude}) => {
-
+const HomeScreen = () => {
   const [loaded] = useFonts({
     CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
     CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
@@ -27,6 +27,34 @@ const HomeScreen = ({latitude, longitude}) => {
     GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
     GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
   });
+
+
+
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLatitude(location.coords.latitude);
+  //     setLongitude(location.coords.longitude);
+  //   })();
+
+  // }, []);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
+    })();
+  }, []);
 
   const [loading, setLoading] = useState(false);
   const [dataA, setDataA] = useState(null);
@@ -52,7 +80,7 @@ const HomeScreen = ({latitude, longitude}) => {
   
   const fetchData = async () => {
     setLoading(true);
-    const fetchedData = await getDetailedRestaurantData(latitude, longitude);
+    const fetchedData = await getDetailedRestaurantData({latitude, longitude});
     setMessageA(fetchedData[0]);
     setDataA(fetchedData[1]);
     setMessageB(fetchedData[2]);
@@ -61,8 +89,10 @@ const HomeScreen = ({latitude, longitude}) => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    if(latitude != null && longitude != null){
+      fetchData();
+    }
+  }, [latitude, longitude]);
 
 
   if (loading || !dataA || !messageA || !dataB || !messageB) {

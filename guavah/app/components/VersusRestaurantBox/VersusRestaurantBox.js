@@ -4,6 +4,7 @@ import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 import placeHolder from '../../assets/defaults/VerticalDefault.png';
 import { useFonts } from 'expo-font';
+import { postVersusData } from '../../services/postVersusData';
 
 function VersusRestaurantBox({restaurant, type="SMALL"}) {
     const {name, rating, distance, photo, location, id, photo_gallary} = restaurant;
@@ -25,9 +26,8 @@ function VersusRestaurantBox({restaurant, type="SMALL"}) {
     const navigation = useNavigation();
 
     const pressHandler = () =>{
-        Alert.alert(restaurant[0],"Are you sure you want to submit? ",[
-            {text: "Yes", onPress: ()=>console.log("Yes is pressed.")}
-        ])
+    //    postVersusData('test');
+        console.log(restaurant[0], restaurant[3]);
     }
 
     // console.log(photo);
@@ -36,14 +36,14 @@ function VersusRestaurantBox({restaurant, type="SMALL"}) {
         <Pressable 
         onPress={() =>pressHandler()}
         style = {[styles[`container_${type}`], styles.shadowProp]}>
-            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} defaultSource={require('../../assets/defaults/VerticalDefault.png')} source = {{uri: photo}}>
+            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} defaultSource={require('../../assets/defaults/VerticalDefault.png')} source = {{uri: restaurant[3]}}>
                 <View style = {styles.mask}/>
                 <View style = {styles.topTextBox}>
-                    <Text style = {styles.restaurantNameText}> {name} </Text>
+                    <Text style = {styles.restaurantNameText}> {restaurant[0]} </Text>
                 </View>
-                <View style = {styles.centerLogo}>
+                {/* <View style = {styles.centerLogo}>
                     <Image source = {require('../../assets/ICONS/Tier-1-Badge-(Base).png')}></Image>
-                </View>
+                </View> */}
                 <View style = {styles.bottomTextBox}>
                     {/* <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text> */}
                 </View>
@@ -55,7 +55,7 @@ function VersusRestaurantBox({restaurant, type="SMALL"}) {
 const styles = StyleSheet.create({
     container_SMALL: {
         width: 150,
-        height: 200,
+        height: 316,
         marginRight: 10,
     },
     container_LARGE: {

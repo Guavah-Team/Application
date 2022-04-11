@@ -11,9 +11,11 @@ import {useFonts} from 'expo-font';
 import { getVersusData } from '../../services/requests';
 import { useEffect } from 'react';
 import Amplify, { Auth } from "aws-amplify";
+import { postVersusData } from '../../services/postVersusData';
 
 function VersusScreen(props) {
     const [data, setData] = useState(null);
+    const [data2, setData2] = useState(null);
 
 
     const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
@@ -23,6 +25,13 @@ function VersusScreen(props) {
         // console.log("break")
         // console.log((fetchedData[0]['restaurants'][0]['id']));
         setData(fetchedData[0]['restaurants'][0]);
+        // console.log(fetchedData[0]['restaurants']);
+        // console.log(fetchedData[0]['restaurants'][0]);
+        // console.log(fetchedData[0]['restaurants'][1]);
+        setData2(fetchedData[0]['restaurants'][1]);
+        // console.log(data);
+        // console.log(data2);
+        // console.log(fetchedData[0]['restaurants'][1]);
         
         // console.log(data[restaurants][0]);
     };
@@ -45,12 +54,13 @@ function VersusScreen(props) {
         GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
     });
 
+
     if(!data){
         return <ActivityIndicator style = {componentStyle.loading} size="large" />; 
     }
 
     const item = [data['name'], null, null, data['photo']];
-    const item2 = ["testName2", 3, 35, null];
+    const item2 = [data2['name'], 3, 35, data2['photo']];
 
     return (
         <View style={containerStyles.container}>

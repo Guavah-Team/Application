@@ -51,7 +51,7 @@ export const getVersusData = async (userId) => {
     const response = await axios.get(url);
     let sections = [];
     sections.push(response.data);
-    console.log(sections);
+    // console.log(sections);
     return sections;
   } catch (e){
     console.log(e);

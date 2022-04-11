@@ -1,10 +1,11 @@
 import { container } from 'aws-amplify';
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import CustomButton from '../../components/CustomButton';
 import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
+import VersusRestaurantBox from '../../components/VersusRestaurantBox';
 import colors from '../../config/colors/colors';
 import {useFonts} from 'expo-font';
 import { getVersusData } from '../../services/requests';
@@ -14,11 +15,16 @@ import Amplify, { Auth } from "aws-amplify";
 function VersusScreen(props) {
     const [data, setData] = useState(null);
 
+
     const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
 
     const fetchData = async () => {
         const fetchedData = await getVersusData(userId);
-        setData(fetchedData[0]);
+        // console.log("break")
+        // console.log((fetchedData[0]['restaurants'][0]['id']));
+        setData(fetchedData[0]['restaurants'][0]);
+        
+        // console.log(data[restaurants][0]);
     };
 
     useEffect(() => {
@@ -39,7 +45,12 @@ function VersusScreen(props) {
         GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
     });
 
-    const item = ["testName", 2, 20, null];
+    if(!data){
+        return <ActivityIndicator style = {componentStyle.loading} size="large" />; 
+    }
+
+    const item = [data['name'], null, null, data['photo']];
+    const item2 = ["testName2", 3, 35, null];
 
     return (
         <View style={containerStyles.container}>
@@ -61,8 +72,10 @@ function VersusScreen(props) {
                 {/* <Text style={textStyle.versusText}>Which was better?</Text>
                 <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
                 <View style={containerStyles.versusRestaurantContainer}>
-                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
-                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
+                    <VersusRestaurantBox restaurant={item}/>
+                    <VersusRestaurantBox restaurant={item2}/>
+                    {/* <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
+                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/> */}
                 </View>
             </View>
 
@@ -118,6 +131,11 @@ const containerStyles = StyleSheet.create({
             borderRadius: 1000,
             marginTop: '0%',
         },
+
+        loading: {
+            flex: 1,
+            justifyContent: 'center',
+          },
     })
 
     const textStyle = StyleSheet.create({

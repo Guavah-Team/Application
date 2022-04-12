@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {ScrollView, View, Text, StyleSheet, Alert, ImageBackground, Image} from 'react-native';
 import HorizontalProfileBox from '../../components/HorizontalProfileBox/HorizontalProfileBox';
+import HorizontalProfileBoxUnused from '../../components/HorizontalProfileBoxUnused/HorizontalProfileBoxUnused';
 import Amplify, {Auth} from 'aws-amplify';
 import {useNavigation} from '@react-navigation/native';
 import colors from '../../config/colors/colors';
@@ -74,7 +75,7 @@ function ProfileScreen(props) {
 
             <View style = {styles.horizontalBox}>
                 <HorizontalProfileBox onPress={onSettingsPressed} iconName = {'settings'} name = {'Profile Settings'} description = {'Adjust your profile information'}/>
-                <HorizontalProfileBox onPress={onHistoryPressed} iconName = {'history'} name = {'History'} description = {'View your recent activity'}/>
+                <HorizontalProfileBoxUnused iconName = {'history'} name = {'History'} description = {'View your recent activity'}/>
                 <HorizontalProfileBox onPress={logout} iconName = {'logout'} name = {'Logout'} description = {'Log out of your account'}/>
             </View>
         </ScrollView>
@@ -127,7 +128,7 @@ const styles = StyleSheet.create({
         width: '150%',
         backgroundColor: colors.accent,
         transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -550}],
-    }
+    },
 })
 
 export default ProfileScreen;

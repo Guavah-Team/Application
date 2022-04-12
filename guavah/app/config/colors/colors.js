@@ -6,4 +6,5 @@ export default {
     light: '#DBD3CE',
     white: 'white',
     primaryText: '#F5F2F3',
+    grey: 'grey',
 }

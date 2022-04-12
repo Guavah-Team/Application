@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {StyleSheet, View, Text, Image, Alert, Pressable, SafeAreaView, TextInput, Switch} from 'react-native';
 import colors from '../../config/colors/colors';
 import CustomInput from '../../components/CustomInput';
@@ -9,10 +9,47 @@ import {Auth} from 'aws-amplify';
 import Slider from '@react-native-community/slider';
 import {Ionicons} from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
+import { getUserDataSettings } from '../../services/requests';
+import { postSettingsData } from '../../services/post';
+import {SvgUri} from 'react-native-svg';
 
 const EMAIL_REGEX = /^[a-zA-Z0-9.!$#%&-]+@[a-zA-Z0-9]+\.[a-z]{2,3}/
 
 function UserSettingsScreen(){
+
+    const [name, setName] = useState(null);
+    const [email, setEmail] = useState(null);
+    const [radius, setRadius] = useState(null);
+    const [profilePhoto, setProfilePhoto] = useState(null);
+    const [darkTheme, setDarkTheme] = useState(null);
+    const [darkThemeBool, setDarkThemeBool] = useState(null);
+    const [vegan, setVegan] = useState(null);
+    const [veganBool, setVeganBool] = useState(null);
+
+    const [isDarkEnabled, setIsDarkEnabled] = useState(false);
+    const toggleDarkSwitch = () => {
+        setIsDarkEnabled(previousState => !previousState);
+        if(darkTheme === 0){
+            setDarkTheme(1);
+            setDarkThemeBool(true);
+        } else if(darkTheme === 1){
+            setDarkTheme(0);
+            setDarkThemeBool(false);
+        }
+    }
+    console.log(vegan)
+
+    const [isVeganEnabled, setIsVeganEnabled] = useState(false);
+    const toggleVeganSwitch = () => {
+        setIsVeganEnabled(previousState => !previousState);
+        if(vegan === 0){
+            setVegan(1);
+            setVeganBool(true);
+        } else if(vegan === 1){
+            setVegan(0);
+            setVeganBool(false);
+        }
+    }
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -28,25 +65,51 @@ function UserSettingsScreen(){
         GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
     });
 
+    const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
+
+    const fetchUserData = async () => {
+        const fetchedUserData = await getUserDataSettings(userId);
+        // console.log(fetchedUserData)
+        setName(fetchedUserData[0]);
+        setEmail(fetchedUserData[1]);
+        setProfilePhoto(fetchedUserData[2]);
+        setRadius(fetchedUserData[3] * .000621371);
+        setVegan(fetchedUserData[4]);
+        setDarkTheme(fetchedUserData[5]);
+    }
+
+    useEffect(() =>{
+        fetchUserData();
+        isDarkTheme();
+        isVegan();
+    }, [])
+
     const navigation = useNavigation();
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const isDarkTheme = () =>{
+        if(darkTheme === 0){
+            setDarkThemeBool(false)
+        }else if(darkTheme === 1){
+            setDarkThemeBool(true)
+        }
+    }
 
-    const [range, setRange] = useState('0')
+    const isVegan = () =>{
+        if(vegan === 0){
+            setVeganBool(false)
+        }else if(vegan === 1){
+            setVeganBool(true)
+        }
+    }
 
-    const [isDarkEnabled, setIsDarkEnabled] = useState(false);
-    const toggleDarkSwitch = () => setIsDarkEnabled(previousState => !previousState);
-
-    const [isVeganEnabled, setIsVeganEnabled] = useState(false);
-    const toggleVeganSwitch = () => setIsVeganEnabled(previousState => !previousState);
-
-    const radius = 0;
-
+    const onPressPost = async() =>{
+        postSettingsData(userId, name, darkTheme, vegan, radius);
+    }
+    console.log(radius)
+    
     const returnHome = () => {
         navigation.navigate('HomeScreen');
     }
-    
 
     return (
         <View style = {styles.container}>
@@ -64,12 +127,13 @@ function UserSettingsScreen(){
             {/* Profile Box */}
             <Text style = {styles.sections}>Profile</Text>
             <View style = {styles.profileSettingsBox}>
-                <Image style = {styles.profilePic} source = {require('../../assets/ProfilePics/Guavah.jpg')}/>
+                <SvgUri style = {styles.profilePic} uri={profilePhoto}/>
+
                 <View>
                     <Text style = {styles.profileText}>Name</Text>
                     <TextInput  
                         style = {styles.input}
-                        placeholder = {'Dylan Guzman'}
+                        placeholder = {name}
                         placeholderTextColor = 'black'
                         onChangeText = {newName => setName(newName)}
                         defaultValue = {name}
@@ -77,9 +141,10 @@ function UserSettingsScreen(){
                     <Text style = {styles.profileText}>Email</Text>
                     <TextInput 
                         style = {styles.input}
-                        placeholder = {'dylan@guzman.com'}
+                        value = {email}
+                        //placeholder = {email}
                         placeholderTextColor = 'black'
-                        onChangeText = {newEmail => setEmail(newEmail)}
+                        //onChangeText = {newEmail => setEmail(newEmail)}
                         defaultValue = {email}
                         />
                 </View>
@@ -91,17 +156,19 @@ function UserSettingsScreen(){
                     <View style = {styles.locations}>
                         <View style = {styles.locationView}><Image style = {styles.location} source={require('../../assets/userSettingsIcons/location.png')}/></View>
                         <Text style = {styles.textFonts}>Search Radius</Text>
-                        <View  style = {styles.switch}><Text style = {styles.textFonts}>{range} Miles</Text></View>
+                        <View  style = {styles.switch}><Text style = {styles.textFonts}>{Math.ceil(radius)} Miles</Text></View>
                     </View>
                     
                     <Slider
                         style={{width: '90%', height: 40, alignSelf: 'center', flex: .1}}
                         minimumValue={0}
-                        maximumValue={1}
+                        maximumValue={10.9}
+                        value = {radius}
                         thumbTintColor= {colors.accent}
                         minimumTrackTintColor={colors.accent}
                         maximumTrackTintColor= "#1b1b1b"
-                        onValueChange={value => setRange(parseInt(value * 10.9))}
+                        onValueChange={value => setRadius(Math.ceil(value))}
+                        v
                     />
 
 
@@ -143,7 +210,7 @@ function UserSettingsScreen(){
             
 
             <View style = {styles.save}>
-                <Pressable style = {styles.button} onPress={() => {alert('Changes Saved!');}}>
+                <Pressable style = {styles.button} onPress={() => {alert('Changes Saved!'); onPressPost();}}>
                     <Text style = {styles.textStyle}>save</Text>
                 </Pressable>
             </View>

@@ -81,3 +81,22 @@ export const getUserData = async (userId) => {
     console.log(e);
   }
 }
+
+export const getUserDataSettings = async (userId) => {
+  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/get-user?UserID=${userId}`
+  try{
+    const response = await axios.get(url);
+
+    let sections = [];
+    // sections.push(response.data['body']);
+    sections.push(response.data['body']['Name']);
+    sections.push(response.data['body']['Email']);
+    sections.push(response.data['body']['ProfilePhoto']);
+    sections.push(response.data['body']['Radius']);
+    sections.push(response.data['body']['Vegan']);
+    sections.push(response.data['body']['DarkMode']);
+    return sections;
+  }catch (e) {
+    console.log(e);
+  }
+}

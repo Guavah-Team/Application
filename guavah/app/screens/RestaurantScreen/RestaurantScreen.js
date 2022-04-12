@@ -11,7 +11,7 @@ import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import {Ionicons} from '@expo/vector-icons';
 import { getRestaurantReviews } from '../../services/requests';
-import { postReviewData } from '../../services/postReviewData';
+import { postReviewData } from '../../services/post';
 
 import {useFonts} from 'expo-font';
 import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';

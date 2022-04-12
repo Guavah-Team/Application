@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-        height: '50%',
+        height: '60%',
         width: '90%',
     },
     modalThumbView:{
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-        height: '50%',
+        height: '60%',
         width: '90%',
     },
     modalheader:{
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         flex: 1,
-        
+        marginTop: '10%',
     },
     ThumbsUp:{
         height: 116.7,

@@ -15,7 +15,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import {Auth, Hub} from 'aws-amplify';
 import TabNavigator from './TabNavigator';
 import ProfileScreen from '../screens/ProfileScreen';
-import SearchScreen from '../screens/SearchPage';
+import SearchScreen from '../screens/SearchPageSecond/SearchPageSecond';
 import RestaurantScreen from '../screens/RestaurantScreen/RestaurantScreen';
 import UserSettingsScreen from '../screens/UserSettingsScreen';
 
@@ -58,7 +58,6 @@ const Navigation = ({latitude, longitude}) => {
                 {user ? (
                     <>
                         <Stack.Screen name = 'HomeScreen' component={TabNavigator}/>
-                        {/* <Stack.Screen name = 'HomeScreen' component={() => <TabNavigator latitude={latitude} longitude={longitude}/>}/> */}
                         <Stack.Screen name = 'ProfileScreen' component={ProfileScreen}/>
                         <Stack.Screen name = 'HistoryScreen' component={HistoryScreen}/>
                         <Stack.Screen name = 'SettingsScreen' component={UserSettingsScreen}/>

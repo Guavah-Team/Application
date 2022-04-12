@@ -84,6 +84,15 @@ const styles = StyleSheet.create({
         padding: 0,
         justifyContent: 'center'
     },
+    container_SEARCHBOX: {
+        backgroundColor: colors.light,
+        borderRadius: 6,
+        width: 100,
+        height: 26,
+        padding: 0,
+        justifyContent: 'center',
+        marginVertical: 0
+    },
 
     text: {
         color: colors.white,   

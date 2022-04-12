@@ -12,10 +12,13 @@ import { getVersusData } from '../../services/requests';
 import { useEffect } from 'react';
 import Amplify, { Auth } from "aws-amplify";
 import { postVersusData } from '../../services/postVersusData';
+import {SvgUri} from 'react-native-svg';
 
 function VersusScreen(props) {
     const [data, setData] = useState(null);
     const [data2, setData2] = useState(null);
+
+    const [userPhoto, setUserPhoto] = useState(null);
 
 
     const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
@@ -24,11 +27,14 @@ function VersusScreen(props) {
         const fetchedData = await getVersusData(userId);
         // console.log("break")
         // console.log((fetchedData[0]['restaurants'][0]['id']));
+        setData2(fetchedData[0]['restaurants'][1]);
         setData(fetchedData[0]['restaurants'][0]);
+        setUserPhoto(fetchedData[0]['user'].ProfilePhoto);
+        console.log(fetchedData[0]['user'].ProfilePhoto);
         // console.log(fetchedData[0]['restaurants']);
         // console.log(fetchedData[0]['restaurants'][0]);
         // console.log(fetchedData[0]['restaurants'][1]);
-        setData2(fetchedData[0]['restaurants'][1]);
+        
         // console.log(data);
         // console.log(data2);
         // console.log(fetchedData[0]['restaurants'][1]);
@@ -75,7 +81,7 @@ function VersusScreen(props) {
             </View>
 
             <View style={containerStyles.profileImageContainer}>
-                <Image style = {componentStyle.topImage} source = {require('../../assets/icon.png')}/>
+                <SvgUri style = {componentStyle.topImage} uri={userPhoto}/>
             </View>
 
             <View style={containerStyles.versusContainer}>

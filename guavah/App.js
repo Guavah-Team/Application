@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Alert, View, Text, FlatList, SafeAreaView, StyleSheet } from 'react-native';
+import { Alert, View, Text, FlatList, SafeAreaView, StyleSheet, TextInput } from 'react-native';
 import colors from './app/config/colors/colors';
 import LoginScreen from './app/screens/LoginScreen';
 import SignUpScreen from './app/screens/SignUpScreen/SignUpScreen';
@@ -16,6 +16,7 @@ import VersusScreen from './app/screens/VersusScreen/VersusScreen';
 
 import * as Location from 'expo-location';
 import UserSettingsScreen from './app/screens/UserSettingsScreen';
+import CustomSearch from './app/components/CustomSearch';
 
 
 const data = [
@@ -30,18 +31,17 @@ const data = [
 ]
 
 function App(props) {
-  // const [latitude, setLatitude] = useState(null);
-  // const [longitude, setLongitude] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     let location = await Location.getCurrentPositionAsync({});
-  //     setLatitude(location.coords.latitude);
-  //     setLongitude(location.coords.longitude);
-  //   })();
+  useEffect(() => {
+    (async () => {
+      let location = await Location.getCurrentPositionAsync({});
+      setLatitude(location.coords.latitude);
+      setLongitude(location.coords.longitude);
+    })();
 
-  // }, []);
-
+  }, []);
 
 
 
@@ -60,7 +60,7 @@ function App(props) {
 
       {/* <SearchPage/> */}
 
-      {/* <Navigation latitude={latitude} longitude={longitude}/> */}
+      <Navigation latitude={latitude} longitude={longitude}/>
 
 
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
@@ -77,7 +77,15 @@ function App(props) {
       {/* <UserSettingsScreen/> */}
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
 
-      <Navigation/>
+      {/* <Navigation/> */}
+{/* 
+      <CustomSearch
+        searchPhrase={searchPhrase}
+        setSearchPhrase={setSearchPhrase}
+        clicked={clicked}
+        setClicked={setClicked}
+      /> */}
+
       {/* <SearchPage/> */}
       {/* <Navigation/> */}
       {/* <RestaurantScreen/> */}

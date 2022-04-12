@@ -136,6 +136,10 @@ function SearchPage() {
         }
     }
 
+    const returnHome = () => {
+        navigation.navigate('HomeScreen');
+    }
+
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
@@ -161,9 +165,15 @@ function SearchPage() {
 
     return (
         <View style={styles.container}> 
+
+
             <View style={styles.searchContainer}>
+
                 <View style = {styles.searchBox}>
                     <View style={styles.innerContainer}>
+                        <View style = {styles.backArrow}>
+                            <Ionicons onPress = {returnHome} name="chevron-back-outline" size={30} style = {styles.backArrow}/>
+                        </View>
                         <View
                             style={
                             clicked
@@ -292,7 +302,7 @@ const styles = StyleSheet.create({
     },
     searchBox: {
         marginTop: '8%',
-        marginLeft: 10,
+        // marginLeft: 10,
         marginRight: 10,
     },
     horizontal: {
@@ -339,7 +349,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         height: 35,
         flexDirection: "row",
-        width: "100%",
+        width: "92%",
         backgroundColor: colors.background,
         borderRadius: 4,
         alignItems: "center",
@@ -349,7 +359,7 @@ const styles = StyleSheet.create({
         paddingRight: 10,
         height: 35,
         flexDirection: "row",
-        width: "83%",
+        width: "76%",
         backgroundColor: colors.background,
         borderRadius: 4,
         alignItems: "center",
@@ -376,7 +386,10 @@ const styles = StyleSheet.create({
           justifyContent: 'space-evenly',
           marginLeft: 10,
           marginRight: 10,
-      }
+      },
+      backArrow: {
+        color: 'white',
+    },
 })
 
 export default SearchPage;

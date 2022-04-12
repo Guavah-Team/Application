@@ -20,26 +20,16 @@ function VersusScreen(props) {
 
     const [userPhoto, setUserPhoto] = useState(null);
 
-
     const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
 
     const fetchData = async () => {
         const fetchedData = await getVersusData(userId);
-        // console.log("break")
-        // console.log((fetchedData[0]['restaurants'][0]['id']));
+
         setData2(fetchedData[0]['restaurants'][1]);
         setData(fetchedData[0]['restaurants'][0]);
         setUserPhoto(fetchedData[0]['user'].ProfilePhoto);
         console.log(fetchedData[0]['user'].ProfilePhoto);
-        // console.log(fetchedData[0]['restaurants']);
-        // console.log(fetchedData[0]['restaurants'][0]);
-        // console.log(fetchedData[0]['restaurants'][1]);
         
-        // console.log(data);
-        // console.log(data2);
-        // console.log(fetchedData[0]['restaurants'][1]);
-        
-        // console.log(data[restaurants][0]);
     };
 
     useEffect(() => {
@@ -70,20 +60,22 @@ function VersusScreen(props) {
 
     return (
         <View style={containerStyles.container}>
+        {/* Slanted Accent Color */}
             <View style={containerStyles.topBox}>
 
             </View>
+        {/* Header */}
             <View style={containerStyles.headerContainer}>
                 {/* <View style={containerStyles.headerTextContainer}> */}
                     <Text style={textStyle.text}>{`Which was better?`}</Text>
                     <Text style={textStyle.textSmall}>Tap One</Text>
                 {/* </View> */}
             </View>
-
+        {/* Profile Image */}
             <View style={containerStyles.profileImageContainer}>
                 <SvgUri style = {componentStyle.topImage} uri={userPhoto}/>
             </View>
-
+        {/* Versus */}
             <View style={containerStyles.versusContainer}>
                 {/* <Text style={textStyle.versusText}>Which was better?</Text>
                 <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
@@ -94,7 +86,6 @@ function VersusScreen(props) {
                     <VerticalRestaurantBox restaurant={item} type={'LARGE'}/> */}
                 </View>
             </View>
-
         </View>
         
     );
@@ -157,7 +148,6 @@ const containerStyles = StyleSheet.create({
     const textStyle = StyleSheet.create({
         text: {
             color: colors.background,
-            // color: colors.accent,
             textAlign: 'center',
             textAlignVertical: 'bottom',
             fontSize: 30,
@@ -165,14 +155,6 @@ const containerStyles = StyleSheet.create({
             marginTop: '15%',
             marginBottom: '0%',
 
-    
-            // marginBottom: '10%',
-    
-            // ...Platform.select({
-            //     android: {
-            //         marginTop: '10%',
-            //     },
-            // })
         },
 
         textSmall: {
@@ -192,7 +174,6 @@ const containerStyles = StyleSheet.create({
 
         versusTextSmall: {
             color: colors.accent,
-            // color: 'black',
             textAlign: 'center',
             fontSize: 16,
             marginTop: '0%',

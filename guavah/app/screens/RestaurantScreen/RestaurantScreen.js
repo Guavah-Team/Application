@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, Button, Alert, Modal, FlatList, TextInput, Pressable} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Image, ImageBackground, Button, Alert, Modal, FlatList, TextInput, Pressable, Keyboard} from 'react-native';
 import colors from '../../config/colors/colors';
 import Wordmark from '../../components/Wordmark/Wordmark';
 import CustomInput from '../../components/CustomInput';
@@ -9,7 +9,7 @@ import Amplify, { Auth, button } from 'aws-amplify';
 import HorizontalReviewBox from '../../components/HorizontalReviewBox';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-import {Ionicons} from '@expo/vector-icons';
+import {Ionicons, MaterialIcons} from '@expo/vector-icons';
 import { getRestaurantReviews } from '../../services/requests';
 import { postReviewData } from '../../services/postReviewData';
 
@@ -90,6 +90,9 @@ function RestaurantScreen({route}){
             >
                 <View style = {styles.containerModal}>
                     <View style = {styles.modalView}>
+                        <Pressable style = {styles.cancel} onPress={() => setCommentVisible(false)}>
+                            <MaterialIcons name='cancel' size={23} color={colors.light} style = {styles.exitButton}/>
+                        </Pressable>
                         <Text style = {styles.modalheader}>Leave a Comment</Text>
                         <TextInput 
                             style = {styles.modalinput} 
@@ -97,15 +100,25 @@ function RestaurantScreen({route}){
                             multiline = {true}
                             onChangeText = {newReview => setReview(newReview)}
                             defaultValue = {review}
+                            onSubmitEditing = {() => {
+                                Keyboard.dismiss();
+                            }}
                         />
                         <View style = {styles.modalbuttonView}>
                             <Pressable style = {styles.buttonModal} onPress={() => {setCommentVisible(!commentVisible); pushData(rating, review);}}>
                                 <Text style = {styles.textStyleModal}>Submit</Text>
                             </Pressable>
                         </View>
-                        <Pressable  onPress={() => setCommentVisible(false)}>
-                            <Text style = {styles.textStyleSecondaryModal}>Skip</Text>
-                        </Pressable>
+                        <View style = {styles.tabs}>
+                            <Text style = {styles.footerText}>2 of 2</Text>
+                            <View style = {styles.periodsComment}>
+                                <MaterialIcons name = 'fiber-manual-record' style = {styles.notCurrent}/>
+                                <MaterialIcons name = 'fiber-manual-record' style = {styles.current}/>
+                            </View>
+                        </View>
+                        {/* <Pressable  onPress={() => setCommentVisible(false)}>
+                            <Text style = {styles.textStyleSecondaryModal}>Cancel</Text>
+                        </Pressable> */}
                     </View>
                 </View>
             </Modal>
@@ -122,6 +135,9 @@ function RestaurantScreen({route}){
             >
                 <View style = {styles.containerModal}>
                     <View style = {styles.modalThumbView}>
+                        <Pressable onPress={() => setThumbsVisible(false)}>
+                            <MaterialIcons name='cancel' size={23} color={colors.light} style = {styles.exitButton}/>
+                        </Pressable>
                         <Text style = {styles.thumbHeader}>Rate Your Experience</Text>
                         <View style = {styles.thumbs}>
                             <Pressable style = {styles.thumbLocation} onPress={() => {setCommentVisible(true); setThumbsVisible(false); setRating(1);}}>
@@ -131,9 +147,16 @@ function RestaurantScreen({route}){
                                 <Image style = {styles.ThumbsDown} source = {require('../../assets/Thumbs/ThumbDown.png')}/>
                             </Pressable>
                         </View> 
-                        <Pressable style = {styles.modalcancel} onPress={() => setThumbsVisible(false)}>
+                        <View style = {styles.footerContainer}>
+                            <Text style = {styles.footerText}>1 of 2</Text>
+                            <View style = {styles.periodsThumb}>
+                                <MaterialIcons name = 'fiber-manual-record' style = {styles.current}/>
+                                <MaterialIcons name = 'fiber-manual-record' style = {styles.notCurrent}/>
+                            </View>
+                        </View>
+                        {/* <Pressable style = {styles.modalcancel} onPress={() => setThumbsVisible(false)}>
                             <Text style = {styles.textStyleSecondaryModal}>Cancel</Text>
-                        </Pressable>
+                        </Pressable> */}
                     </View>
                     
                 </View>
@@ -264,7 +287,7 @@ const styles = StyleSheet.create({
     },
     modalheader:{
         fontFamily: 'GigaSansSemiBold',
-        paddingTop: 40,
+        paddingTop: 60,
         paddingBottom: 50,
 
     },
@@ -279,16 +302,17 @@ const styles = StyleSheet.create({
     },
     modalinput:{
        borderWidth: 1,
-       borderColor: 'gray',
-       borderRadius: 10,
+       borderColor: colors.light,
+       borderRadius: 4,
        width: '65%',
        height: '25%',
+       padding: 10,
     },
     buttonModal:{
         borderRadius: 30,
         elevation: 2,
         backgroundColor: colors.accent,
-        width: 250,
+        width: 241,
         height: 50,
         alignItems: 'center',
         justifyContent: 'center'
@@ -296,7 +320,7 @@ const styles = StyleSheet.create({
     modalbuttonView:{
        
         alignItems: 'center',
-        paddingTop: '20%',
+        paddingTop: '30%',
         flex: 1
     },
     textStyleModal:{
@@ -310,7 +334,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         flex: 1,
-        marginTop: '10%',
+        // marginTop: '10%',
     },
     ThumbsUp:{
         height: 116.7,
@@ -320,5 +344,42 @@ const styles = StyleSheet.create({
         height: 116.7,
         width: 134.8,
     },
+    footerText: {
+
+    },
+    footerContainer: {
+        marginLeft: '46%',
+    },
+    footerContainer2: {
+
+    },
+    periodsThumb: {
+        flexDirection: 'row',
+        marginLeft: 6,
+        marginBottom: 10,
+    },
+    periodsComment: {
+        flexDirection: 'row',
+        marginLeft: 7,
+        marginBottom: 10,
+    },
+    current: {
+        color: colors.accent
+    },
+    notCurrent: {
+        color: colors.light
+    },
+    exitButton: {
+        marginLeft: 10,
+        marginTop: 10
+    },
+    cancel: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+    },
+    tabs: {
+        marginTop: '20%',
+    }
 })
 export default RestaurantScreen;

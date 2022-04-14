@@ -33,7 +33,7 @@ function HorizontalProfileBoxUnused({onPress, name, description, iconName}) {
                 </View>
 
             </View>
-            <Text style = {styles.comingSoon}>Coming Soon</Text>
+            {/* <Text style = {styles.comingSoon}>Coming Soon</Text> */}
         </Pressable>
     );
 }
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 100,
         backgroundColor: colors.background,
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        // backgroundColor: 'rgba(0,0,0,0.5)',
         borderRadius: 6,
         marginBottom: 10,
     },

@@ -124,11 +124,13 @@ const styles = StyleSheet.create({
     },
     topBox: {
         position: 'absolute',
-        height: '100%',
-        width: '150%',
+        height: 400,
+        width: 600,
         backgroundColor: colors.accent,
         transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -550}],
     },
+    //     transform: [{skewY: '-20deg'}, {translateX: -100}, {translateY: -225}],
+    // }
 })
 
 export default ProfileScreen;

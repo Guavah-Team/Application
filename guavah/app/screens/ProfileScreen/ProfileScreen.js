@@ -54,11 +54,6 @@ function ProfileScreen(props) {
     const onSettingsPressed = () => {
         navigation.navigate('SettingsScreen')
     }
-    
-    const onHistoryPressed = () => {
-        navigation.navigate('HistoryScreen');
-    }
-
 
     return (
         <ScrollView style = {styles.container}>
@@ -127,10 +122,9 @@ const styles = StyleSheet.create({
         height: 400,
         width: 600,
         backgroundColor: colors.accent,
-        transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -550}],
+        // transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -550}],
+        transform: [{skewY: '-20deg'}, {translateX: -100}, {translateY: -225}],
     },
-    //     transform: [{skewY: '-20deg'}, {translateX: -100}, {translateY: -225}],
-    // }
 })
 
 export default ProfileScreen;

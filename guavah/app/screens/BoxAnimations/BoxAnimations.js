@@ -13,27 +13,26 @@ const { UIManager } = NativeModules;
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true);
 
+
+
 export default class App extends React.Component {
   state = {
-    w: 125,
-    h: 200,
+    w: 130,
+    h: 300,
   };
 
   _onPress = () => {
     // Animate the update
     LayoutAnimation.spring();
-    this.setState({w: this.state.w + 80, h: this.state.h + 80})
+    this.setState({w: this.state.w + 50, h: this.state.h + 50});
   }
 
   render() {
     return (
       <View style={styles.container}>
         <View style={[styles.box, {width: this.state.w, height: this.state.h}]} >
-        <TouchableOpacity style = {styles.button} onPress={this._onPress}/>
-          
-        
-        </View>
-        
+          <TouchableOpacity style = {styles.button} onPress={this._onPress}/>
+        </View> 
       </View>
     );
   }
@@ -44,11 +43,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    
   },
   box: {
     width: 200,
     height: 200,
     backgroundColor: 'red',
+    borderRadius: 20
   },
   button: {
     backgroundColor: 'black',
@@ -56,9 +57,11 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginTop: 15,
     flex: 1,
+    opacity: 0
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
   },
 });
+

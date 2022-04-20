@@ -17,6 +17,7 @@ import VersusScreen from './app/screens/VersusScreen/VersusScreen';
 import * as Location from 'expo-location';
 import UserSettingsScreen from './app/screens/UserSettingsScreen';
 import Animations from './app/screens/Animations';
+import MoveX from './app/screens/MovingAnimations/MoveX';
 
 
 const data = [
@@ -77,7 +78,13 @@ function App(props) {
       {/* <Navigation/> */}
       {/* <UserSettingsScreen/> */}
       {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
+      
+
+      {/* <MoveX/> */}
       <Animations/>
+
+
+
       {/* <Navigation/> */}
       {/* <SearchPage/> */}
       {/* <Navigation/> */}

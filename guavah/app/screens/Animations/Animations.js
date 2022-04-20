@@ -1,6 +1,6 @@
 import { container } from 'aws-amplify';
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity,} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import CustomButton from '../../components/CustomButton';
@@ -8,8 +8,10 @@ import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
 import colors from '../../config/colors/colors';
 import {useFonts} from 'expo-font';
 import BoxAnimations from '../BoxAnimations';
+import MoveX from '../MovingAnimations/MoveX';
+import MoveXLeft from '../MovingLeftAnimations/MoveXLeft';
 
-function VersusScreen(props) {
+function Animations(props) {
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -26,6 +28,23 @@ function VersusScreen(props) {
     });
 
     const item = ["testName", 2, 20, null];
+
+    const [rightOpacity, setRightOpacity] = useState(1);
+    const [leftOpacity, setLeftOpacity] = useState(1);
+    onPressLeft = () => {
+        setRightOpacity(0);
+    };
+    onPressRight = () =>{
+        setLeftOpacity(0);
+    };
+
+    useEffect(() => {
+        setRightOpacity(1);
+        setLeftOpacity(1);
+    }, []);
+    console.log(rightOpacity);
+    console.log(leftOpacity);
+    
 
     return (
         <View style={containerStyles.container}>
@@ -47,8 +66,15 @@ function VersusScreen(props) {
                 {/* <Text style={textStyle.versusText}>Which was better?</Text>
                 <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
                 <View style={containerStyles.versusRestaurantContainer}>
-                    <BoxAnimations/>
-                    <BoxAnimations/>
+                <TouchableOpacity onPress={() =>{onPressRight()}} style = {{opacity: leftOpacity}} >
+                        <MoveX/>
+                    </TouchableOpacity>
+                    <TouchableOpacity  onPress={() =>{onPressLeft()}} style = {{opacity: rightOpacity}} >
+                        <MoveXLeft/>
+                    </TouchableOpacity> 
+                    
+                    
+                    
                 </View>
             </View>
 
@@ -152,4 +178,4 @@ const containerStyles = StyleSheet.create({
     });
 
 
-export default VersusScreen;
+export default Animations;

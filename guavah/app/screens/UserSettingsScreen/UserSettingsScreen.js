@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     backButton:{
         position: 'absolute',
         left: 20,
-        top: 55
+        top: 30
     },
     backButtonText:{
         fontSize: 30,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     },
     header:{
         backgroundColor: colors.accent,
-        height: 125,
+        height: 100,
         alignItems: 'center'
     },
     save:{
@@ -224,6 +224,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         paddingLeft: 15,
         paddingVertical: 10,
+        marginTop: '5%'
     },
     textStyle:{
         color: colors.white,
@@ -338,9 +339,8 @@ const styles = StyleSheet.create({
         fontFamily: 'GigaSansExtraLight'
     },
     profilePic:{
-        width: 100,
-        height: 100,
-        borderRadius: 50,
+        width: 80,
+        height: 80,
     }
    
 })

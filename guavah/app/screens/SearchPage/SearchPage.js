@@ -149,15 +149,15 @@ function SearchPage() {
         setLoading(false);
     };
 
-    useEffect(() => {
-        if(latitude != null && longitude != null && userRadius != null){
-            fetchData();
-        }
-    }, [latitude, longitude, userRadius]);
+    // useEffect(() => {
+    //     if(latitude != null && longitude != null && userRadius != null){
+    //         fetchData();
+    //     }
+    // }, [latitude, longitude, userRadius]);
 
-    if (loading || !data) {
-        return <ActivityIndicator style = {styles.loading} size="large" />; 
-    }
+    // if (loading || !data) {
+    //     return <ActivityIndicator style = {styles.loading} size="large" />; 
+    // }
 
     return (
         <View style={styles.container}> 
@@ -217,27 +217,26 @@ function SearchPage() {
                         )}
                         </View>
                 </View>
-                <View style = {styles.dollarButtons}>
-                    <CustomButton 
-                        text = {"$"}
-                        type = {'SEARCHBOX'}
-                        onPress = {onOnePressed}
-                        bgColor = {oneColor}
-                    />
-                    <CustomButton 
-                        text = {"$$"}
-                        type = {'SEARCHBOX'}
-                        onPress = {onTwoPressed}
-                        bgColor = {twoColor}
-                    />
-                    <CustomButton 
-                        text = {"$$$"}
-                        type = {'SEARCHBOX'}
-                        onPress = {onThreePressed}
-                        bgColor = {threeColor}
-                    />
-                </View>
-
+            </View>
+            <View style = {styles.dollarButtons}>
+                <CustomButton 
+                    text = {"$"}
+                    type = {'SEARCHBOX'}
+                    onPress = {onOnePressed}
+                    bgColor = {oneColor}
+                />
+                <CustomButton 
+                    text = {"$$"}
+                    type = {'SEARCHBOX'}
+                    onPress = {onTwoPressed}
+                    bgColor = {twoColor}
+                />
+                <CustomButton 
+                    text = {"$$$"}
+                    type = {'SEARCHBOX'}
+                    onPress = {onThreePressed}
+                    bgColor = {threeColor}
+                />
             </View>
             <View style = {styles.resultsHeader}>
                 <Text style={styles.localText}>
@@ -270,7 +269,7 @@ const styles = StyleSheet.create({
     searchContainer: {
         backgroundColor: colors.accent,
         width: '100%',
-        height: 140,
+        height: 100,
     },
     text: {
         color: colors.background,
@@ -304,7 +303,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'GigaSansSemiBold',
         marginLeft: 15,
-        marginTop: 20,
+        marginTop: 10,
+        // marginTop: 20,
         marginBottom: 10,
     },
     resultsHeader: {
@@ -318,7 +318,8 @@ const styles = StyleSheet.create({
     },
     downArrow: {
         fontSize: 25,
-        marginTop: 20,
+        // marginTop: 20,
+        marginTop: 10,
         marginBottom: 10,
         alignSelf: 'flex-end',
     },
@@ -376,6 +377,7 @@ const styles = StyleSheet.create({
           justifyContent: 'space-evenly',
           marginLeft: 10,
           marginRight: 10,
+          marginTop: '3%',
       }
 })
 

@@ -4,7 +4,7 @@ import HorizontalRestaurantPage from "../../components/HorizontalRestaurantBox/H
 import VerticalRestaurantBox from "../../components/VerticalRestaurantBox";
 import Amplify, { Auth } from "aws-amplify";
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
-import { getDetailedRestaurantData } from "../../services/requests";
+import { getDetailedRestaurantData, getUserData } from "../../services/requests";
 import colors from "../../config/colors/colors";
 import CustomButton from "../../components/CustomButton";
 import {useFonts} from 'expo-font';
@@ -32,15 +32,29 @@ const HomeScreen = () => {
 
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const[userRadius, setUserRadius] = useState("");
 
   // useEffect(() => {
-  //   (async () => {
+  //   (async () => {   
   //     let location = await Location.getCurrentPositionAsync({});
   //     setLatitude(location.coords.latitude);
   //     setLongitude(location.coords.longitude);
   //   })();
 
   // }, []);
+
+  const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
+
+  const fetchUserData = async () => {
+      const fetchedUserData = await getUserData(userId)
+      setUserRadius(fetchedUserData[3]);
+  }
+
+  useEffect(() => {
+    fetchUserData();
+  }, [])
+
+  // console.log(userRadius)
 
   useEffect(() => {
     (async () => {
@@ -80,7 +94,7 @@ const HomeScreen = () => {
   
   const fetchData = async () => {
     setLoading(true);
-    const fetchedData = await getDetailedRestaurantData({latitude, longitude});
+    const fetchedData = await getDetailedRestaurantData({latitude, longitude, userRadius});
     setMessageA(fetchedData[0]);
     setDataA(fetchedData[1]);
     setMessageB(fetchedData[2]);
@@ -91,10 +105,10 @@ const HomeScreen = () => {
   };
 
   useEffect(() => {
-    if(latitude != null && longitude != null){
+    if(latitude != null && longitude != null && userRadius != null){
       fetchData();
     }
-  }, [latitude, longitude]);
+  }, [latitude, longitude, userRadius]);
 
 
   if (loading || !dataA || !messageA || !dataB || !messageB) {

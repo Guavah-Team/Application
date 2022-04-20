@@ -63,8 +63,8 @@ function App(props) {
       <Navigation latitude={latitude} longitude={longitude}/>
 
 
-      {/* <HorizontalRestaurantPage name = "MarieCallendar’s Restaurant & Bakery"/> */}
-      {/* <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1}/> */}
+      {/* <HorizontalRestaurantPage name = "Fosters Freeze" distance={10000} price={2}/> */}
+      {/* <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1} price={2}/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
       {/* <Text>{text}</Text> */}

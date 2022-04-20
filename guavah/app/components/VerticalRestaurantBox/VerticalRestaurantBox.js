@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Pressable, ImageBackground, Text, View, Alert, Image} from 'react-native';
 import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -6,7 +6,7 @@ import placeHolder from '../../assets/defaults/VerticalDefault.png';
 import { useFonts } from 'expo-font';
 
 function VerticalRestaurantBox({restaurant, type="SMALL"}) {
-    const {name, rating, distance, photo, location, id, photo_gallary} = restaurant;
+    const {name, rating, distance, price, photo, location, id, photo_gallary} = restaurant;
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -24,7 +24,25 @@ function VerticalRestaurantBox({restaurant, type="SMALL"}) {
 
     const navigation = useNavigation();
 
+    const [dollarSign, setDollarSign] = useState();
+
     // console.log(photo);
+
+    const dollarSignConverter = () => {
+        if(price === 1){
+            setDollarSign("$");
+        }else if(price === 2){
+            setDollarSign("$$");
+        }else{
+            setDollarSign("$$$");
+        }
+    }
+
+
+    useEffect(() => {
+        dollarSignConverter();
+    }, [])
+
 
     return (
         <Pressable 
@@ -35,6 +53,7 @@ function VerticalRestaurantBox({restaurant, type="SMALL"}) {
                 location: location,
                 FSQID: id,
                 photo_gallary: photo_gallary,
+                price: price,
             });
         }}
         style = {[styles[`container_${type}`], styles.shadowProp]}>
@@ -48,6 +67,7 @@ function VerticalRestaurantBox({restaurant, type="SMALL"}) {
                 </View>
                 <View style = {styles.bottomTextBox}>
                     <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text>
+                    <Text style = {styles.priceText}>{dollarSign}</Text>
                 </View>
             </ImageBackground>
         </Pressable>
@@ -96,7 +116,7 @@ const styles = StyleSheet.create({
     bottomTextBox: {
         alignItems: 'center',
         position: 'absolute',
-        bottom: 21,
+        bottom: 15,
         left: 43,
         right: 43
     },
@@ -112,7 +132,13 @@ const styles = StyleSheet.create({
         left: 63,
         right: 50,
         bottom: 78,
-    }
+    },
+    priceText: {
+        color: colors.white,
+        fontSize: 12,
+        textTransform: 'capitalize',
+        fontFamily: 'GigaSansReg'
+    },
 })
 
 export default VerticalRestaurantBox;

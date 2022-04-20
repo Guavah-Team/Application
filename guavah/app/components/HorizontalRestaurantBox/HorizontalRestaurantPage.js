@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Pressable, StyleSheet, ImageBackground} from 'react-native';
 import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
@@ -21,6 +21,25 @@ function HorizontalRestaurantPage({restaurant}) {
         GigaSansMedium: require('../../assets/fonts/GigaSans-Medium.otf'),
         GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
       });
+
+      const [dollarSign, setDollarSign] = useState();
+
+    // console.log(photo);
+
+    const dollarSignConverter = () => {
+        if(price === 1){
+            setDollarSign("$");
+        }else if(price === 2){
+            setDollarSign("$$");
+        }else{
+            setDollarSign("$$$");
+        }
+    }
+
+
+    useEffect(() => {
+        dollarSignConverter();
+    }, [])
     
     
 
@@ -42,6 +61,7 @@ function HorizontalRestaurantPage({restaurant}) {
                 <View style = {styles.textBox}>
                     <Text style = {styles.restaurantNameText}> {name} </Text>
                     <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text>
+                    <Text style = {styles.priceText}>{dollarSign}</Text>
                 </View>
             </ImageBackground>
         </Pressable>
@@ -80,7 +100,8 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontSize: 12,
         textTransform: 'capitalize',
-        fontFamily: 'GigaSansReg'
+        fontFamily: 'GigaSansReg',
+        marginLeft: 2,
     },
     textBox: {
         marginLeft: 25,
@@ -92,6 +113,13 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: 4},
         shadowOpacity: 0.3,
         shadowRadius: 2,
+    },
+    priceText: {
+        color: colors.white,
+        fontSize: 12,
+        textTransform: 'capitalize',
+        fontFamily: 'GigaSansReg',
+        marginLeft: 5,
     },
 })
 

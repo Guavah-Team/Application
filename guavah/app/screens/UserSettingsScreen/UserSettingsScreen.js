@@ -22,33 +22,20 @@ function UserSettingsScreen(){
     const [radius, setRadius] = useState(null);
     const [profilePhoto, setProfilePhoto] = useState(null);
     const [darkTheme, setDarkTheme] = useState(null);
-    //const [darkThemeBool, setDarkThemeBool] = useState(null);
     const [vegan, setVegan] = useState(null);
-    //const [veganBool, setVeganBool] = useState(null);
 
-    const [isDarkEnabled, setIsDarkEnabled] = useState(false);
     const toggleDarkSwitch = () => {
-        setIsDarkEnabled(previousState => !previousState);
-        if(isDarkEnabled){
+        if(darkTheme === 1){
             setDarkTheme(0);
-        } else if(!isDarkEnabled){
+        }else{
             setDarkTheme(1);
         }
     }
 
-
-
-    console.log(darkTheme);
-    console.log(radius);
-    console.log(vegan);
-
-    const [isVeganEnabled, setIsVeganEnabled] = useState(false);
-
     const toggleVeganSwitch = () => {
-        setIsVeganEnabled(previousState => !previousState);
-        if(isVeganEnabled){
+        if(vegan === 1){
             setVegan(0);
-        } else if(!isVeganEnabled){
+        }else{
             setVegan(1);
         }
     }
@@ -70,76 +57,22 @@ function UserSettingsScreen(){
 
     const fetchUserData = async () => {
         const fetchedUserData = await getUserDataSettings(userId);
-        // console.log(fetchedUserData)
         setName(fetchedUserData[0]);
         setEmail(fetchedUserData[1]);
         setProfilePhoto(fetchedUserData[2]);
         setRadius(fetchedUserData[3] * .000621371);
         setVegan(fetchedUserData[4]);
         setDarkTheme(fetchedUserData[5]);
-        
-        // if(darkTheme === 1){
-        //     setIsDarkEnabled(true);
-        // }else if(darkTheme === 0){
-        //     setIsDarkEnabled(false);
-        // }
-
-        // console.log(isDarkEnabled + "dark")
-
-        
-        
-        // if(vegan === 1){
-        //     setIsVeganEnabled(true);
-        // }else if (vegan === 0){
-        //     setIsVeganEnabled(false);
-        // }
-        // console.log(isVeganEnabled + "vegan");
     }
 
     useEffect(() =>{
         fetchUserData();
-        // isDarkTheme();
-        // isVegan();
-
-        if(darkTheme === 1){
-            setIsDarkEnabled(true);
-        }else if(darkTheme === 0){
-            setIsDarkEnabled(false);
-        }
-
-        console.log(isDarkEnabled + "dark")
-
-        
-        
-        if(vegan === 1){
-            setIsVeganEnabled(true);
-        }else if (vegan === 0){
-            setIsVeganEnabled(false);
-        }
-        console.log(isVeganEnabled + "vegan");
-
     }, [])
 
     const navigation = useNavigation();
 
-    // const isDarkTheme = () =>{
-    //     if(darkTheme === 1){
-    //         setIsDarkEnabled(true);
-    //     }else if(darkTheme === 0){
-    //         setIsDarkEnabled(false);
-    //     }
-    // }
-
-    // const isVegan = () =>{
-    //     if(setIsVeganEnabled){
-    //         setVegan(1);
-    //     }else if(!setIsVeganEnabled){
-    //         setVegan(0);
-    //     }
-    // }
-
     const onPressPost = async() =>{
-        postSettingsData(userId, name, darkTheme, vegan, radius);
+        postSettingsData(userId, name, darkTheme, vegan, Math.ceil(radius));
     }
     
     const returnHome = () => {
@@ -205,8 +138,6 @@ function UserSettingsScreen(){
                         onValueChange={value => setRadius(Math.ceil(value))}
                         
                     />
-
-
                 </View>
 
             {/* Preference Box */}
@@ -219,10 +150,10 @@ function UserSettingsScreen(){
                     <View style = {styles.switch}>
                         <Switch
                             trackColor={{ false: "#1b1b1b" , true: "#1b1b1b" }}
-                            thumbColor={isDarkEnabled ? colors.accent : colors.white}
+                            thumbColor={darkTheme === 1 ? colors.accent : colors.white}
                             ios_backgroundColor = "#1b1b1b"
                             onValueChange={toggleDarkSwitch}
-                            value={isDarkEnabled}
+                            value={darkTheme === 1 ? true : false}
                         />
                     </View>
                 </View>
@@ -232,10 +163,10 @@ function UserSettingsScreen(){
                     <View style = {styles.switch}>
                         <Switch
                             trackColor={{ false: "#1b1b1b" , true: "#1b1b1b" }}
-                            thumbColor={isVeganEnabled ? colors.accent : colors.white}
+                            thumbColor={vegan === 1 ? colors.accent : colors.white}
                             ios_backgroundColor = "#1b1b1b"
                             onValueChange={toggleVeganSwitch}
-                            value={isVeganEnabled}
+                            value={vegan === 1 ? true : false}
                         />
                     </View>
                 </View>

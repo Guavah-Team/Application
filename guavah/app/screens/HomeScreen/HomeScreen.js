@@ -75,6 +75,7 @@ const HomeScreen = () => {
   const [messageA, setMessageA] = useState(null);
   const [dataB, setDataB] = useState(null);
   const [messageB, setMessageB] = useState(null);
+  const [dataC, setDataC] = useState(null);
 
   const navigation = useNavigation();
 
@@ -99,6 +100,7 @@ const HomeScreen = () => {
     setDataA(fetchedData[1]);
     setMessageB(fetchedData[2]);
     setDataB(fetchedData[3]);
+    setDataC(fetchedData[4]);
     setLoading(false);
     // console.log("THIS IS DATA A vvvv")
     // console.log(dataA);
@@ -111,20 +113,23 @@ const HomeScreen = () => {
   }, [latitude, longitude, userRadius]);
 
 
-  if (loading || !dataA || !messageA || !dataB || !messageB) {
+  if (loading || !dataA || !messageA || !dataB || !messageB || !dataC) {
     return <ActivityIndicator style = {styles.loading} size="large" />; 
   }
+
+  // console.log(dataC["image"])
 
   return (
     <ScrollView style={styles.container}>
       <ImageBackground
         style={styles.topImage}
-        source={randomImage[Math.floor(Math.random()*randomImage.length)]}
+        // source={randomImage[Math.floor(Math.random()*randomImage.length)]}
+        source={{uri: dataC["image"]}}
       >
         <View style={styles.mask} />
         <View style = {styles.headerTextBox}>
-          <Text style = {styles.headerText}>Date night?</Text>
-          <Text style = {styles.headerText}>Find a restaurant.</Text>
+          <Text style = {styles.headerText}>{dataC["message_1"]}</Text>
+          <Text style = {styles.headerText}>{dataC["message_2"]}</Text>
           <CustomButton 
             text = {"Search"}
             onPress = {searchPressed}

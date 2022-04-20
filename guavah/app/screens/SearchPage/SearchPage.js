@@ -66,7 +66,7 @@ function SearchPage() {
     const[userRadius, setUserRadius] = useState("");
 
     const [oneDollar, setOneDollar] = useState(true);
-    const [oneColor, setOneColor] = useState(colors.dark);
+    const [oneColor, setOneColor] = useState(colors.accent);
     const [twoDollar, setTwoDollar] = useState(false);
     const [twoColor, setTwoColor] = useState("");
     const [threeDollar, setThreeDollar] = useState(false);
@@ -82,7 +82,7 @@ function SearchPage() {
         setOneDollar(true);
         setTwoDollar(false);
         setThreeDollar(false);
-        setOneColor(colors.dark);
+        setOneColor(colors.accent);
         setTwoColor("");
         setThreeColor("");
         const fetchedData = await getOpeningSearchRestaurantData(1, {latitude, longitude, userRadius});
@@ -92,7 +92,7 @@ function SearchPage() {
         setTwoDollar(true);
         setOneDollar(false);
         setThreeDollar(false);
-        setTwoColor(colors.dark);
+        setTwoColor(colors.accent);
         setOneColor("");
         setThreeColor("");
         const fetchedData = await getOpeningSearchRestaurantData(2, {latitude, longitude, userRadius});
@@ -102,7 +102,7 @@ function SearchPage() {
         setThreeDollar(true);
         setOneDollar(false);
         setTwoDollar(false);
-        setThreeColor(colors.dark);
+        setThreeColor(colors.accent);
         setOneColor('');
         setTwoColor('');
         const fetchedData = await getOpeningSearchRestaurantData(3, {latitude, longitude, userRadius});
@@ -291,8 +291,8 @@ const styles = StyleSheet.create({
     },
     searchBox: {
         marginTop: '8%',
-        marginLeft: 10,
-        marginRight: 10,
+        // marginLeft: 10,
+        // marginRight: 10,
     },
     horizontal: {
         marginLeft: 10,
@@ -361,7 +361,7 @@ const styles = StyleSheet.create({
         justifyContent: "flex-start",
         alignItems: "center",
         flexDirection: "row",
-        width: "90%",
+        width: "93%",
         
       },
       input: {
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
       },
       dollarButtons: {
           flexDirection: 'row',
-          justifyContent: 'space-evenly',
+          justifyContent: 'space-between',
           marginLeft: 10,
           marginRight: 10,
           marginTop: '3%',

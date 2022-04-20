@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const getDetailedRestaurantData = async ({latitude, longitude, userRadius}) => {
-  console.log(userRadius)
   url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/home?latlong=${latitude},${longitude}&radius=${userRadius}`;
   // url = "https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/home?latlong=33.4936,-117.1484&radius=2000";
   // console.log(latitude)
@@ -13,7 +12,9 @@ export const getDetailedRestaurantData = async ({latitude, longitude, userRadius
       sections.push(response.data["sectionA"]);
       sections.push(response.data["messageB"]);
       sections.push(response.data["sectionB"]);
-      // console.log(sections[1]);
+      sections.push(response.data["sectionC"]);
+      console.log(sections[1]);
+      // console.log(sections[4])
       return sections;
     }catch (e) {
       console.log(e);
@@ -60,7 +61,7 @@ export const getRestaurantReviews = async (restaurantId) => {
     const response = await axios.get(url);
     let sections = [];
     sections.push(response.data);
-    console.log(sections);
+    // console.log(sections);
     return sections;
   }catch (e) {
     console.log(e);

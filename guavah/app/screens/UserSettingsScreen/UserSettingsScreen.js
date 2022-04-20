@@ -88,89 +88,92 @@ function UserSettingsScreen(){
                     <Text style = {styles.textStyleHeader}>settings</Text>
                 </SafeAreaView>
                 <Pressable style = {styles.backButton} >
-                    <Ionicons onPress = {returnHome} name="chevron-back-outline" size="30" style = {styles.backArrow}/>
+                    <Ionicons onPress = {returnHome} name="chevron-back-outline" size={30} style = {styles.backArrow}/>
                 </Pressable>
             </View>
 
             {/* Profile Box */}
-            <Text style = {styles.sections}>Profile</Text>
-            <View style = {styles.profileSettingsBox}>
-                <SvgUri style = {styles.profilePic} uri={profilePhoto}/>
+            <View style = {styles.border}>
 
-                <View>
-                    <Text style = {styles.profileText}>Name</Text>
-                    <TextInput  
-                        style = {styles.input}
-                        placeholder = {name}
-                        placeholderTextColor = 'black'
-                        onChangeText = {newName => setName(newName)}
-                        defaultValue = {name}
-                    />
-                    <Text style = {styles.profileText}>Email</Text>
-                    <TextInput 
-                        style = {styles.input}
-                        value = {email}
-                        //placeholder = {email}
-                        placeholderTextColor = 'black'
-                        //onChangeText = {newEmail => setEmail(newEmail)}
-                        defaultValue = {email}
+                <Text style = {styles.sections}>Profile</Text>
+                <View style = {styles.profileSettingsBox}>
+                    <SvgUri style = {styles.profilePic} uri={profilePhoto}/>
+
+                    <View>
+                        <Text style = {styles.profileText}>Name</Text>
+                        <TextInput  
+                            style = {styles.input}
+                            placeholder = {name}
+                            placeholderTextColor = 'black'
+                            onChangeText = {newName => setName(newName)}
+                            defaultValue = {name}
                         />
-                </View>
-            </View>
-
-            {/* Location Box */}
-            <Text style = {styles.sections}>Location</Text>
-                <View style = {styles.settingsBox}>
-                    <View style = {styles.locations}>
-                        <View style = {styles.locationView}><Image style = {styles.location} source={require('../../assets/userSettingsIcons/location.png')}/></View>
-                        <Text style = {styles.textFonts}>Search Radius</Text>
-                        <View  style = {styles.switch}><Text style = {styles.textFonts}>{Math.ceil(radius)} Miles</Text></View>
+                        <Text style = {styles.profileText}>Email</Text>
+                        <TextInput 
+                            style = {styles.input}
+                            value = {email}
+                            //placeholder = {email}
+                            placeholderTextColor = 'black'
+                            //onChangeText = {newEmail => setEmail(newEmail)}
+                            defaultValue = {email}
+                            />
                     </View>
-                    
-                    <Slider
-                        style={{width: '90%', height: 40, alignSelf: 'center', flex: .1}}
-                        minimumValue={0}
-                        maximumValue={10}
-                        value = {radius}
-                        thumbTintColor= {colors.accent}
-                        minimumTrackTintColor={colors.accent}
-                        maximumTrackTintColor= "#1b1b1b"
-                        onValueChange={value => setRadius(Math.ceil(value))}
+                </View>
+
+                {/* Location Box */}
+                <Text style = {styles.sections}>Location</Text>
+                    <View style = {styles.settingsBox}>
+                        <View style = {styles.locations}>
+                            <View style = {styles.locationView}><Image style = {styles.location} source={require('../../assets/userSettingsIcons/location.png')}/></View>
+                            <Text style = {styles.textFonts}>Search Radius</Text>
+                            <View  style = {styles.switch}><Text style = {styles.textFonts}>{Math.ceil(radius)} Miles</Text></View>
+                        </View>
                         
-                    />
-                </View>
+                        <Slider
+                            style={{width: '90%', height: 40, alignSelf: 'center', flex: .1}}
+                            minimumValue={0}
+                            maximumValue={10}
+                            value = {radius}
+                            thumbTintColor= {colors.accent}
+                            minimumTrackTintColor={colors.accent}
+                            maximumTrackTintColor= "#1b1b1b"
+                            onValueChange={value => setRadius(Math.ceil(value))}
+                            
+                        />
+                    </View>
 
-            {/* Preference Box */}
-            <Text style = {styles.sections}>Preferences</Text>
-            <View style = {styles.settingsBox}>
-                <View style = {styles.preferences}>
-                    <View style = {styles.moonView}><Image style = {styles.moon} source={require('../../assets/userSettingsIcons/DarkMode.png')}/></View>
-                    
-                    <Text style = {styles.textFonts}>Dark Theme (cs approved)</Text>
-                    <View style = {styles.switch}>
-                        <Switch
-                            trackColor={{ false: "#1b1b1b" , true: "#1b1b1b" }}
-                            thumbColor={darkTheme === 1 ? colors.accent : colors.white}
-                            ios_backgroundColor = "#1b1b1b"
-                            onValueChange={toggleDarkSwitch}
-                            value={darkTheme === 1 ? true : false}
-                        />
+                {/* Preference Box */}
+                <Text style = {styles.sections}>Preferences</Text>
+                <View style = {styles.settingsBox}>
+                    <View style = {styles.preferences}>
+                        <View style = {styles.moonView}><Image style = {styles.moon} source={require('../../assets/userSettingsIcons/DarkMode.png')}/></View>
+                        
+                        <Text style = {styles.textFonts}>Dark Theme (cs approved)</Text>
+                        <View style = {styles.switch}>
+                            <Switch
+                                trackColor={{ false: "#1b1b1b" , true: "#1b1b1b" }}
+                                thumbColor={darkTheme === 1 ? colors.accent : colors.white}
+                                ios_backgroundColor = "#1b1b1b"
+                                onValueChange={toggleDarkSwitch}
+                                value={darkTheme === 1 ? true : false}
+                            />
+                        </View>
                     </View>
-                </View>
-                <View style = {styles.preferences}>
-                <View style = {styles.plantView}><Image style = {styles.plant} source={require('../../assets/userSettingsIcons/VeganPrio.png')}/></View>
-                    <Text style = {styles.textFonts}>Vegan Prioritization</Text>
-                    <View style = {styles.switch}>
-                        <Switch
-                            trackColor={{ false: "#1b1b1b" , true: "#1b1b1b" }}
-                            thumbColor={vegan === 1 ? colors.accent : colors.white}
-                            ios_backgroundColor = "#1b1b1b"
-                            onValueChange={toggleVeganSwitch}
-                            value={vegan === 1 ? true : false}
-                        />
+                    <View style = {styles.preferences}>
+                    <View style = {styles.plantView}><Image style = {styles.plant} source={require('../../assets/userSettingsIcons/VeganPrio.png')}/></View>
+                        <Text style = {styles.textFonts}>Vegan Prioritization</Text>
+                        <View style = {styles.switch}>
+                            <Switch
+                                trackColor={{ false: "#1b1b1b" , true: "#1b1b1b" }}
+                                thumbColor={vegan === 1 ? colors.accent : colors.white}
+                                ios_backgroundColor = "#1b1b1b"
+                                onValueChange={toggleVeganSwitch}
+                                value={vegan === 1 ? true : false}
+                            />
+                        </View>
                     </View>
+                
                 </View>
-            
             </View>
 
             
@@ -222,7 +225,7 @@ const styles = StyleSheet.create({
     sections:{
         fontFamily: 'GigaSansSemiBold',
         fontSize: 20,
-        paddingLeft: 15,
+        // paddingLeft: 15,
         paddingVertical: 10,
         marginTop: '5%'
     },
@@ -235,9 +238,10 @@ const styles = StyleSheet.create({
         color: colors.white,
     },
     settingsBox:{
-        width: 350,
+        width: '100%',
         height: 120,
-        alignSelf: 'center',
+        // alignSelf: 'center',
+
         shadowColor: '#171717',
         shadowOffset: {width: 0, height: 4},
         shadowOpacity: 0.3,
@@ -247,7 +251,7 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     profileSettingsBox:{
-        width: 350,
+        width: '100%',
         height: 120,
         alignSelf: 'center',
         alignItems: 'center',
@@ -341,6 +345,10 @@ const styles = StyleSheet.create({
     profilePic:{
         width: 80,
         height: 80,
+    },
+    border: {
+        marginLeft: 9,
+        marginRight: 9
     }
    
 })

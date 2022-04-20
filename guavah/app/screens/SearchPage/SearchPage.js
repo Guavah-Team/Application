@@ -149,15 +149,15 @@ function SearchPage() {
         setLoading(false);
     };
 
-    // useEffect(() => {
-    //     if(latitude != null && longitude != null && userRadius != null){
-    //         fetchData();
-    //     }
-    // }, [latitude, longitude, userRadius]);
+    useEffect(() => {
+        if(latitude != null && longitude != null && userRadius != null){
+            fetchData();
+        }
+    }, [latitude, longitude, userRadius]);
 
-    // if (loading || !data) {
-    //     return <ActivityIndicator style = {styles.loading} size="large" />; 
-    // }
+    if (loading || !data) {
+        return <ActivityIndicator style = {styles.loading} size="large" />; 
+    }
 
     return (
         <View style={styles.container}> 

@@ -6,7 +6,7 @@ import placeHolder from '../../assets/defaults/VerticalDefault.png';
 import { useFonts } from 'expo-font';
 
 function VerticalRestaurantBox({restaurant, type="SMALL"}) {
-    const {name, rating, distance, price, photo, location, id, photo_gallary} = restaurant;
+    const {name, badge, distance, price, photo, location, id, photo_gallary} = restaurant;
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -26,8 +26,6 @@ function VerticalRestaurantBox({restaurant, type="SMALL"}) {
 
     const [dollarSign, setDollarSign] = useState();
 
-    // console.log(photo);
-
     const dollarSignConverter = () => {
         if(price === 1){
             setDollarSign("$");
@@ -38,11 +36,9 @@ function VerticalRestaurantBox({restaurant, type="SMALL"}) {
         }
     }
 
-
     useEffect(() => {
         dollarSignConverter();
     }, [])
-
 
     return (
         <Pressable 
@@ -54,6 +50,7 @@ function VerticalRestaurantBox({restaurant, type="SMALL"}) {
                 FSQID: id,
                 photo_gallary: photo_gallary,
                 price: price,
+                badge: badge,
             });
         }}
         style = {[styles[`container_${type}`], styles.shadowProp]}>
@@ -63,7 +60,7 @@ function VerticalRestaurantBox({restaurant, type="SMALL"}) {
                     <Text style = {styles.restaurantNameText}> {name} </Text>
                 </View>
                 <View style = {styles.centerLogo}>
-                    {/* <Image source = {require('../../assets/ICONS/Tier-1-Badge-(Base).png')}></Image> */}
+                    <Image style={styles.badge} source = {{uri: badge}}></Image>
                 </View>
                 <View style = {styles.bottomTextBox}>
                     <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text>
@@ -128,8 +125,8 @@ const styles = StyleSheet.create({
     },
     centerLogo: {
         position: 'absolute',
-        top: 89,
-        left: 63,
+        top: 82,
+        left: 60,
         right: 50,
         bottom: 78,
     },
@@ -139,6 +136,10 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
         fontFamily: 'GigaSansReg'
     },
+    badge: {
+        width: 30,
+        height: 40,
+    }
 })
 
 export default VerticalRestaurantBox;

@@ -63,8 +63,10 @@ function App(props) {
       <Navigation latitude={latitude} longitude={longitude}/>
 
 
-      {/* <HorizontalRestaurantPage name = "Fosters Freeze" distance={10000} price={2}/> */}
-      {/* <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1} price={2}/> */}
+      {/* <HorizontalRestaurantPage name = "Fosters Freezer that will ke=ill youasdgfh" distance={10000} price={2} badge={"https:guavah-image-bucket.s3.us-west-1.amazonaws.com/ranks/gor_91.png"}/> */}
+
+      {/* "badge": "https://guavah-image-bucket.s3.us-west-1.amazonaws.com/ranks/gor_91.png" */}
+      {/* <VerticalRestaurantBox name = "Olive Garden" distance = "10000" rating = {1} price={2} badge={"https:guavah-image-bucket.s3.us-west-1.amazonaws.com/ranks/gor_91.png"}/> */}
       {/* <NavigationBar/> */}
       {/* <HomeScreen/> */}
       {/* <Text>{text}</Text> */}

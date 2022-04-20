@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Pressable, StyleSheet, ImageBackground} from 'react-native';
+import {View, Text, Pressable, StyleSheet, Image, ImageBackground} from 'react-native';
 import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 import {useFonts} from 'expo-font';
 
 function HorizontalRestaurantPage({restaurant}) {
-    const {name, rating, distance, photo, price, location, id, photo_gallary} = restaurant;
+    const {name, badge, distance, photo, price, location, id, photo_gallary} = restaurant;
     const navigation = useNavigation();
 
     const [loaded] = useFonts({
@@ -62,6 +62,9 @@ function HorizontalRestaurantPage({restaurant}) {
                     <Text style = {styles.restaurantNameText}> {name} </Text>
                     <Text style = {styles.distanceText}> {(distance / 1609).toFixed(2)} Miles </Text>
                     <Text style = {styles.priceText}>{dollarSign}</Text>
+                    <View style = {styles.topRightLogo}>
+                        <Image style={styles.badge} source = {{uri: badge}}></Image>
+                    </View>
                 </View>
             </ImageBackground>
         </Pressable>
@@ -120,6 +123,17 @@ const styles = StyleSheet.create({
         textTransform: 'capitalize',
         fontFamily: 'GigaSansReg',
         marginLeft: 5,
+    },
+    badge: {
+        width: 30,
+        height: 40,
+    },
+    topRightLogo: {
+        position: 'absolute',
+        // top: 1,
+        left: 306,
+        // right: 9,
+        bottom: 18,
     },
 })
 

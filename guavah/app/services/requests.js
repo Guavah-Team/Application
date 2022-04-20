@@ -66,6 +66,19 @@ export const getRestaurantReviews = async (restaurantId) => {
   }
 }
 
+export const getVersusData = async (userId) => {
+  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/display-versus?UserID=${userId}`;
+  try{
+    const response = await axios.get(url);
+    let sections = [];
+    sections.push(response.data);
+    // console.log(sections);
+    return sections;
+  } catch (e){
+    console.log(e);
+  }
+};
+
 export const getUserData = async (userId) => {
   url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/get-user?UserID=${userId}`
   try{

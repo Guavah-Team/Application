@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {ScrollView, View, Text, StyleSheet, Alert, ImageBackground, Image} from 'react-native';
 import HorizontalProfileBox from '../../components/HorizontalProfileBox/HorizontalProfileBox';
+import HorizontalProfileBoxUnused from '../../components/HorizontalProfileBoxUnused/HorizontalProfileBoxUnused';
 import Amplify, {Auth} from 'aws-amplify';
 import {useNavigation} from '@react-navigation/native';
 import colors from '../../config/colors/colors';
@@ -53,11 +54,6 @@ function ProfileScreen(props) {
     const onSettingsPressed = () => {
         navigation.navigate('SettingsScreen')
     }
-    
-    const onHistoryPressed = () => {
-        navigation.navigate('HistoryScreen');
-    }
-
 
     return (
         <ScrollView style = {styles.container}>
@@ -74,7 +70,7 @@ function ProfileScreen(props) {
 
             <View style = {styles.horizontalBox}>
                 <HorizontalProfileBox onPress={onSettingsPressed} iconName = {'settings'} name = {'Profile Settings'} description = {'Adjust your profile information'}/>
-                <HorizontalProfileBox onPress={onHistoryPressed} iconName = {'history'} name = {'History'} description = {'View your recent activity'}/>
+                <HorizontalProfileBoxUnused iconName = {'history'} name = {'History'} description = {'View your recent activity'}/>
                 <HorizontalProfileBox onPress={logout} iconName = {'logout'} name = {'Logout'} description = {'Log out of your account'}/>
             </View>
         </ScrollView>
@@ -123,11 +119,12 @@ const styles = StyleSheet.create({
     },
     topBox: {
         position: 'absolute',
-        height: '100%',
-        width: '150%',
+        height: 400,
+        width: 600,
         backgroundColor: colors.accent,
-        transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -550}],
-    }
+        // transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -550}],
+        transform: [{skewY: '-20deg'}, {translateX: -100}, {translateY: -225}],
+    },
 })
 
 export default ProfileScreen;

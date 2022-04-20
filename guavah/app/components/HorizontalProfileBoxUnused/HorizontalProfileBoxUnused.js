@@ -7,7 +7,7 @@ import {useFonts} from 'expo-font';
 //ICON NAME
 //settings, history, logout
 
-function HorizontalProfileBox({onPress, name, description, iconName}) {
+function HorizontalProfileBoxUnused({onPress, name, description, iconName}) {
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -33,7 +33,7 @@ function HorizontalProfileBox({onPress, name, description, iconName}) {
                 </View>
 
             </View>
-            
+            {/* <Text style = {styles.comingSoon}>Coming Soon</Text> */}
         </Pressable>
     );
 }
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 100,
         backgroundColor: colors.background,
+        // backgroundColor: 'rgba(0,0,0,0.5)',
         borderRadius: 6,
         marginBottom: 10,
     },
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginLeft: 21,
+        color: colors.grey,
     },
     textBox: {
         marginLeft: 25,
@@ -68,13 +70,23 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'GigaSansBold',
         textTransform: 'capitalize',
+        color: colors.grey,
     },
     description: {
         fontSize: 14,
         fontFamily: 'GigaSansReg',
-        textTransform: 'capitalize',
+        color: colors.grey,
+        // textTransform: 'capitalize',
+    },
+    comingSoon: {
+        color: colors.white,
+        fontSize: 34,
+        fontFamily: 'GigaSansSemiBold',
+        position: 'absolute',
+        left: '21%',
+        top: '25%',
     }
     
 })
 
-export default HorizontalProfileBox;
+export default HorizontalProfileBoxUnused;

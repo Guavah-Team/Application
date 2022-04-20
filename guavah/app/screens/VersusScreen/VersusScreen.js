@@ -1,14 +1,40 @@
 import { container } from 'aws-amplify';
-import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import React, {useState} from 'react';
+import { View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import CustomButton from '../../components/CustomButton';
 import VerticalRestaurantBox from '../../components/VerticalRestaurantBox';
+import VersusRestaurantBox from '../../components/VersusRestaurantBox';
 import colors from '../../config/colors/colors';
 import {useFonts} from 'expo-font';
+import { getVersusData } from '../../services/requests';
+import { useEffect } from 'react';
+import Amplify, { Auth } from "aws-amplify";
+import { postVersusData } from '../../services/postVersusData';
+import {SvgUri} from 'react-native-svg';
 
 function VersusScreen(props) {
+    const [data, setData] = useState(null);
+    const [data2, setData2] = useState(null);
+
+    const [userPhoto, setUserPhoto] = useState(null);
+
+    const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
+
+    const fetchData = async () => {
+        const fetchedData = await getVersusData(userId);
+
+        setData2(fetchedData[0]['restaurants'][1]);
+        setData(fetchedData[0]['restaurants'][0]);
+        setUserPhoto(fetchedData[0]['user'].ProfilePhoto);
+        console.log(fetchedData[0]['user'].ProfilePhoto);
+        
+    };
+
+    useEffect(() => {
+        fetchData();
+      }, []);
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -24,33 +50,42 @@ function VersusScreen(props) {
         GigaSansSemiBold: require('../../assets/fonts/GigaSans-SemiBold.otf'),
     });
 
-    const item = ["testName", 2, 20, null];
+
+    if(!data){
+        return <ActivityIndicator style = {componentStyle.loading} size="large" />; 
+    }
+
+    const item = [data['name'], null, null, data['photo']];
+    const item2 = [data2['name'], 3, 35, data2['photo']];
 
     return (
         <View style={containerStyles.container}>
+        {/* Slanted Accent Color */}
             <View style={containerStyles.topBox}>
 
             </View>
+        {/* Header */}
             <View style={containerStyles.headerContainer}>
                 {/* <View style={containerStyles.headerTextContainer}> */}
                     <Text style={textStyle.text}>{`Which was better?`}</Text>
                     <Text style={textStyle.textSmall}>Tap One</Text>
                 {/* </View> */}
             </View>
-
+        {/* Profile Image */}
             <View style={containerStyles.profileImageContainer}>
-                <Image style = {componentStyle.topImage} source = {require('../../assets/icon.png')}/>
+                <SvgUri style = {componentStyle.topImage} uri={userPhoto}/>
             </View>
-
+        {/* Versus */}
             <View style={containerStyles.versusContainer}>
                 {/* <Text style={textStyle.versusText}>Which was better?</Text>
                 <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
                 <View style={containerStyles.versusRestaurantContainer}>
-                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
-                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
+                    <VersusRestaurantBox restaurant={item}/>
+                    <VersusRestaurantBox restaurant={item2}/>
+                    {/* <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
+                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/> */}
                 </View>
             </View>
-
         </View>
         
     );
@@ -98,17 +133,21 @@ const containerStyles = StyleSheet.create({
 
     const componentStyle = StyleSheet.create({
         topImage: {
-            height: 132,
-            width: 132,
+            height: 104,
+            width: 104,
             borderRadius: 1000,
             marginTop: '0%',
         },
+
+        loading: {
+            flex: 1,
+            justifyContent: 'center',
+          },
     })
 
     const textStyle = StyleSheet.create({
         text: {
             color: colors.background,
-            // color: colors.accent,
             textAlign: 'center',
             textAlignVertical: 'bottom',
             fontSize: 30,
@@ -116,14 +155,6 @@ const containerStyles = StyleSheet.create({
             marginTop: '15%',
             marginBottom: '0%',
 
-    
-            // marginBottom: '10%',
-    
-            // ...Platform.select({
-            //     android: {
-            //         marginTop: '10%',
-            //     },
-            // })
         },
 
         textSmall: {
@@ -143,7 +174,6 @@ const containerStyles = StyleSheet.create({
 
         versusTextSmall: {
             color: colors.accent,
-            // color: 'black',
             textAlign: 'center',
             fontSize: 16,
             marginTop: '0%',

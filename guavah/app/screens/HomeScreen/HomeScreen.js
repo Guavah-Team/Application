@@ -86,6 +86,8 @@ const HomeScreen = () => {
     setMessageB(fetchedData[2]);
     setDataB(fetchedData[3]);
     setLoading(false);
+    // console.log("THIS IS DATA A vvvv")
+    // console.log(dataA);
   };
 
   useEffect(() => {

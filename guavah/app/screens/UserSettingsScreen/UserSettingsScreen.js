@@ -22,35 +22,36 @@ function UserSettingsScreen(){
     const [radius, setRadius] = useState(null);
     const [profilePhoto, setProfilePhoto] = useState(null);
     const [darkTheme, setDarkTheme] = useState(null);
-    const [darkThemeBool, setDarkThemeBool] = useState(null);
+    //const [darkThemeBool, setDarkThemeBool] = useState(null);
     const [vegan, setVegan] = useState(null);
-    const [veganBool, setVeganBool] = useState(null);
+    //const [veganBool, setVeganBool] = useState(null);
 
     const [isDarkEnabled, setIsDarkEnabled] = useState(false);
     const toggleDarkSwitch = () => {
         setIsDarkEnabled(previousState => !previousState);
-        if(darkTheme === 0){
-            setDarkTheme(1);
-            setDarkThemeBool(true);
-        } else if(darkTheme === 1){
+        if(isDarkEnabled){
             setDarkTheme(0);
-            setDarkThemeBool(false);
+        } else if(!isDarkEnabled){
+            setDarkTheme(1);
         }
     }
-    console.log(vegan)
+
+
+
+    console.log(darkTheme);
+    console.log(radius);
+    console.log(vegan);
 
     const [isVeganEnabled, setIsVeganEnabled] = useState(false);
+
     const toggleVeganSwitch = () => {
         setIsVeganEnabled(previousState => !previousState);
-        if(vegan === 0){
-            setVegan(1);
-            setVeganBool(true);
-        } else if(vegan === 1){
+        if(isVeganEnabled){
             setVegan(0);
-            setVeganBool(false);
+        } else if(!isVeganEnabled){
+            setVegan(1);
         }
     }
-
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
         CeraBlackItalic: require('../../assets/fonts/CeraPro-BlackItalic.otf'),
@@ -76,36 +77,70 @@ function UserSettingsScreen(){
         setRadius(fetchedUserData[3] * .000621371);
         setVegan(fetchedUserData[4]);
         setDarkTheme(fetchedUserData[5]);
+        
+        // if(darkTheme === 1){
+        //     setIsDarkEnabled(true);
+        // }else if(darkTheme === 0){
+        //     setIsDarkEnabled(false);
+        // }
+
+        // console.log(isDarkEnabled + "dark")
+
+        
+        
+        // if(vegan === 1){
+        //     setIsVeganEnabled(true);
+        // }else if (vegan === 0){
+        //     setIsVeganEnabled(false);
+        // }
+        // console.log(isVeganEnabled + "vegan");
     }
 
     useEffect(() =>{
         fetchUserData();
-        isDarkTheme();
-        isVegan();
+        // isDarkTheme();
+        // isVegan();
+
+        if(darkTheme === 1){
+            setIsDarkEnabled(true);
+        }else if(darkTheme === 0){
+            setIsDarkEnabled(false);
+        }
+
+        console.log(isDarkEnabled + "dark")
+
+        
+        
+        if(vegan === 1){
+            setIsVeganEnabled(true);
+        }else if (vegan === 0){
+            setIsVeganEnabled(false);
+        }
+        console.log(isVeganEnabled + "vegan");
+
     }, [])
 
     const navigation = useNavigation();
 
-    const isDarkTheme = () =>{
-        if(darkTheme === 0){
-            setDarkThemeBool(false)
-        }else if(darkTheme === 1){
-            setDarkThemeBool(true)
-        }
-    }
+    // const isDarkTheme = () =>{
+    //     if(darkTheme === 1){
+    //         setIsDarkEnabled(true);
+    //     }else if(darkTheme === 0){
+    //         setIsDarkEnabled(false);
+    //     }
+    // }
 
-    const isVegan = () =>{
-        if(vegan === 0){
-            setVeganBool(false)
-        }else if(vegan === 1){
-            setVeganBool(true)
-        }
-    }
+    // const isVegan = () =>{
+    //     if(setIsVeganEnabled){
+    //         setVegan(1);
+    //     }else if(!setIsVeganEnabled){
+    //         setVegan(0);
+    //     }
+    // }
 
     const onPressPost = async() =>{
         postSettingsData(userId, name, darkTheme, vegan, radius);
     }
-    console.log(radius)
     
     const returnHome = () => {
         navigation.navigate('HomeScreen');
@@ -119,7 +154,7 @@ function UserSettingsScreen(){
                 <SafeAreaView>
                     <Text style = {styles.textStyleHeader}>settings</Text>
                 </SafeAreaView>
-                <Pressable style = {styles.backButton} onPress={() => {alert('Back');}}>
+                <Pressable style = {styles.backButton} >
                     <Ionicons onPress = {returnHome} name="chevron-back-outline" size="30" style = {styles.backArrow}/>
                 </Pressable>
             </View>
@@ -162,13 +197,13 @@ function UserSettingsScreen(){
                     <Slider
                         style={{width: '90%', height: 40, alignSelf: 'center', flex: .1}}
                         minimumValue={0}
-                        maximumValue={10.9}
+                        maximumValue={10}
                         value = {radius}
                         thumbTintColor= {colors.accent}
                         minimumTrackTintColor={colors.accent}
                         maximumTrackTintColor= "#1b1b1b"
                         onValueChange={value => setRadius(Math.ceil(value))}
-                        v
+                        
                     />
 
 

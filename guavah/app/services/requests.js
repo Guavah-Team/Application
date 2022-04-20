@@ -86,7 +86,7 @@ export const getUserDataSettings = async (userId) => {
   url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/get-user?UserID=${userId}`
   try{
     const response = await axios.get(url);
-
+    console.log(response)
     let sections = [];
     // sections.push(response.data['body']);
     sections.push(response.data['body']['Name']);
@@ -95,6 +95,7 @@ export const getUserDataSettings = async (userId) => {
     sections.push(response.data['body']['Radius']);
     sections.push(response.data['body']['Vegan']);
     sections.push(response.data['body']['DarkMode']);
+    // console.log(sections);
     return sections;
   }catch (e) {
     console.log(e);

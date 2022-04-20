@@ -17,7 +17,7 @@ export const postSettingsData = async (userId, name, darkTheme, Vegan, radius  )
         UserID: userId,
         Name: name,
         DarkMode: darkTheme,
-        Vegan: Vegan,
+        Vegan: 1,
         Radius: radius,
       })
       .then(function(response){

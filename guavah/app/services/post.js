@@ -17,7 +17,7 @@ export const postSettingsData = async (userId, name, darkTheme, Vegan, radius  )
     axios.post("https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/update-settings",{
         UserID: userId,
         Name: name,
-        DarkMode: darkTheme,
+        DarkTheme: darkTheme,
         Vegan: Vegan,
         Radius: radius,
       })

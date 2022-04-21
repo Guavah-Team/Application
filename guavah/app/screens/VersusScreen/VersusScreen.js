@@ -15,8 +15,12 @@ import { postVersusData } from '../../services/postVersusData';
 import {SvgUri} from 'react-native-svg';
 
 function VersusScreen() {
-    const [data, setData] = useState(null);
-    const [data2, setData2] = useState(null);
+
+    const item = [null, 3, 35, null];
+    const item2 = [null, 3, 35, null]; 
+
+    const [data, setData] = useState(item);
+    const [data2, setData2] = useState(item2);
 
     const [canUserVersus, setCanUserVersus] = useState(null);
 
@@ -27,15 +31,17 @@ function VersusScreen() {
     const fetchData = async () => {
         const fetchedData = await getVersusData(userId);
         console.log(fetchedData[0]['statusCode']);
+        console.log(fetchedData[0]['restaurants'][0]['name']);
 
-        if(fetchedData[0]['statusCode'] == 404){
-            setCanUserVersus(false);
-        } else {
+        if(fetchedData[0]['statusCode'] == 200){
             setCanUserVersus(true);
             setData2(fetchedData[0]['restaurants'][1]);
             setData(fetchedData[0]['restaurants'][0]);
+            
             setUserPhoto(fetchedData[0]['user'].ProfilePhoto);
-            // console.log(fetchedData[0]['user'].ProfilePhoto);
+        } else {
+            setCanUserVersus(false);
+            console.log(setCanUserVersus);
         }
         
     };
@@ -65,8 +71,11 @@ function VersusScreen() {
 
     if(canUserVersus){
 
-        const item = [data['name'], null, null, data['photo']];
         const item2 = [data2['name'], 3, 35, data2['photo']];
+        const item = [data['name'], null, null, data['photo']]; 
+
+        // const item = [null, 3, 35, null];
+        // const item2 = [null, 3, 35, null];
 
         return (
             <View style={containerStyles.container}>

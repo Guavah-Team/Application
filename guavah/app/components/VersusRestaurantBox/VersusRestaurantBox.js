@@ -1,12 +1,13 @@
-import React from 'react';
-import {StyleSheet, Pressable, ImageBackground, Text, View, Alert, Image} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Pressable, ImageBackground, Text, View, Alert, Image, SafeAreaView} from 'react-native';
 import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 import placeHolder from '../../assets/defaults/VerticalDefault.png';
 import { useFonts } from 'expo-font';
 import { postVersusData } from '../../services/postVersusData';
+import { useEffect } from 'react';
 
-function VersusRestaurantBox({restaurant, type="SMALL"}) {
+function VersusRestaurantBox({restaurant, type="SMALL",}) {
     const {name, rating, distance, photo, location, id, photo_gallary} = restaurant;
 
     const [loaded] = useFonts({
@@ -29,18 +30,32 @@ function VersusRestaurantBox({restaurant, type="SMALL"}) {
     //    postVersusData('test');
         console.log(restaurant[0], restaurant[3]);
     }
+    
+    const[pagetext, setPageText] = useState(null);
+    const textCreater = () =>{
+        if(type === "FULLSCREEN"){
+            setPageText('Winner!');
+        }else{
+            setPageText(restaurant[0]);
+        }
+    }
 
+    useEffect(() => {
+        textCreater();
+      }, []);
+    
     // console.log(photo);
 
     return (
         <Pressable 
         onPress={() =>pressHandler()}
         style = {[styles[`container_${type}`], styles.shadowProp]}>
-            <ImageBackground imageStyle = {{borderRadius: 10}} style = {styles.backgroundImage} defaultSource={require('../../assets/defaults/VerticalDefault.png')} source = {{uri: restaurant[3]}}>
+            <ImageBackground imageStyle = {{borderRadius: 10}} style = {[styles.backgroundImage, styles[`background_${type}`]]} defaultSource={require('../../assets/defaults/VerticalDefault.png')} source = {{uri: restaurant[3]}}>
                 <View style = {styles.mask}/>
-                <View style = {styles.topTextBox}>
-                    <Text style = {styles.restaurantNameText}> {restaurant[0]} </Text>
-                </View>
+                <SafeAreaView style = {styles.topTextBox}>
+
+                    <Text style = {[styles.restaurantNameText, styles[`text_${type}`]]}> {pagetext} </Text>
+                </SafeAreaView>
                 {/* <View style = {styles.centerLogo}>
                     <Image source = {require('../../assets/ICONS/Tier-1-Badge-(Base).png')}></Image>
                 </View> */}
@@ -63,6 +78,18 @@ const styles = StyleSheet.create({
         height: 316,
         marginRight: 10,
     },
+    container_FULLSCREEN:{
+        flex: 1
+    },
+    text_FULLSCREEN:{
+        color: colors.accent,
+        fontFamily: 'CeraBold',
+        fontSize: 80,
+        textTransform: 'uppercase',
+        position: 'absolute',
+        // transform: [{ rotate: '-50deg'}],
+        alignSelf: 'center',
+    },
     restaurantNameText: {
         color: colors.white,
         fontSize: 18,
@@ -72,6 +99,10 @@ const styles = StyleSheet.create({
     },
     backgroundImage: {
         flex: 1,
+        
+    },
+    background_FULLSCREEN:{
+        justifyContent: 'center'
     },
     mask: {
         flex: 1,

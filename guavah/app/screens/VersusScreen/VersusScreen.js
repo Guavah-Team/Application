@@ -14,9 +14,11 @@ import Amplify, { Auth } from "aws-amplify";
 import { postVersusData } from '../../services/postVersusData';
 import {SvgUri} from 'react-native-svg';
 
-function VersusScreen(props) {
+function VersusScreen() {
     const [data, setData] = useState(null);
     const [data2, setData2] = useState(null);
+
+    const [canUserVersus, setCanUserVersus] = useState(null);
 
     const [userPhoto, setUserPhoto] = useState(null);
 
@@ -24,11 +26,17 @@ function VersusScreen(props) {
 
     const fetchData = async () => {
         const fetchedData = await getVersusData(userId);
+        console.log(fetchedData[0]['statusCode']);
 
-        setData2(fetchedData[0]['restaurants'][1]);
-        setData(fetchedData[0]['restaurants'][0]);
-        setUserPhoto(fetchedData[0]['user'].ProfilePhoto);
-        console.log(fetchedData[0]['user'].ProfilePhoto);
+        if(fetchedData[0]['statusCode'] == 404){
+            setCanUserVersus(false);
+        } else {
+            setCanUserVersus(true);
+            setData2(fetchedData[0]['restaurants'][1]);
+            setData(fetchedData[0]['restaurants'][0]);
+            setUserPhoto(fetchedData[0]['user'].ProfilePhoto);
+            // console.log(fetchedData[0]['user'].ProfilePhoto);
+        }
         
     };
 
@@ -51,44 +59,59 @@ function VersusScreen(props) {
     });
 
 
-    if(!data){
-        return <ActivityIndicator style = {componentStyle.loading} size="large" />; 
-    }
+    // if(!data){
+    //     return <ActivityIndicator style = {componentStyle.loading} size="large" />; 
+    // }
 
-    const item = [data['name'], null, null, data['photo']];
-    const item2 = [data2['name'], 3, 35, data2['photo']];
+    if(canUserVersus){
 
-    return (
-        <View style={containerStyles.container}>
-        {/* Slanted Accent Color */}
-            <View style={containerStyles.topBox}>
+        const item = [data['name'], null, null, data['photo']];
+        const item2 = [data2['name'], 3, 35, data2['photo']];
 
-            </View>
-        {/* Header */}
-            <View style={containerStyles.headerContainer}>
-                {/* <View style={containerStyles.headerTextContainer}> */}
-                    <Text style={textStyle.text}>{`Which was better?`}</Text>
-                    <Text style={textStyle.textSmall}>Tap One</Text>
-                {/* </View> */}
-            </View>
-        {/* Profile Image */}
-            <View style={containerStyles.profileImageContainer}>
-                <SvgUri style = {componentStyle.topImage} uri={userPhoto}/>
-            </View>
-        {/* Versus */}
-            <View style={containerStyles.versusContainer}>
-                {/* <Text style={textStyle.versusText}>Which was better?</Text>
-                <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
-                <View style={containerStyles.versusRestaurantContainer}>
-                    <VersusRestaurantBox restaurant={item}/>
-                    <VersusRestaurantBox restaurant={item2}/>
-                    {/* <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
-                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/> */}
+        return (
+            <View style={containerStyles.container}>
+            {/* Slanted Accent Color */}
+                <View style={containerStyles.topBox}>
+
+                </View>
+            {/* Header */}
+                <View style={containerStyles.headerContainer}>
+                    {/* <View style={containerStyles.headerTextContainer}> */}
+                        <Text style={textStyle.text}>{`Which was better?`}</Text>
+                        <Text style={textStyle.textSmall}>Tap One</Text>
+                    {/* </View> */}
+                </View>
+            {/* Profile Image */}
+                <View style={containerStyles.profileImageContainer}>
+                    <SvgUri style = {componentStyle.topImage} uri={userPhoto}/>
+                </View>
+            {/* Versus */}
+                <View style={containerStyles.versusContainer}>
+                    {/* <Text style={textStyle.versusText}>Which was better?</Text>
+                    <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
+                    <View style={containerStyles.versusRestaurantContainer}>
+                        <VersusRestaurantBox restaurant={item}/>
+                        <VersusRestaurantBox restaurant={item2}/>
+                        {/* <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
+                        <VerticalRestaurantBox restaurant={item} type={'LARGE'}/> */}
+                    </View>
                 </View>
             </View>
-        </View>
-        
-    );
+            
+        );
+    } else {
+        return (
+            <View style={containerStyles.container}>
+                <View style={containerStyles.headerContainer}>
+                     <View style={containerStyles.headerTextContainer}>
+                         <Text style={textStyle.versusText}>{`Go Rank more restaurants`}</Text>
+                         <Text style={textStyle.textSmall}>Tap One</Text>
+                     </View>
+                 </View>
+            </View>
+            
+        );
+    }
 }
 
 const containerStyles = StyleSheet.create({

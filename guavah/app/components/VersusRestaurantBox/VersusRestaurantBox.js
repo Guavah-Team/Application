@@ -6,7 +6,7 @@ import placeHolder from '../../assets/defaults/VerticalDefault.png';
 import { useFonts } from 'expo-font';
 import { postVersusData } from '../../services/postVersusData';
 
-function VersusRestaurantBox({restaurant, type="SMALL"}) {
+function VersusRestaurantBox({restaurant, fullData, restaurantNum, type="SMALL"}) {
     const {name, rating, distance, photo, location, id, photo_gallary} = restaurant;
 
     const [loaded] = useFonts({
@@ -27,7 +27,10 @@ function VersusRestaurantBox({restaurant, type="SMALL"}) {
 
     const pressHandler = () =>{
     //    postVersusData('test');
-        console.log(restaurant[0], restaurant[3]);
+        // console.log(restaurant);
+        // console.log(restaurantNum);
+        fullData[0]['userSelection'] = restaurantNum;
+        console.log(fullData);
     }
 
     // console.log(photo);

@@ -16,22 +16,28 @@ import {SvgUri} from 'react-native-svg';
 
 function VersusScreen() {
 
+    //This is to send back to back end
+    const [fullData, setFullData] = useState(null);
+
+    // These are to give default values while the item data is loading. DO NOT DELETE
     const item = [null, 3, 35, null];
     const item2 = [null, 3, 35, null]; 
 
+    //Data from backend stored here
     const [data, setData] = useState(item);
     const [data2, setData2] = useState(item2);
 
+    //Determines what to display to user
     const [canUserVersus, setCanUserVersus] = useState(null);
 
+    //User Photo
     const [userPhoto, setUserPhoto] = useState(null);
 
     const userId = Auth.Credentials["Auth"]["user"]["attributes"]["sub"];
 
     const fetchData = async () => {
         const fetchedData = await getVersusData(userId);
-        console.log(fetchedData[0]['statusCode']);
-        console.log(fetchedData[0]['restaurants'][0]['name']);
+        setFullData(fetchedData);
 
         if(fetchedData[0]['statusCode'] == 200){
             setCanUserVersus(true);
@@ -99,8 +105,8 @@ function VersusScreen() {
                     {/* <Text style={textStyle.versusText}>Which was better?</Text>
                     <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
                     <View style={containerStyles.versusRestaurantContainer}>
-                        <VersusRestaurantBox restaurant={item}/>
-                        <VersusRestaurantBox restaurant={item2}/>
+                        <VersusRestaurantBox restaurant={item} fullData = {fullData} restaurantNum={1}/>
+                        <VersusRestaurantBox restaurant={item2} fullData = {fullData} restaurantNum={0}/>
                         {/* <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
                         <VerticalRestaurantBox restaurant={item} type={'LARGE'}/> */}
                     </View>

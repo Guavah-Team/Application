@@ -90,8 +90,10 @@ const HomeScreen = () => {
   ];
 
   const searchPressed = () => {
-    navigation.navigate("SearchScreen");
+    navigation.navigate("SearchScreen", {dataC:dataC["url"]});
   }
+
+  // console.log(dataC["url"])
   
   const fetchData = async () => {
     setLoading(true);

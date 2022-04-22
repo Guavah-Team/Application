@@ -11,7 +11,7 @@ import {useForm, Controller, set} from 'react-hook-form';
 import { Ionicons, Feather, Entypo } from '@expo/vector-icons'; 
 import * as Location from 'expo-location';
 
-import { getDetailedRestaurantData, getOpeningSearchRestaurantData, getSearchRestaurantData, getUserData } from "../../services/requests";
+import { getDetailedRestaurantData, getOpeningSearchRestaurantData2, getOpeningSearchRestaurantData, getSearchRestaurantData, getUserData } from "../../services/requests";
 
 import config from '../../../src/aws-exports';
 import CustomSearch from "../../components/CustomSearch";
@@ -23,7 +23,7 @@ const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
   }
 
-function SearchPage() {
+function SearchPage(dataC) {
 
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
@@ -77,6 +77,14 @@ function SearchPage() {
     function updateSearch(value){
         setValue(value);
     }
+
+    // var newUrl = url.substring(0,url.indexOf('8046')) + userRadius + url.substring(url.indexOf('8046'), url.indexOf('='));
+
+    // console.log(dataC["route"]["params"]["dataC"]);
+    var url = dataC["route"]["params"]["dataC"];
+    var newUrl = url.substring(0, url.indexOf('#')) + userRadius + url.substring(url.indexOf('#') + 1, url.indexOf('@')) + latitude + ',' + longitude + url.substring(url.indexOf('@') + 1, url.size)
+
+    console.log(newUrl);
 
     const onOnePressed = async () => {
         setOneDollar(true);
@@ -148,7 +156,7 @@ function SearchPage() {
 
     const fetchData = async () => {
         setLoading(true);
-        const fetchedData = await getOpeningSearchRestaurantData(1, {latitude, longitude, userRadius});
+        const fetchedData = await getOpeningSearchRestaurantData2(newUrl);
         setData(fetchedData[0]);
         setLoading(false);
     };

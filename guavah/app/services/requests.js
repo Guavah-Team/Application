@@ -13,7 +13,7 @@ export const getDetailedRestaurantData = async ({latitude, longitude, userRadius
       sections.push(response.data["messageB"]);
       sections.push(response.data["sectionB"]);
       sections.push(response.data["sectionC"]);
-      console.log(sections[1]);
+      console.log(sections[4]);
       // console.log(sections[4])
       return sections;
     }catch (e) {
@@ -27,7 +27,7 @@ export const getSearchRestaurantData = async (restaurantName, minPrice, {latitud
   // console.log(userRadius)
   const restaurant = restaurantName.replace(' ', '%20');
   // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=1600&latlong=33.4936,-117.1484&term=${restaurant}&category=13000&isOpen=false&doChains=true&minPrice=1&maxPrice=2&limit=10`
-  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=${restaurant}&category=13000&isOpen=false&doChains=true&minPrice=${minPrice}&maxPrice=4&limit=20`
+  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=${restaurant}&category=13000&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
   try{
     const response = await axios.get(url);
     let sections = [];
@@ -43,7 +43,23 @@ export const getOpeningSearchRestaurantData = async (minPrice, {latitude, longit
   // console.log(longitude)
   // console.log(userRadius)
   // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=1600&latlong=33.4936,-117.1484&term=${restaurant}&category=13000&isOpen=false&doChains=true&minPrice=1&maxPrice=2&limit=10`
-  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=&category=13000&isOpen=false&doChains=true&minPrice=${minPrice}&maxPrice=4&limit=20`
+  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=&category=13000&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+  try{
+    const response = await axios.get(url);
+    let sections = [];
+    sections.push(response.data["body"]);
+    return sections;
+  }catch (e) {
+    console.log(e);
+  }
+}
+
+export const getOpeningSearchRestaurantData2 = async (url) => {
+  // console.log(latitude)
+  // console.log(longitude)
+  // console.log(userRadius)
+  // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=1600&latlong=33.4936,-117.1484&term=${restaurant}&category=13000&isOpen=false&doChains=true&minPrice=1&maxPrice=2&limit=10`
+  // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=&category=13000&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
   try{
     const response = await axios.get(url);
     let sections = [];

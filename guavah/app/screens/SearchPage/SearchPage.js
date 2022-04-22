@@ -64,6 +64,7 @@ function SearchPage() {
     const [clicked, setClicked] = useState(false);
 
     const[userRadius, setUserRadius] = useState("");
+    const[userVegan, setUserVegan] = useState("");
 
     const [oneDollar, setOneDollar] = useState(true);
     const [oneColor, setOneColor] = useState(colors.accent);
@@ -85,7 +86,7 @@ function SearchPage() {
         setOneColor(colors.accent);
         setTwoColor("");
         setThreeColor("");
-        const fetchedData = await getOpeningSearchRestaurantData(1, {latitude, longitude, userRadius});
+        const fetchedData = await getOpeningSearchRestaurantData(1, {latitude, longitude, userRadius, userVegan});
         setData(fetchedData[0]);
     }
     const onTwoPressed = async () => {
@@ -95,7 +96,7 @@ function SearchPage() {
         setTwoColor(colors.accent);
         setOneColor("");
         setThreeColor("");
-        const fetchedData = await getOpeningSearchRestaurantData(2, {latitude, longitude, userRadius});
+        const fetchedData = await getOpeningSearchRestaurantData(2, {latitude, longitude, userRadius, userVegan});
         setData(fetchedData[0]);
     }
     const onThreePressed = async () => {
@@ -105,7 +106,7 @@ function SearchPage() {
         setThreeColor(colors.accent);
         setOneColor('');
         setTwoColor('');
-        const fetchedData = await getOpeningSearchRestaurantData(3, {latitude, longitude, userRadius});
+        const fetchedData = await getOpeningSearchRestaurantData(3, {latitude, longitude, userRadius, userVegan});
         setData(fetchedData[0]);
     }
 
@@ -113,6 +114,7 @@ function SearchPage() {
 
     const fetchUserData = async () => {
         const fetchedUserData = await getUserData(userId)
+        setUserVegan(fetchedUserData[4]);
         setUserRadius(fetchedUserData[3]);
     }
 
@@ -125,13 +127,13 @@ function SearchPage() {
         setPressed(true);
 
         if(threeDollar){
-            const fetchedData = await getSearchRestaurantData(data, 3, {latitude, longitude, userRadius});
+            const fetchedData = await getSearchRestaurantData(data, 3, {latitude, longitude, userRadius, userVegan});
             setSearchData(fetchedData[0]);
         }else if(twoDollar){
-            const fetchedData = await getSearchRestaurantData(data, 2, {latitude, longitude, userRadius});
+            const fetchedData = await getSearchRestaurantData(data, 2, {latitude, longitude, userRadius, userVegan});
             setSearchData(fetchedData[0]);
         }else{
-            const fetchedData = await getSearchRestaurantData(data, 1, {latitude, longitude, userRadius});
+            const fetchedData = await getSearchRestaurantData(data, 1, {latitude, longitude, userRadius, userVegan});
             setSearchData(fetchedData[0]);
         }
     }
@@ -144,7 +146,7 @@ function SearchPage() {
 
     const fetchData = async () => {
         setLoading(true);
-        const fetchedData = await getOpeningSearchRestaurantData(1, {latitude, longitude, userRadius});
+        const fetchedData = await getOpeningSearchRestaurantData(1, {latitude, longitude, userRadius, userVegan});
         setData(fetchedData[0]);
         setLoading(false);
     };
@@ -153,7 +155,7 @@ function SearchPage() {
         if(latitude != null && longitude != null && userRadius != null){
             fetchData();
         }
-    }, [latitude, longitude, userRadius]);
+    }, [latitude, longitude, userRadius, userVegan]);
 
     if (loading || !data) {
         return <ActivityIndicator style = {styles.loading} size="large" />; 

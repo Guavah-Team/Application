@@ -13,7 +13,7 @@ export const getDetailedRestaurantData = async ({latitude, longitude, userRadius
       sections.push(response.data["messageB"]);
       sections.push(response.data["sectionB"]);
       sections.push(response.data["sectionC"]);
-      console.log(sections[4]);
+      // console.log(sections[4]);
       // console.log(sections[4])
       return sections;
     }catch (e) {
@@ -21,13 +21,19 @@ export const getDetailedRestaurantData = async ({latitude, longitude, userRadius
   }
 };
 
-export const getSearchRestaurantData = async (restaurantName, minPrice, {latitude, longitude, userRadius}) => {
+export const getSearchRestaurantData = async (restaurantName, minPrice, {latitude, longitude, userRadius, vegan}) => {
   // console.log(latitude)
   // console.log(longitude)
   // console.log(userRadius)
   const restaurant = restaurantName.replace(' ', '%20');
   // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=1600&latlong=33.4936,-117.1484&term=${restaurant}&category=13000&isOpen=false&doChains=true&minPrice=1&maxPrice=2&limit=10`
-  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=${restaurant}&category=13000&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+  
+  if(vegan === 0){
+    url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=${restaurant}&category=13000&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+  }else{
+    url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=${restaurant}&category=13377,13381,13332,13032,13059,13143&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+  }
+  
   try{
     const response = await axios.get(url);
     let sections = [];
@@ -38,12 +44,19 @@ export const getSearchRestaurantData = async (restaurantName, minPrice, {latitud
   }
 }
 
-export const getOpeningSearchRestaurantData = async (minPrice, {latitude, longitude, userRadius}) => {
+export const getOpeningSearchRestaurantData = async (minPrice, {latitude, longitude, userRadius, vegan}) => {
   // console.log(latitude)
   // console.log(longitude)
   // console.log(userRadius)
   // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=1600&latlong=33.4936,-117.1484&term=${restaurant}&category=13000&isOpen=false&doChains=true&minPrice=1&maxPrice=2&limit=10`
-  url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=&category=13000&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+  // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=&category=13000&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+  
+  if(vegan === 0){
+    url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=&category=13000&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+  }else{
+    url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=&category=13377,13381,13332,13032,13059,13143&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+  }
+  
   try{
     const response = await axios.get(url);
     let sections = [];
@@ -71,7 +84,7 @@ export const getOpeningSearchRestaurantData2 = async (url) => {
 }
 
 export const getRestaurantReviews = async (restaurantId) => {
-  console.log(restaurantId);
+  // console.log(restaurantId);
   url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/get-restaurant-reviews?FSQID=${restaurantId}`;
   try{
     const response = await axios.get(url);
@@ -90,7 +103,7 @@ export const getVersusData = async (userId) => {
     const response = await axios.get(url);
     let sections = [];
     sections.push(response.data);
-    // console.log(sections);
+    console.log(response.data);
     return sections;
   } catch (e){
     console.log(e);
@@ -101,12 +114,14 @@ export const getUserData = async (userId) => {
   url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/get-user?UserID=${userId}`
   try{
     const response = await axios.get(url);
+    // console.log(response)
     let sections = [];
     // sections.push(response.data['body']);
     sections.push(response.data['body']['Name']);
     sections.push(response.data['body']['Level']);
     sections.push(response.data['body']['ProfilePhoto']);
     sections.push(response.data['body']['Radius']);
+    sections.push(response.data['body']['Vegan'])
     return sections;
   }catch (e) {
     console.log(e);
@@ -123,8 +138,9 @@ export const getUserDataSettings = async (userId) => {
     sections.push(response.data['body']['Email']);
     sections.push(response.data['body']['ProfilePhoto']);
     sections.push(response.data['body']['Radius']);
+    // console.log(response.data['body']['Radius'])
     sections.push(response.data['body']['Vegan']);
-    sections.push(response.data['body']['DarkMode']);
+    sections.push(response.data['body']['DarkTheme']);
     // console.log(sections);
     return sections;
   }catch (e) {

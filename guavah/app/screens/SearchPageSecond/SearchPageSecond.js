@@ -84,7 +84,7 @@ function SearchPage(dataC) {
     var url = dataC["route"]["params"]["dataC"];
     var newUrl = url.substring(0, url.indexOf('#')) + userRadius + url.substring(url.indexOf('#') + 1, url.indexOf('@')) + latitude + ',' + longitude + url.substring(url.indexOf('@') + 1, url.size)
 
-    console.log(newUrl);
+    // console.log(newUrl);
 
     const onOnePressed = async () => {
         setOneDollar(true);

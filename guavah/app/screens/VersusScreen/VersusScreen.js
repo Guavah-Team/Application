@@ -53,6 +53,7 @@ function VersusScreen() {
     const fetchData = async () => {
         const fetchedData = await getVersusData(userId);
         setFullData(fetchedData);
+        // console.log(fetchedData[0])
 
         if(fetchedData[0]['statusCode'] == 200){
             setCanUserVersus(true);
@@ -62,10 +63,12 @@ function VersusScreen() {
             setUserPhoto(fetchedData[0]['user'].ProfilePhoto);
         } else {
             setCanUserVersus(false);
-            setUserMessage(fullData[0]["message"]);
-            setError(fullData[0]['statusCode']);
+            setUserMessage(fetchedData[0]["message"]);
+            setError(fetchedData[0]['statusCode']);
             // console.log(userMessage);
         }
+
+        // console.log(fetchedData)
         
     };
 
@@ -103,6 +106,7 @@ function VersusScreen() {
         fullData[0]["userSelection"] = 1;
         postVersusData(fullData);
     }
+
     // console.log(fullData[0]["userSelection"])
 
 
@@ -180,7 +184,7 @@ function VersusScreen() {
                             <Text style = {containerStyles.modalText}>WINNER</Text>
                             <View style = {containerStyles.cancel}>
                                 <Pressable onPress={() => {clear();}}>
-                                    <Text style = {{color: colors.light, }}>DISMISS</Text>
+                                    <Text style = {containerStyles.bottomButton}>DISMISS</Text>
                                 </Pressable>
                             </View>                            
                         </View>
@@ -202,7 +206,7 @@ function VersusScreen() {
                             <Text style = {containerStyles.modalText}>WINNER</Text>
                             <View style = {containerStyles.cancel}>
                                 <Pressable onPress={() => {clear();}}>
-                                    <Text style = {{color: colors.light, }}>DISMISS</Text>
+                                    <Text style = {containerStyles.bottomButton}>DISMISS</Text>
                                 </Pressable>
                             </View>                            
                         </View>
@@ -255,7 +259,7 @@ function VersusScreen() {
                         {error === 404 ?
                             <Text style = {textStyle.versusText}>{userMessage}</Text>
                         :
-                            <Text style = {textStyle.versusText}>Go Rank {"\n"} More Restaurants</Text>
+                            <Text style = {textStyle.versusText}></Text>
                         }
                      </View>
                  </View>
@@ -269,6 +273,11 @@ const containerStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.background,
+    },
+    bottomButton: {
+        color: colors.light,
+        width: '100%',
+        fontSize: 16
     },
     modalContainer:{
         flex: 1,
@@ -331,6 +340,8 @@ const containerStyles = StyleSheet.create({
         marginTop: '90%',
         justifyContent: 'center',
         alignItems: 'center',
+        marginLeft: 10,
+        marginRight: 10,
     },
     profileImageContainer: {
         marginLeft: '6%',

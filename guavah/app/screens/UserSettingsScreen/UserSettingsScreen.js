@@ -61,8 +61,10 @@ function UserSettingsScreen(){
         setEmail(fetchedUserData[1]);
         setProfilePhoto(fetchedUserData[2]);
         setRadius(fetchedUserData[3] * .000621371);
+        // console.log(fetchedUserData[3])
         setVegan(fetchedUserData[4]);
         setDarkTheme(fetchedUserData[5]);
+        // console.log(fetchedUserData[5])
     }
 
     useEffect(() =>{
@@ -73,6 +75,7 @@ function UserSettingsScreen(){
 
     const onPressPost = async() =>{
         postSettingsData(userId, name, darkTheme, vegan, Math.ceil(radius));
+        navigation.navigate('HomeScreen');
     }
     
     const returnHome = () => {
@@ -179,7 +182,7 @@ function UserSettingsScreen(){
             
 
             <View style = {styles.save}>
-                <Pressable style = {styles.button} onPress={() => {alert('Changes Saved!'); onPressPost();}}>
+                <Pressable style = {styles.button} onPress={() => {onPressPost();}}>
                     <Text style = {styles.textStyle}>save</Text>
                 </Pressable>
             </View>

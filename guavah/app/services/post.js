@@ -13,15 +13,15 @@ export const postReviewData = async (rating, review, FSQID, userId) =>{
 }
 
 export const postSettingsData = async (userId, name, darkTheme, Vegan, radius  ) =>{
-    console.log(radius)
     axios.post("https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/update-settings",{
         UserID: userId,
         Name: name,
-        DarkTheme: darkTheme,
+        DarkMode: darkTheme,
         Vegan: Vegan,
         Radius: radius,
-      })
-      .then(function(response){
-          console.log(response);
-      })
+    })
+    .then(function(response){
+        console.log(response);
+    })
+    console.log(darkTheme)
 }

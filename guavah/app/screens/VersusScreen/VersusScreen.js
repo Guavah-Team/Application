@@ -1,6 +1,6 @@
 import { container } from 'aws-amplify';
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, Image, ActivityIndicator, Modal, Pressable, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, Image, ActivityIndicator, Modal, Pressable, SafeAreaView, ImageBackground } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import CustomButton from '../../components/CustomButton';
@@ -142,14 +142,17 @@ function VersusScreen() {
             setModal1Visible(!modal1Visible);
         }}>
             <View style = {containerStyles.modalContainer}>
-
-            <SafeAreaView style = {containerStyles.safeView}>
-                    <Pressable style = {containerStyles.cancel} onPress={() => setModal1Visible(false)}>
-                            <MaterialIcons name='cancel' size={23} color={colors.dark} style = {containerStyles.exitButton}/>
-                    </Pressable>
-                    </SafeAreaView>
-                    <VersusRestaurantBox restaurant={item} fullData={fullData} restaurantNum={1} type='FULLSCREEN'/>
-                    
+                    <ImageBackground source={{uri:data['photo']}} style ={containerStyles.modalImage}>
+                        <View style = {containerStyles.modalShadow}>
+                            <Text style = {textStyle.restaurantText}>{data['name']}</Text>
+                            <Text style = {containerStyles.modalText}>WINNER</Text>
+                            <View style = {containerStyles.cancel}>
+                                <Pressable onPress={() => setModal1Visible(false)}>
+                                    <Text style = {{color: colors.light, }}>DISMISS</Text>
+                                </Pressable>
+                            </View>                            
+                        </View>
+                    </ImageBackground>    
             </View>
         </Modal>
         <Modal
@@ -161,12 +164,17 @@ function VersusScreen() {
             setModal2Visible(!modal2Visible);
         }}>
              <View style = {containerStyles.modalContainer}>
-             <SafeAreaView style = {containerStyles.safeView}>
-                <Pressable style = {containerStyles.cancel} onPress={() => setModal2Visible(false)}>
-                    <MaterialIcons name='cancel' size={23} color={colors.dark} style = {containerStyles.exitButton}/>
-                </Pressable>
-                </SafeAreaView>
-                <VersusRestaurantBox restaurant={item2} fullData={fullData} restaurantNum={0} type='FULLSCREEN'/>
+             <ImageBackground source={{uri:data2['photo']}} style ={containerStyles.modalImage}>
+                        <View style = {containerStyles.modalShadow}>
+                            <Text style = {textStyle.restaurantText}>{data2['name']}</Text>
+                            <Text style = {containerStyles.modalText}>WINNER</Text>
+                            <View style = {containerStyles.cancel}>
+                                <Pressable onPress={() => setModal2Visible(false)}>
+                                    <Text style = {{color: colors.light, }}>DISMISS</Text>
+                                </Pressable>
+                            </View>                            
+                        </View>
+                    </ImageBackground>  
                 
         </View>
         </Modal>
@@ -209,8 +217,8 @@ function VersusScreen() {
             <View style={containerStyles.container}>
                 <View style={containerStyles.headerContainer}>
                      <View style={containerStyles.headerTextContainer}>
-                         <Text style={textStyle.versusText}>{`Go Rank more restaurants`}</Text>
-                         <Text style={textStyle.textSmall}>Tap One</Text>
+                         <Text style={textStyle.versusText}>Go Rank</Text>
+                         <Text style={textStyle.versusText}>More Restaurants</Text>
                      </View>
                  </View>
             </View>
@@ -226,7 +234,22 @@ const containerStyles = StyleSheet.create({
     },
     modalContainer:{
         flex: 1,
-        backgroundColor: colors.accent
+        backgroundColor: colors.accent,
+        
+    },
+    modalShadow:{
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        position: 'absolute',
+        top: 0, left: 0, right: 0, bottom: 0, 
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalImage:{
+        flex: 1,
+        
+        
     },
     safeView:{
         height: '8%'
@@ -246,14 +269,15 @@ const containerStyles = StyleSheet.create({
     },
     modalText:{
         color: colors.accent,
-        fontFamily: 'CeraBold',
-        fontSize: 30,
-        transform: [{ rotate: '-45deg'}]
+        fontSize: 90,
+        fontStyle: 'italic',
+        fontWeight: '700',
+        
     },
     cancel: {
         position: 'absolute',
-        left: 10,
-        top: 40,
+        bottom: 50,
+
     },
     topBox: {
         position: 'absolute',
@@ -266,7 +290,7 @@ const containerStyles = StyleSheet.create({
         // backgroundColor: colors.accent,
     },
     headerTextContainer: {
-        marginTop: '10%',
+        marginTop: '90%',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -327,8 +351,8 @@ const containerStyles = StyleSheet.create({
         versusText: {
             color: colors.accent,
             textAlign: 'center',
-            fontSize: 30,
-            marginTop: '40%',
+            fontSize: 35,
+            fontFamily: 'CeraBold',
         },
 
         versusTextSmall: {
@@ -336,6 +360,12 @@ const containerStyles = StyleSheet.create({
             textAlign: 'center',
             fontSize: 16,
             marginTop: '0%',
+        },
+        restaurantText:{
+            color: colors.light,
+            fontSize: 30,
+            fontWeight: 'bold',
+            fontStyle: 'italic'
         },
     });
 

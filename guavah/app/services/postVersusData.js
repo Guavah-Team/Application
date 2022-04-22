@@ -2,7 +2,6 @@ import axios from 'axios'
 
 export const postVersusData = async (data) =>{
     url = 'https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/submit-versus';
-    console.log("HOE")
 
     // const versusDetails = {
     //     userSelection: data[0]['userSelection'],

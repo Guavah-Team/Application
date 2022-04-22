@@ -1,6 +1,6 @@
 import { container } from 'aws-amplify';
 import React, {useState} from 'react';
-import { View, Text, StyleSheet, Image, ActivityIndicator, Modal, Pressable, SafeAreaView, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Image, ActivityIndicator, Modal, Pressable, RefreshControl, SafeAreaView, ImageBackground } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import CustomButton from '../../components/CustomButton';
@@ -14,6 +14,10 @@ import Amplify, { Auth } from "aws-amplify";
 import { postVersusData } from '../../services/postVersusData';
 import {SvgUri} from 'react-native-svg';
 import {Ionicons, MaterialIcons} from '@expo/vector-icons';
+
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
 
 function VersusScreen() {
 
@@ -33,6 +37,8 @@ function VersusScreen() {
 
     const [modal1Visible, setModal1Visible] = useState(false);
     const [modal2Visible, setModal2Visible] = useState(false);
+
+    const[refreshing, setRefreshing] = useState(false);
 
     //User Photo
     const [userPhoto, setUserPhoto] = useState(null);
@@ -56,6 +62,11 @@ function VersusScreen() {
         }
         
     };
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(500).then(() => setRefreshing(false), fetchData());
+    }, []);
 
     useEffect(() => {
         fetchData();
@@ -132,7 +143,7 @@ function VersusScreen() {
     const item = [data['name'], null, null, data['photo'], fullData, 1]; 
 
     return (
-        <View style={containerStyles.container}>
+        <View style={containerStyles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
         <Modal
             animationType='slide'
             transparent={true}
@@ -179,49 +190,52 @@ function VersusScreen() {
         </View>
         </Modal>
         {/* Slanted Accent Color */}
-            <View style={containerStyles.topBox}>
+        <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
 
-            </View>
-        {/* Header */}
-            <View style={containerStyles.headerContainer}>
-                {/* <View style={containerStyles.headerTextContainer}> */}
-                    <Text style={textStyle.text}>{`Which was better?`}</Text>
-                    <Text style={textStyle.textSmall}>Tap One</Text>
-                {/* </View> */}
-            </View>
-        {/* Profile Image */}
-            <View style={containerStyles.profileImageContainer}>
-                <SvgUri style = {componentStyle.topImage} uri={userPhoto}/>
-            </View>
-        {/* Versus */}
-            <View style={containerStyles.versusContainer}>
-                {/* <Text style={textStyle.versusText}>Which was better?</Text>
-                <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
-                <View style={containerStyles.versusRestaurantContainer}>
-                    <TouchableOpacity  onPress={() =>{onPress1();}}>
-                        <VersusRestaurantBox restaurant={item}/>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() =>{onPress2();}}>
-                        <VersusRestaurantBox restaurant={item2}/>
-                    </TouchableOpacity>
-                    
-                    {/* <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
-                    <VerticalRestaurantBox restaurant={item} type={'LARGE'}/> */}
-{/* >>>>>>> 7c97b377834c7bcd5c3d8dd1140136a8b5784606 */}
+                <View style={containerStyles.topBox}>
+
                 </View>
-            </View>
+            {/* Header */}
+                <View style={containerStyles.headerContainer}>
+                    {/* <View style={containerStyles.headerTextContainer}> */}
+                        <Text style={textStyle.text}>{`Which was better?`}</Text>
+                        <Text style={textStyle.textSmall}>Tap One</Text>
+                    {/* </View> */}
+                </View>
+            {/* Profile Image */}
+                <View style={containerStyles.profileImageContainer}>
+                    <SvgUri style = {componentStyle.topImage} uri={userPhoto}/>
+                </View>
+            {/* Versus */}
+                <View style={containerStyles.versusContainer}>
+                    {/* <Text style={textStyle.versusText}>Which was better?</Text>
+                    <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
+                    <View style={containerStyles.versusRestaurantContainer}>
+                        <TouchableOpacity  onPress={() =>{onPress1();}}>
+                            <VersusRestaurantBox restaurant={item}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() =>{onPress2();}}>
+                            <VersusRestaurantBox restaurant={item2}/>
+                        </TouchableOpacity>
+                        
+                        {/* <VerticalRestaurantBox restaurant={item} type={'LARGE'}/>
+                        <VerticalRestaurantBox restaurant={item} type={'LARGE'}/> */}
+    {/* >>>>>>> 7c97b377834c7bcd5c3d8dd1140136a8b5784606 */}
+                    </View>
+                </View>
+        </ScrollView>
         </View>
         );
     } else {
         return (
-            <View style={containerStyles.container}>
+            <ScrollView style={containerStyles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                 <View style={containerStyles.headerContainer}>
                      <View style={containerStyles.headerTextContainer}>
                          <Text style={textStyle.versusText}>Go Rank</Text>
                          <Text style={textStyle.versusText}>More Restaurants</Text>
                      </View>
                  </View>
-            </View>
+            </ScrollView>
             
         );
     }
@@ -281,10 +295,10 @@ const containerStyles = StyleSheet.create({
     },
     topBox: {
         position: 'absolute',
-        height: 400,
+        height: 600,
         width: 600,
         backgroundColor: colors.accent,
-        transform: [{skewY: '-20deg'}, {translateX: -100}, {translateY: -225}], 
+        transform: [{skewY: '-20deg'}, {translateX: -100}, {translateY: -425}], 
     },
     headerContainer: {
         // backgroundColor: colors.accent,

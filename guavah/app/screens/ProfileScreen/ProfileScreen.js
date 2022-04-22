@@ -119,11 +119,11 @@ const styles = StyleSheet.create({
     },
     topBox: {
         position: 'absolute',
-        height: 400,
+        height: 600,
         width: 600,
         backgroundColor: colors.accent,
         // transform: [{skewY: '-30deg'}, {translateX: -100}, {translateY: -550}],
-        transform: [{skewY: '-20deg'}, {translateX: -100}, {translateY: -225}],
+        transform: [{skewY: '-20deg'}, {translateX: -100}, {translateY: -425}],
     },
 })
 

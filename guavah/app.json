@@ -4,7 +4,7 @@
     "slug": "guavah",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/guavah-splash.png",
+    "icon": "./app/assets/guavah-spash.png",
     "splash": {
       "image": "./app/assets/guavah-image.png",
       "resizeMode": "contain",

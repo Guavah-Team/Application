@@ -1,10 +1,11 @@
-import React from 'react';
-import {StyleSheet, Pressable, ImageBackground, Text, View, Alert, Image} from 'react-native';
+import React, {useState} from 'react';
+import {StyleSheet, Pressable, ImageBackground, Text, View, Alert, Image, SafeAreaView} from 'react-native';
 import colors from '../../config/colors/colors';
 import {useNavigation} from '@react-navigation/native';
 import placeHolder from '../../assets/defaults/VerticalDefault.png';
 import { useFonts } from 'expo-font';
 import { postVersusData } from '../../services/postVersusData';
+import { useEffect } from 'react';
 
 function VersusRestaurantBox({restaurant, fullData, restaurantNum, type="SMALL"}) {
     const {name, rating, distance, photo, location, id, photo_gallary} = restaurant;
@@ -29,10 +30,29 @@ function VersusRestaurantBox({restaurant, fullData, restaurantNum, type="SMALL"}
     //    postVersusData('test');
         // console.log(restaurant);
         // console.log(restaurantNum);
-        fullData[0]['userSelection'] = restaurantNum;
-        console.log(fullData);
+        // fullData[0]['userSelection'] = restaurantNum;
+        //4 is Full Data
+        //5 is 1 or 0
+        // console.log(restaurant[4]);
+        restaurant[4][0]['userSelection'] = restaurant[5];
+        // console.log(restaurant[4]);
+        postVersusData(restaurant[4]);
+        // console.log(restaurant[4]);
+    }
+    
+    const[pagetext, setPageText] = useState(null);
+    const textCreater = () =>{
+        if(type === "FULLSCREEN"){
+            setPageText('Winner!');
+        }else{
+            setPageText(restaurant[0]);
+        }
     }
 
+    useEffect(() => {
+        textCreater();
+      }, []);
+    
     // console.log(photo);
 
     return (
@@ -66,6 +86,18 @@ const styles = StyleSheet.create({
         height: 316,
         marginRight: 10,
     },
+    container_FULLSCREEN:{
+        flex: 1
+    },
+    text_FULLSCREEN:{
+        color: colors.accent,
+        fontFamily: 'CeraBold',
+        fontSize: 80,
+        textTransform: 'uppercase',
+        position: 'absolute',
+        // transform: [{ rotate: '-50deg'}],
+        alignSelf: 'center',
+    },
     restaurantNameText: {
         color: colors.white,
         fontSize: 18,
@@ -75,6 +107,10 @@ const styles = StyleSheet.create({
     },
     backgroundImage: {
         flex: 1,
+        
+    },
+    background_FULLSCREEN:{
+        justifyContent: 'center'
     },
     mask: {
         flex: 1,

@@ -4,9 +4,9 @@
     "slug": "guavah",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./app/assets/icon.png",
+    "icon": "./app/assets/guavah-splash.png",
     "splash": {
-      "image": "./app/assets/splash.png",
+      "image": "./app/assets/guavah-image.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

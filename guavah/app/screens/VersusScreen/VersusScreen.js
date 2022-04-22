@@ -38,7 +38,12 @@ function VersusScreen() {
     const [modal1Visible, setModal1Visible] = useState(false);
     const [modal2Visible, setModal2Visible] = useState(false);
 
+    const [userSelection, setUserSelection] = useState();
+
     const[refreshing, setRefreshing] = useState(false);
+
+    const[userMessage, setUserMessage] = useState();
+    const[error, setError] = useState();
 
     //User Photo
     const [userPhoto, setUserPhoto] = useState(null);
@@ -48,7 +53,6 @@ function VersusScreen() {
     const fetchData = async () => {
         const fetchedData = await getVersusData(userId);
         setFullData(fetchedData);
-        // console.log(fullData);
 
         if(fetchedData[0]['statusCode'] == 200){
             setCanUserVersus(true);
@@ -58,7 +62,9 @@ function VersusScreen() {
             setUserPhoto(fetchedData[0]['user'].ProfilePhoto);
         } else {
             setCanUserVersus(false);
-            console.log(setCanUserVersus);
+            setUserMessage(fullData[0]["message"]);
+            setError(fullData[0]['statusCode']);
+            // console.log(userMessage);
         }
         
     };
@@ -93,9 +99,24 @@ function VersusScreen() {
 
     const onPress1 = () =>{
         setModal1Visible(true);
+        // setUserSelection(1);
+        fullData[0]["userSelection"] = 1;
+        postVersusData(fullData);
     }
+    // console.log(fullData[0]["userSelection"])
+
+
     const onPress2 = () =>{
         setModal2Visible(true);
+        // setUserSelection(0);
+        fullData[0]["userSelection"] = 0;
+        postVersusData(fullData);
+    }
+
+    const clear = () => {
+        setModal1Visible(false);
+        setModal2Visible(false);
+        fetchData();
     }
 
     if(!data){
@@ -158,7 +179,7 @@ function VersusScreen() {
                             <Text style = {textStyle.restaurantText}>{data['name']}</Text>
                             <Text style = {containerStyles.modalText}>WINNER</Text>
                             <View style = {containerStyles.cancel}>
-                                <Pressable onPress={() => setModal1Visible(false)}>
+                                <Pressable onPress={() => {clear();}}>
                                     <Text style = {{color: colors.light, }}>DISMISS</Text>
                                 </Pressable>
                             </View>                            
@@ -180,7 +201,7 @@ function VersusScreen() {
                             <Text style = {textStyle.restaurantText}>{data2['name']}</Text>
                             <Text style = {containerStyles.modalText}>WINNER</Text>
                             <View style = {containerStyles.cancel}>
-                                <Pressable onPress={() => setModal2Visible(false)}>
+                                <Pressable onPress={() => {clear();}}>
                                     <Text style = {{color: colors.light, }}>DISMISS</Text>
                                 </Pressable>
                             </View>                            
@@ -212,7 +233,7 @@ function VersusScreen() {
                     <Text style={textStyle.versusTextSmall}>This decision will impact their rank.</Text> */}
                     <View style={containerStyles.versusRestaurantContainer}>
                         <TouchableOpacity  onPress={() =>{onPress1();}}>
-                            <VersusRestaurantBox restaurant={item}/>
+                            <VersusRestaurantBox restaurant={item} />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() =>{onPress2();}}>
                             <VersusRestaurantBox restaurant={item2}/>
@@ -231,8 +252,11 @@ function VersusScreen() {
             <ScrollView style={containerStyles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                 <View style={containerStyles.headerContainer}>
                      <View style={containerStyles.headerTextContainer}>
-                         <Text style={textStyle.versusText}>Go Rank</Text>
-                         <Text style={textStyle.versusText}>More Restaurants</Text>
+                        {error === 404 ?
+                            <Text style = {textStyle.versusText}>{userMessage}</Text>
+                        :
+                            <Text style = {textStyle.versusText}>Go Rank {"\n"} More Restaurants</Text>
+                        }
                      </View>
                  </View>
             </ScrollView>

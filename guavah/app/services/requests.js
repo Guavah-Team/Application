@@ -29,9 +29,9 @@ export const getSearchRestaurantData = async (restaurantName, minPrice, {latitud
   // url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=1600&latlong=33.4936,-117.1484&term=${restaurant}&category=13000&isOpen=false&doChains=true&minPrice=1&maxPrice=2&limit=10`
   
   if(vegan === 0){
-    url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=${restaurant}&category=13000&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+    url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=${restaurant}&category=13000&isOpen=True&doChains=True&minPrice=${minPrice}&maxPrice=4&limit=50`
   }else{
-    url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=${restaurant}&category=13377,13381,13332,13032,13059,13143&isOpen=True&doChains=False&minPrice=${minPrice}&maxPrice=4&limit=50`
+    url = `https://dt9tx0ox2d.execute-api.us-west-1.amazonaws.com/test/search?radius=${userRadius}&latlong=${latitude},${longitude}&term=${restaurant}&category=13377,13381,13332,13032,13059,13143&isOpen=True&doChains=True&minPrice=${minPrice}&maxPrice=4&limit=50`
   }
   
   try{

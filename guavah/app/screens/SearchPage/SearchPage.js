@@ -141,8 +141,9 @@ function SearchPage() {
 
     const onRefresh = React.useCallback(() => {
         setRefreshing(true);
-        wait(500).then(() => setRefreshing(false), setPressed(false));
-    }, []);
+        wait(500).then(() => setRefreshing(false), setPressed(false), fetchUserData(), fetchData());
+        console.log(userRadius)
+    }, [latitude, longitude, userRadius, userVegan]);
 
     const fetchData = async () => {
         setLoading(true);

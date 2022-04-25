@@ -13,6 +13,10 @@ import * as Location from 'expo-location';
 import { get } from "react-hook-form";
 import TabNavigator from "../../navigation/TabNavigator";
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const HomeScreen = () => {
   const [loaded] = useFonts({
     CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -34,6 +38,7 @@ const HomeScreen = () => {
   const [longitude, setLongitude] = useState(null);
   const[userRadius, setUserRadius] = useState("");
 
+  const[refreshing, setRefreshing] = useState(false);
   // useEffect(() => {
   //   (async () => {   
   //     let location = await Location.getCurrentPositionAsync({});
@@ -108,6 +113,11 @@ const HomeScreen = () => {
     // console.log(dataA);
   };
 
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(500).then(() => setRefreshing(false), fetchUserData(), fetchData());
+  }, [latitude, longitude, userRadius]);
+
   useEffect(() => {
     if(latitude != null && longitude != null && userRadius != null){
       fetchData();
@@ -122,7 +132,7 @@ const HomeScreen = () => {
   // console.log(dataC["image"])
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
       <ImageBackground
         style={styles.topImage}
         // source={randomImage[Math.floor(Math.random()*randomImage.length)]}

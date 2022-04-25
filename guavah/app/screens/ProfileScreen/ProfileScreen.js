@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {ScrollView, View, Text, StyleSheet, Alert, ImageBackground, Image} from 'react-native';
+import {ScrollView, View, Text, StyleSheet, Alert, ImageBackground, RefreshControl, Image} from 'react-native';
 import HorizontalProfileBox from '../../components/HorizontalProfileBox/HorizontalProfileBox';
 import HorizontalProfileBoxUnused from '../../components/HorizontalProfileBoxUnused/HorizontalProfileBoxUnused';
 import Amplify, {Auth} from 'aws-amplify';
@@ -9,12 +9,16 @@ import {useFonts} from 'expo-font';
 import { getUserData } from '../../services/requests';
 import {SvgUri} from 'react-native-svg';
 
+const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
 
 function ProfileScreen(props) {
     const [userData, setUserData] = useState(null);
     const [userName, setUserName] = useState(null);
     const [userPhoto, setUserPhoto] = useState(null);
     const [userLevel, setUserLevel] = useState(null);
+    const [refreshing, setRefreshing] = useState(false);
 
     const [loaded] = useFonts({
         CeraBlack: require('../../assets/fonts/CeraPro-Black.otf'),
@@ -43,6 +47,11 @@ function ProfileScreen(props) {
         setUserPhoto(fetchedUserData[2]);
     }
 
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        wait(500).then(() => setRefreshing(false), fetchUserData());
+    }, []);
+
     useEffect(() => {
         fetchUserData();
     }, [])
@@ -56,7 +65,7 @@ function ProfileScreen(props) {
     }
 
     return (
-        <ScrollView style = {styles.container}>
+        <ScrollView style = {styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
             <View style = {styles.topBox}>
             
             </View>
